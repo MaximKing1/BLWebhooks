@@ -114,6 +114,28 @@ async DiscordLabsVoteHook(url, auth, toggle) {
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
       })      
 }
+
+async BotrixVoteHook(url, auth, toggle) {
+    if (toggle == false) {
+        return console.log(chalk.red('[BLWEBHOOKS] Botrix Vote Hooks Disabled'));
+    } else if (toggle == true) {
+        await console.log(chalk.green('[BLWEBHOOKS] Botrix Vote Hooks Enabled'))
+    }
+      
+    app.post(`/${url}`, (req, res) => {
+        // Respond to invalid requests
+        if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - Botrix"}));
+      
+        // Use the data on whatever you want
+        console.log(req.body)
+        const userID = req.body.uid;
+        const botID = req.body.bid;
+        BLWEvent.emit('BTR-voted', userID, botID)
+      
+       // Respond to DiscordLabs API
+        res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
+      })      
+}
 }
 
 module.exports.Client = Client;

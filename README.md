@@ -103,6 +103,19 @@ BLWEvent.on('DL-voted', function async (userID, botID, wasTest) {
 })
 ```
 
+**Botrix Vote Hooks:**
+```js
+// This will listen to votes from Botrix, the url is the end not
+// including the / and auth is the webhook auth. You can enable and
+// disable using true or false at the end
+const Botrix = bl.BotrixVoteHook(url, auth, true);
+
+// This code will run after a new vote was received from Botrix
+BLWEvent.on('BTR-voted', function async (userID, botID) {
+  console.log(`${userID} Voted For ${botID}.`)
+})
+```
+
 # Events
 
 **Error Event**
