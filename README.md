@@ -16,6 +16,7 @@ yarn add blwebhooks
 > top.gg<br>
 > InfinityBotList<br>
 > VoidBots<br>
+> DiscordLabs<br>
 
 # Usage
 
@@ -84,6 +85,19 @@ const VoidBots = bl.VoidBotsVoteHook(url, auth, true);
 // This code will run after a new vote was received from VoidBots
 BLWEvent.on('VB-voted', function async (userID, botID) {
   console.log(userID + " Voted For " + botID)
+})
+```
+
+**DiscordLabs Vote Hooks:**
+```js
+// This will listen to votes from DiscordLabs, the url is the end not
+// including the / and auth is the webhook auth. You can enable and
+// disable using true or false at the end
+const VoidBots = bl.DiscordLabsVoteHook(url, auth, true);
+
+// This code will run after a new vote was received from DiscordLabs
+BLWEvent.on('DL-voted', function async (userID, botID, wasTest) {
+  console.log(`${userID} Voted For ${botID}. Was Test: ${wasTest}`)
 })
 ```
 
