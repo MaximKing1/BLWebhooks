@@ -19,6 +19,7 @@ yarn add blwebhooks
 > InfinityBotList<br>
 > VoidBots<br>
 > DiscordLabs<br>
+> Botrix - Coming Soon!<br>
 
 # Usage
 
