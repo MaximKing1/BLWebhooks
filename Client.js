@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const helmet = require('helmet');
 
 const chalk = require('chalk');
 
@@ -23,6 +24,7 @@ class Client {
         if(port) {
             app.listen(port)
             app.use(bodyParser.json())
+            app.use(helmet({ contentSecurityPolicy: false, permittedCrossDomainPolicies: false, }));
             console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`))
         }
     }
