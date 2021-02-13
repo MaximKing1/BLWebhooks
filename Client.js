@@ -74,7 +74,7 @@ async IBLVoteHook(url, auth, toggle) {
         await console.log(chalk.green('[BLWEBHOOKS] InfinityBotList Vote Hooks Enabled'))
     }
       
-    app.post(`/${url}`, (req, res) => {
+    app.post(`/${url}`, bruteforce.prevent, (req, res) => {
         // Respond to invalid requests
         if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - InfinityBotList"}));
       
@@ -98,7 +98,7 @@ async VoidBotsVoteHook(url, auth, toggle) {
         await console.log(chalk.green('[BLWEBHOOKS] Void Bots Vote Hooks Enabled'))
     }
       
-    app.post(`/${url}`, (req, res) => {
+    app.post(`/${url}`, bruteforce.prevent, (req, res) => {
         // Respond to invalid requests
         if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - VoidBots"}));
       
@@ -120,7 +120,7 @@ async DiscordLabsVoteHook(url, auth, toggle) {
         await console.log(chalk.green('[BLWEBHOOKS] DiscordLabs Vote Hooks Enabled'))
     }
       
-    app.post(`/${url}`, (req, res) => {
+    app.post(`/${url}`, bruteforce.prevent, (req, res) => {
         // Respond to invalid requests
         if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - DiscordLabs"}));
       
@@ -143,7 +143,7 @@ async BotrixVoteHook(url, auth, toggle) {
         await console.log(chalk.green('[BLWEBHOOKS] Botrix Vote Hooks Enabled'))
     }
       
-    app.post(`/${url}`, (req, res) => {
+    app.post(`/${url}`, bruteforce.prevent, (req, res) => {
         // Respond to invalid requests
         if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - Botrix"}));
       
