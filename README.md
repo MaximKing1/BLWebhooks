@@ -27,7 +27,8 @@ const client = discord.Client();
 const blwebhooks = require("blwebhooks");
 
 // Attatch The Client and Webhooks Keys To The Module
-blwebhooks.listen(client, whKeys);
+// The client is it attaching to the client, whKeys are the webhook keys and 80 is the port it will run on
+blwebhooks.listen(client, whKeys, 80);
 ```
 **Turn On Logging**
 ```js
@@ -35,9 +36,11 @@ blwebhooks.listen(client, whKeys);
 // All errors will be logged without using this setting
 blwebhooks.logging(true);
 ```
-**Vote Executed Code**
+**Vote Executed Code Event**
 ```js
+// This code will run after a new vote was received
 blwebhooks.event("vote", async (userID, botID) => {
  // Code Runs After New Vote
 });
 ```
+**
