@@ -83,7 +83,7 @@ const VoidBots = bl.VoidBotsVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from VoidBots
 BLWEvent.on('VB-voted', function async (userID, botID) {
-  console.log(userID + "Voted For" + botID)
+  console.log(userID + " Voted For " + botID)
 })
 ```
 
