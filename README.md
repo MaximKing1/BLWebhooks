@@ -34,7 +34,41 @@ blwebhooks.listen(client, whKeys, 80);
 ```js
 // This will enable the extended logging, this is mainly for debugging purposes
 // All errors will be logged without using this setting
-blwebhooks.logging(true);
+blwebhooks.setLogging(true);
+```
+
+# whKeys
+These are all the webhooks and auths.
+
+**Example:**
+```json
+{
+    "service": "auth",
+    "service": "auth",
+}
+```
+**Real World Example:**
+```json
+{
+    "top.gg": "278y4h_webhook_auth",
+    "infinitybotlist": "278y4h_webhook_auth"
+}
+```
+**With discord.js:**
+```js
+const discord = require('discord.js');
+const client = discord.Client();
+
+const blwebhooks = require("blwebhooks");
+
+const whKeys = {
+    "top.gg": "278y4h_webhook_auth",
+    "infinitybotlist": "278y4h_webhook_auth"
+};
+
+// This will listen out for the top.gg and
+// infinitybotlist webhooks on Port 80
+blwebhooks.listen(client, whKeys, 80);
 ```
 
 # Events
