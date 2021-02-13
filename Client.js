@@ -9,12 +9,8 @@ const slowDown = require("express-slow-down");
 //app.enable("trust proxy");
 const speedLimiter = slowDown({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  delayAfter: 100, // allow 100 requests per 15 minutes, then...
-  delayMs: 500 // begin adding 500ms of delay per request above 100:
-  // request # 101 is delayed by  500ms
-  // request # 102 is delayed by 1000ms
-  // request # 103 is delayed by 1500ms
-  // etc.
+  delayAfter: 300, // allow 300 requests per 15 minutes, then...
+  delayMs: 400 // begin adding 400ms of delay per request above 100:
 });
 
 const rateLimit = require("express-rate-limit");
@@ -46,6 +42,7 @@ class Client {
             app.listen(port)
             app.use(bodyParser.json())
             app.use(limiter)
+            app.use(speedLimiter)
             app.use(helmet({ contentSecurityPolicy: false, permittedCrossDomainPolicies: false, }));
             console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`))
         }
