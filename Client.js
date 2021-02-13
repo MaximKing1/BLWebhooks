@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 
 const chalk = require('chalk');
 
@@ -13,6 +13,12 @@ class Client {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
         } else if (typeof port != "number") {
             return console.log(chalk.red('[BLWEBHOOKS] The Port Number is not defined'));
+        }
+        if(client) {
+         console.log(chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks"))
+        client.on('error', async (error) => {
+         BLWEvent.emit('error', error)
+          }
         }
         if(port) {
             app.listen(port)
