@@ -10,4 +10,12 @@ npm i blwebhooks
 yarn add blwebhooks
 ```
 
-# Setup
+# Usage
+
+**Import the lib via ES6 or commonJS modules**
+```js
+// ES6
+import * as blapi from "blwebhooks";
+// or commonJS
+const blapi = require("blwebhooks");
+```
