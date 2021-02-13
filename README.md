@@ -28,13 +28,13 @@ const blwebhooks = require("blwebhooks");
 
 // Attatch The Client and Webhooks Keys To The Module
 // The client is it attaching to the client, whKeys are the webhook keys and 80 is the port it will run on
-blwebhooks.listen(client, whKeys, 80);
+const bl = new blwebhooks.Client(client, whKeys, 80);
 ```
 **Turn On Logging**
 ```js
 // This will enable the extended logging, this is mainly for debugging purposes
 // All errors will be logged without using this setting
-blwebhooks.setLogging(true);
+const logging = await bl.setLogging(true);
 ```
 
 # whKeys
@@ -68,7 +68,7 @@ const whKeys = {
 
 // This will listen out for the top.gg and
 // infinitybotlist webhooks on Port 80
-blwebhooks.listen(client, whKeys, 80);
+const bl = new blwebhooks.Client(client, whKeys, 80);
 ```
 
 # Events
@@ -76,14 +76,14 @@ blwebhooks.listen(client, whKeys, 80);
 **Voted Event**
 ```js
 // This code will run after a new vote was received
-blwebhooks.event("vote", async (userID, botID) => {
+bl.event("vote", async (userID, botID) => {
  // Code here
 });
 ```
 **Error Event**
 ```js
 // This code will run in the event of a error, normally it will just console.log the error but you can add custom error events here
-blwebhooks.event("error", async (error) => {
+bl.event("error", async (error) => {
  // Code here
 });
 ```
