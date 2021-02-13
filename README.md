@@ -1,4 +1,4 @@
-[![NPM](https://nodei.co/npm/blwebhooks.png)](https://nodei.co/npm/blwebhooks/)
+[![NPM](https://nodei.co/npm/blwebhooks.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/blwebhooks/)
 
 # BLWebhooks, The Next Gen Vote Hooks!
 
