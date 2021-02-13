@@ -1,3 +1,5 @@
+[![NPM](https://nodei.co/npm/blwebhooks.png)](https://nodei.co/npm/blwebhooks/)
+
 # BLWebhooks, The Next Gen Vote Hooks!
 
 # Installation
@@ -57,7 +59,7 @@ const logging = bl.setLogging(true);
 const topgg = bl.topggVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from top.gg
-BLWEvent.on('topgg-voted', function async (UserID) {
+BLWEvent.on('topgg-voted', function async (UserID, botID, type) {
   console.log(userID)
 })
 ```
@@ -70,7 +72,7 @@ BLWEvent.on('topgg-voted', function async (UserID) {
 const InfinityBotList = bl.IBLVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from InfinityBotList
-BLWEvent.on('IBL-voted', function async (userID) {
+BLWEvent.on('IBL-voted', function async (userID, botID, type, timeStamp) {
   console.log(userID)
 })
 ```

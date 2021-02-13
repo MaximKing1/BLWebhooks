@@ -40,7 +40,9 @@ class Client {
     const webhook = new Topgg.Webhook(auth)
     app.post(`/${url}`, webhook.middleware(), (req, res) => {
     const UserID = req.vote.user;
-    BLWEvent.emit('topgg-voted', UserID)
+    const botID = req.vote.bot;
+    const type = req.vote.type;
+    BLWEvent.emit('topgg-voted', UserID, botID, type)
     })
 }
 
@@ -58,7 +60,10 @@ async IBLVoteHook(url, auth, toggle) {
         // Use the data on whatever you want
         console.log(req.body)
         const userID = req.body.userID;
-        BLWEvent.emit('IBL-voted', userID)
+        const botID = req.body.botID;
+        const type = req.body.type;
+        const timeStamp = req.body.timeStamp;
+        BLWEvent.emit('IBL-voted', userID, botID, type, timeStamp)
       
        // Respond to IBL API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
