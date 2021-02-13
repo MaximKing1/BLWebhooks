@@ -35,3 +35,9 @@ blwebhooks.listen(client, whKeys);
 // All errors will be logged without using this setting
 blwebhooks.logging(true);
 ```
+**Vote Executed Code**
+```js
+blwebhooks.event("vote", async (userID, botID) => {
+ // Code Runs After New Vote
+});
+```
