@@ -1,23 +1,23 @@
 const express = require('express');
 const app = express();
+const bodyParser = require("body-parser");
+
 const chalk = require('chalk');
 
+const EventEmitter = require('events');
+global.BLWEvent = new EventEmitter();
+
 class Client {
-    constructor(client, whKeys, port) {
-        global.port = port;
+    constructor(client, port) {
         if (!client) {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
-        } else if (!whKeys) {
-            return console.log(chalk.red('[BLWEBHOOKS] The whKeys are not defined'))
         } else if (typeof port != "number") {
             return console.log(chalk.red('[BLWEBHOOKS] The Port Number is not defined'));
         }
-        if(whKeys) {
-            console.log(chalk.green(`[BLWEBHOOKS] Webhook Keys Have Been Registered!`))
-        }
         if(port) {
-            app.listen(port);
-            console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`));
+            app.listen(port)
+            app.use(bodyParser.json())
+            console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`))
         }
     }
 
@@ -28,6 +28,7 @@ class Client {
             await console.log(chalk.red('[BLWEBHOOKS] Advance Logging Disabled'));
         }
     }
+
     async topggVoteHook(url, auth, toggle) {
         if (toggle == false) {
             return console.log(chalk.red('[BLWEBHOOKS] top.gg Vote Hooks Disabled'));
@@ -36,11 +37,32 @@ class Client {
         }
           
     const Topgg = require('@top-gg/sdk')
-    const webhook = new Topgg.Webhook(auth) // add your top.gg webhook authorization (not bot token)
+    const webhook = new Topgg.Webhook(auth)
     app.post(`/${url}`, webhook.middleware(), (req, res) => {
-    // req.vote is your vote object e.g
-    console.log(req.vote.user) // 221221226561929217
-    }) // attach the middleware
+    BLWEvent.emit('topgg-voted', req.vote.user)
+    console.log("Working!" + req)
+    })
+}
+
+async IBLVoteHook(url, auth, toggle) {
+    if (toggle == false) {
+        return console.log(chalk.red('[BLWEBHOOKS] InfinityBotList Vote Hooks Disabled'));
+    } else if (toggle == true) {
+        await console.log(chalk.green('[BLWEBHOOKS] InfinityBotList Vote Hooks Enabled'))
+    }
+      
+    app.post(`/${url}`, (req, res) => {
+        // Respond to invalid requests
+        if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "You don't have access to use this endpoint"}));
+      
+        // Use the data on whatever you want
+        console.log(req.body)
+        BLWEvent.emit('IBL-voted', req.body.userID)
+        console.log("Working IBL!" + req.body)
+      
+       // Respond to ibl api
+        res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
+      })      
 }
 }
 
