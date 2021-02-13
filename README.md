@@ -93,7 +93,7 @@ BLWEvent.on('VB-voted', function async (userID, botID) {
 // This will listen to votes from DiscordLabs, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const VoidBots = bl.DiscordLabsVoteHook(url, auth, true);
+const DiscordLabs = bl.DiscordLabsVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from DiscordLabs
 BLWEvent.on('DL-voted', function async (userID, botID, wasTest) {

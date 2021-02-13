@@ -99,7 +99,7 @@ async DiscordLabsVoteHook(url, auth, toggle) {
         if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - DiscordLabs"}));
       
         // Use the data on whatever you want
-        console.log(req)
+        console.log(req.body)
         const userID = req.body.uid;
         const botID = req.body.bid;
         const wasTest = req.body.test;
