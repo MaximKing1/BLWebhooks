@@ -1,9 +1,22 @@
+const express = require('express');
+const app = express();
+
 class Client {
     constructor(client, whKeys, port) {
-        if (typeof client != "string") {
-            return console.log('[BLWEBHOOKS] Client is not defined');
+        if (!client) {
+            return console.log('[BLWEBHOOKS] The client is not defined')
+        } else if (!whKeys) {
+            return console.log('[BLWEBHOOKS] The whKeys are not defined')
         } else if (typeof port != "number") {
-            return console.log('[BLWEBHOOKS] Port Number is not defined');
+            return console.log('[BLWEBHOOKS] The Port Number is not defined');
+        }
+        if(port) {
+            app.listen(port);
+            console.log(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`);
+        }
+        if(whKeys) {
+            var obj = JSON.parse(whKeys);
+            console.log(`[BLWEBHOOKS] Webhook Keys Have Been Registered => ${obj}`);
         }
     }
 
