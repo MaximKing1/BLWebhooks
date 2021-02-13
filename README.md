@@ -25,4 +25,11 @@ const discord = require('discord.js');
 const client = discord.Client();
 
 const blwebhooks = require("blwebhooks");
+
+// Attatch The Client and Webhooks Keys To The Module
+blwebhooks.listen(client, whKeys);
+```
+**Turn On Logging**
+```js
+blwebhooks.logging(true);
 ```
