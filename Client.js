@@ -64,6 +64,28 @@ async IBLVoteHook(url, auth, toggle) {
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
       })      
 }
+
+async VoidBotsVoteHook(url, auth, toggle) {
+    if (toggle == false) {
+        return console.log(chalk.red('[BLWEBHOOKS] Void Bots Vote Hooks Disabled'));
+    } else if (toggle == true) {
+        await console.log(chalk.green('[BLWEBHOOKS] Void Bots Vote Hooks Enabled'))
+    }
+      
+    app.post(`/${url}`, (req, res) => {
+        // Respond to invalid requests
+        if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You don't have access to use this endpoint"}));
+      
+        // Use the data on whatever you want
+        console.log(req.body)
+        const userID = req.body.user;
+        const botID = req.body.bot;
+        BLWEvent.emit('VB-voted', userID, botID)
+      
+       // Respond to ibl api
+        res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
+      })      
+}
 }
 
 module.exports.Client = Client;

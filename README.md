@@ -15,6 +15,7 @@ yarn add blwebhooks
 # Supported Lists
 > top.gg<br>
 > InfinityBotList<br>
+> VoidBots<br>
 
 # Usage
 
@@ -34,7 +35,7 @@ const client = discord.Client();
 const blwebhooks = require("blwebhooks");
 
 // Attatch The Client and Port to the module.
-// The client is it attaching to the client,  80 is the port it will run on
+// The client is it attaching to the client, 80 is the port it will run on
 const bl = new blwebhooks.Client(client, 80);
 ```
 
@@ -70,6 +71,19 @@ const InfinityBotList = bl.IBLVoteHook(url, auth, true);
 // This code will run after a new vote was received from InfinityBotList
 BLWEvent.on('IBL-voted', function async (userID) {
   console.log(userID)
+})
+```
+
+**VoidBots Vote Hooks:**
+```js
+// This will listen to votes from VoidBots, the url is the end not
+// including the / and auth is the webhook auth. You can enable and
+// disable using true or false at the end
+const VoidBots = bl.VoidBotsVoteHook(url, auth, true);
+
+// This code will run after a new vote was received from VoidBots
+BLWEvent.on('VB-voted', function async (userID, botID) {
+  console.log(userID + "Voted For" + botID)
 })
 ```
 
