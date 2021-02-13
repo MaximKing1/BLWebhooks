@@ -1,10 +1,15 @@
+// Express Server Requirements
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 
-const chalk = require('chalk');
+// Brute Force Protection
+const ExpressBrute = require('express-brute');
+const bruteforce = new ExpressBrute(store);
 
+// Imports
+const chalk = require('chalk');
 const EventEmitter = require('events');
 global.BLWEvent = new EventEmitter();
 
