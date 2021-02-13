@@ -15,8 +15,7 @@ class Client {
             console.log(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`);
         }
         if(whKeys) {
-            var obj = JSON.parse(whKeys);
-            console.log(`[BLWEBHOOKS] Webhook Keys Have Been Registered => ${obj}`);
+            console.log(`[BLWEBHOOKS] Webhook Keys Have Been Registered!`);
         }
     }
 
