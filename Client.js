@@ -37,6 +37,14 @@ class Client {
         }
     }
 
+    async onlineStatus(toggle) {
+        if (toggle == true) {
+            await console.log(chalk.green('[BLWEBHOOKS] Online Node Status Dashboard Enabled.'));
+        } else if (toggle == false) {
+            await console.log(chalk.red('[BLWEBHOOKS] Online Node Status Dashboard Disabled.'));
+        }
+    }
+
     async topggVoteHook(url, auth, toggle) {
         if (toggle == false) {
             return console.log(chalk.red('[BLWEBHOOKS] top.gg Vote Hooks Disabled'));
