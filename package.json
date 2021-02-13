@@ -1,6 +1,6 @@
 {
   "name": "blwebhooks",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
   "keywords": [
@@ -10,6 +10,7 @@
     "vote"
   ],
   "dependencies": {
+    "@top-gg/sdk": "^3.0.7",
     "chalk": "^4.1.0",
     "express": "^4.17.1"
   },

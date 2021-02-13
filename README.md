@@ -26,18 +26,45 @@ const client = discord.Client();
 
 const blwebhooks = require("blwebhooks");
 
-// Attatch The Client and Webhooks Keys To The Module
-// The client is it attaching to the client, whKeys are the webhook keys and 80 is the port it will run on
-const bl = new blwebhooks.Client(client, whKeys, 80);
+// Attatch The Client and Port to the module.
+// The client is it attaching to the client,  80 is the port it will run on
+const bl = new blwebhooks.Client(client, 80);
 ```
 **Turn On Logging**
 ```js
 // This will enable the extended logging, this is mainly for debugging purposes
 // All errors will be logged without using this setting
-const logging = await bl.setLogging(true);
+const logging = bl.setLogging(true);
 ```
 
-# whKeys
+# Vote Hooks
+
+**TopGG Vote Hooks:**
+```js
+// This will listen to votes from top.gg, the url is the end not
+// including the / and auth is the webhook auth. You can enable and
+// disable using true or false at the end
+const topgg = bl.topggVoteHook(url, auth, true);
+```
+
+# Events
+
+**Voted Event**
+```js
+// This code will run after a new vote was received
+bl.event("vote", async (userID, botID) => {
+ // Code here
+});
+```
+**Error Event**
+```js
+// This code will run in the event of a error, normally it will just console.log the error but you can add custom error events here
+bl.event("error", async (error) => {
+ // Code here
+});
+```
+
+# whKeys - Future Feature
 These are all the webhooks and auths.
 
 **Example:**
@@ -69,21 +96,4 @@ const whKeys = {
 // This will listen out for the top.gg and
 // infinitybotlist webhooks on Port 80
 const bl = new blwebhooks.Client(client, whKeys, 80);
-```
-
-# Events
-
-**Voted Event**
-```js
-// This code will run after a new vote was received
-bl.event("vote", async (userID, botID) => {
- // Code here
-});
-```
-**Error Event**
-```js
-// This code will run in the event of a error, normally it will just console.log the error but you can add custom error events here
-bl.event("error", async (error) => {
- // Code here
-});
 ```
