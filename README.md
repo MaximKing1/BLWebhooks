@@ -43,7 +43,13 @@ blwebhooks.logging(true);
 ```js
 // This code will run after a new vote was received
 blwebhooks.event("vote", async (userID, botID) => {
- // Code Runs After New Vote
+ // Code here
 });
 ```
-**
+**Error Event**
+```js
+// This code will run in the event of a error, normally it will just console.log the error but you can add custom error events here
+blwebhooks.event("error", async (error) => {
+ // Code here
+});
+```
