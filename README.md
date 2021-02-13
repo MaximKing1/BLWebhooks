@@ -7,5 +7,5 @@ npm i blwebhooks
 ```
 **Yarn**
 ```
-yarn install blwebhooks
+yarn add blwebhooks
 ```
