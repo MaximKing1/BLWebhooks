@@ -41,7 +41,6 @@ class Client {
     app.post(`/${url}`, webhook.middleware(), (req, res) => {
     const UserID = req.vote.user;
     BLWEvent.emit('topgg-voted', UserID)
-    console.log("Working!" + req)
     })
 }
 
@@ -54,13 +53,12 @@ async IBLVoteHook(url, auth, toggle) {
       
     app.post(`/${url}`, (req, res) => {
         // Respond to invalid requests
-        if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "You don't have access to use this endpoint"}));
+        if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You don't have access to use this endpoint"}));
       
         // Use the data on whatever you want
         console.log(req.body)
-        BLWEvent.emit('IBL-voted', req.body.userID)
         const userID = req.body.userID;
-        console.log("Working IBL!" + userID)
+        BLWEvent.emit('IBL-voted', userID)
       
        // Respond to ibl api
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));

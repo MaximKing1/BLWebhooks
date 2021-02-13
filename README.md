@@ -12,6 +12,10 @@ npm i blwebhooks
 yarn add blwebhooks
 ```
 
+# Supported Lists
+> top.gg<br>
+> InfinityBotList<br>
+
 # Usage
 
 **Import the lib via ES6 or commonJS modules**
