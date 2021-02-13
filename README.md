@@ -19,3 +19,10 @@ import * as blwebhooks from "blwebhooks";
 // or commonJS
 const blwebhooks = require("blwebhooks");
 ```
+**With discord.js**
+```js
+const discord = require('discord.js');
+const client = discord.Client();
+
+const blwebhooks = require("blwebhooks");
+```
