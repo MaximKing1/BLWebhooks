@@ -51,7 +51,7 @@ const logging = bl.setLogging(true);
 const topgg = bl.topggVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from top.gg
-BLWEvent.on('topgg-voted', function async (userID) {
+BLWEvent.on('topgg-voted', function async (UserID) {
   console.log(userID)
 })
 ```
