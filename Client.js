@@ -8,6 +8,13 @@ const helmet = require('helmet');
 const ExpressBrute = require('express-brute');
 const bruteforce = new ExpressBrute(store);
 
+const rateLimit = require("express-rate-limit");
+// app.set('trust proxy', 1);
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 300 // limit each IP to 100 requests per windowMs
+});
+
 // Imports
 const chalk = require('chalk');
 const EventEmitter = require('events');
@@ -29,6 +36,7 @@ class Client {
         if(port) {
             app.listen(port)
             app.use(bodyParser.json())
+            app.use(limiter)
             app.use(helmet({ contentSecurityPolicy: false, permittedCrossDomainPolicies: false, }));
             console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`))
         }
