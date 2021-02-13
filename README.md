@@ -31,5 +31,7 @@ blwebhooks.listen(client, whKeys);
 ```
 **Turn On Logging**
 ```js
+// This will enable the extended logging, this is mainly for debugging purposes
+// All errors will be logged without using this setting
 blwebhooks.logging(true);
 ```
