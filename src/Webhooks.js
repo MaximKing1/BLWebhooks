@@ -1,6 +1,6 @@
 const discord = require('discord.js');
 const { EventEmitter } = require('events');
-const WebhookManager = require('./Client.js');
+const WebhooksManager = require('./Client.js');
 
 /**
  * Represents a Vote or Webhook
