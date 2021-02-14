@@ -146,6 +146,14 @@ BLWEvent.on('BTR-voted', async function (userID, botID) {
 
 # Events
 
+**Global Voted Event**
+```js
+// This will run after any vote has been received, use this if you don't want seprate events for each list
+BLWEvent.on('vote', async function (userID, botID, List) {
+  console.log(`${userID} Voted For ${botID} on ${List}`)
+})
+```
+
 **Vote Expired Event**
 ```js
 // This will run after the vote expires, this will be different for each list
