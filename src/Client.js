@@ -24,6 +24,9 @@ const chalk = require('chalk');
 const { EventEmitter } = require('events');
 global.BLWEvent = new EventEmitter();
 
+/**
+ * Webhook Manager
+ */
 class Client extends EventEmitter {
     /**
      * @param {Discord.Client} client The Discord Client
@@ -90,9 +93,9 @@ class Client extends EventEmitter {
     } // Enable this if your behind a proxy, Heroku etc
 
     async testVote(userID, botID) {
-    console.log(userID + " Voted For " + botID)
-    BLWEvent.emit('vote', UserID, botID)
-    }
+     console.log(userID + " Voted For " + botID)
+     BLWEvent.emit('vote', UserID, botID)
+  }
 
     async topggVoteHook(url, auth, toggle) {
         if (toggle == false) {
@@ -100,7 +103,7 @@ class Client extends EventEmitter {
         } else if (toggle == true) {
             await console.log(chalk.green('[BLWEBHOOKS] top.gg Vote Hooks Enabled'))
         }
-          
+      
     const Topgg = require('@top-gg/sdk')
     const webhook = new Topgg.Webhook(auth)
     app.post(`/${url}`, webhook.middleware(), (req, res) => {
@@ -225,7 +228,7 @@ async BListVoteHook(url, auth, toggle) {
       
     app.post(`/${url}`, (req, res) => {
         // Respond to invalid requests
-        if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - Botrix"}));
+        if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - BList"}));
       
         // Use the data on whatever you want
         console.log(req.body)
