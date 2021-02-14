@@ -16,7 +16,6 @@ const limiter = rateLimit({
 });
 const chalk = require('chalk');
 const { EventEmitter } = require('events');
-global.BLWEvent = new EventEmitter();
 const Webhooks = require('./Webhooks.js');
 const { contentSecurityPolicy } = require('helmet');
 
@@ -30,7 +29,7 @@ class WebhooksManager extends EventEmitter {
     constructor(client, port) {
     super();
     console.log(chalk.red("---------------------"))
-    console.log("The Client Varible Has Been Changed To WebhooksManager, Check Our Docs If Your Code Is Not Working.")
+    console.log("The Client Varible Has Been Changed To WebhooksManager, Check Our Docs If Your Code Is Not Working + BLWEvent.on Changed To client.pn")
     console.log(chalk.red("---------------------"))
         if (!client) {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
@@ -45,7 +44,7 @@ class WebhooksManager extends EventEmitter {
         if(client) {
          console.log(chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks"))
         client.on('error', async (error) => {
-         BLWEvent.emit('error', error)
+        this.client.emit('webhookError', error)
          })
         }
         if(port) {
@@ -97,7 +96,7 @@ class WebhooksManager extends EventEmitter {
 
    async testVote(userID, botID) {
      console.log(userID + " Voted For " + botID)
-     BLWEvent.emit('vote', userID, botID)
+     this.client.emit('vote', userID, botID)
   }
 
     async topggVoteHook(url, auth, toggle) {
@@ -114,9 +113,9 @@ class WebhooksManager extends EventEmitter {
     const botID = req.vote.bot;
     const type = req.vote.type;
     const List = "top.gg";
-    BLWEvent.emit('topgg-voted', userID, botID, type)
-    BLWEvent.emit('vote', UserID, botID, List)
-    setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+    this.client.emit('topgg-voted', userID, botID, type)
+    this.client.emit('vote', UserID, botID, List)
+    setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
     })
 }
 
@@ -139,9 +138,9 @@ async IBLVoteHook(url, auth, toggle) {
         const type = req.body.type;
         const timeStamp = req.body.timeStamp;
         const List = "InfinityBotList";
-        this.emit('IBL-voted', userID, botID, type)
-        this.emit('vote', userID, botID, List)
-        setTimeout(() => this.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        this.client.emit('IBL-voted', userID, botID, type)
+        this.client.emit('vote', userID, botID, List)
+        setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to IBL API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -166,9 +165,9 @@ async VoidBotsVoteHook(url, auth, toggle) {
         const userID = req.body.user;
         const botID = req.body.bot;
         const List = "VoidBots";
-        BLWEvent.emit('VB-voted', userID, botID)
-        BLWEvent.emit('vote', userID, botID, List)
-        setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        this.client.emit('VB-voted', userID, botID)
+        this.client.emit('vote', userID, botID, List)
+        setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to VoidBots API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -193,9 +192,9 @@ async DiscordLabsVoteHook(url, auth, toggle) {
         const botID = req.body.bid;
         const wasTest = req.body.test;
         const List = "DiscordLabs";
-        BLWEvent.emit('DL-voted', userID, botID, wasTest)
-        BLWEvent.emit('vote', userID, botID, List)
-        setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        this.client.emit('DL-voted', userID, botID, wasTest)
+        this.client.emit('vote', userID, botID, List)
+        setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to DiscordLabs API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -218,9 +217,9 @@ async BotrixVoteHook(url, auth, toggle) {
         console.log(req.body)
         const userID = req.body.user;
         const List = "Botrix";
-        BLWEvent.emit('BTR-voted', userID)
-        BLWEvent.emit('vote', userID, List)
-        setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        this.client.emit('BTR-voted', userID)
+        this.client.emit('vote', userID, List)
+        setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to Botrix API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -243,9 +242,9 @@ async BListVoteHook(url, auth, toggle) {
         console.log(req.body)
         const userID = req.body.user;
         const List = "BList";
-        BLWEvent.emit('BTR-voted', userID)
-        BLWEvent.emit('vote', userID, List)
-        setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        this.client.emit('BTR-voted', userID)
+        this.client.emit('vote', userID, List)
+        setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to BList API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
