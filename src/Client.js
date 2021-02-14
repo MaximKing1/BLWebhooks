@@ -87,7 +87,7 @@ class Client {
     const type = req.vote.type;
     const List = "top.gg";
     BLWEvent.emit('topgg-voted', UserID, botID, type)
-    setTimeout(() => BLWEvent.emit('vote-expired', UserID, botID, List), 1000 * 60 * 60 * 24);
+    setTimeout(() => BLWEvent.emit('vote-expired', UserID, botID, List), 1000 * 60 * 60 * 24)
     })
 }
 
@@ -108,7 +108,9 @@ async IBLVoteHook(url, auth, toggle) {
         const botID = req.body.botID;
         const type = req.body.type;
         const timeStamp = req.body.timeStamp;
+        const List = "InfinityBotList";
         BLWEvent.emit('IBL-voted', userID, botID, type, timeStamp)
+        setTimeout(() => BLWEvent.emit('vote-expired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to IBL API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -130,7 +132,9 @@ async VoidBotsVoteHook(url, auth, toggle) {
         console.log(req.body)
         const userID = req.body.user;
         const botID = req.body.bot;
+        const List = "VoidBots";
         BLWEvent.emit('VB-voted', userID, botID)
+        setTimeout(() => BLWEvent.emit('vote-expired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to VoidBots API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -153,7 +157,9 @@ async DiscordLabsVoteHook(url, auth, toggle) {
         const userID = req.body.uid;
         const botID = req.body.bid;
         const wasTest = req.body.test;
+        const List = "DiscordLabs";
         BLWEvent.emit('DL-voted', userID, botID, wasTest)
+        setTimeout(() => BLWEvent.emit('vote-expired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to DiscordLabs API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -174,9 +180,11 @@ async BotrixVoteHook(url, auth, toggle) {
         // Use the data on whatever you want
         console.log(req.body)
         const userID = req.body.user;
+        const List = "Botrix";
         BLWEvent.emit('BTR-voted', userID)
+        setTimeout(() => BLWEvent.emit('vote-expired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
-       // Respond to DiscordLabs API
+       // Respond to Botrix API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
       })      
 }
