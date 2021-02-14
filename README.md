@@ -48,34 +48,29 @@ const blwebhooks = require("blwebhooks");
 ```js
 const discord = require("discord.js");
 const client = discord.Client();
-
 const { WebhooksManager } = require("blwebhooks");
 
-// Attatch The Client and Port to the module.
-// The client is it attaching to the client, 80 is the port it will run on
 const voteClient = new WebhooksManager(client, 80);
-
 client.voteManager = voteClient;
 ```
 
 **Turn On Sharding Support**
 ```js
-// This will enable the extended logging, this is mainly for debugging purposes
-voteManager.shardedClient(true);
+voteClient.shardedClient(true);
 ```
 
 **Turn On Extended Security**
 ```js
 // This will enable bruteforce protection for module, once enabled
 // it will start the protection also using more CPU.
-voteManager.extraProtection(true);
+voteClient.extraProtection(true);
 ```
 
 **Turn On Proxy Trust**
 ```js
 // Enable this option is you use this behind a proxy like
 // Heroku services etc
-voteManager.proxyTrust(true);
+voteClient.proxyTrust(true);
 ```
 
 **Emit Test Vote Events**
@@ -91,7 +86,7 @@ voteManager.testVote(userID, botID);
 // This will listen to votes from top.gg, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const topgg = voteManager.topggVoteHook(url, auth, true);
+const topgg = client.voteManager.topggVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from top.gg
 BLWEvent.on('topgg-voted', async function (UserID, botID, type) {
@@ -104,7 +99,7 @@ BLWEvent.on('topgg-voted', async function (UserID, botID, type) {
 // This will listen to votes from InfinityBotList, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const InfinityBotList = voteManager.IBLVoteHook(url, auth, true);
+const InfinityBotList = client.voteManager.IBLVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from InfinityBotList
 BLWEvent.on('IBL-voted', async function (userID, botID, type) {
@@ -117,7 +112,7 @@ BLWEvent.on('IBL-voted', async function (userID, botID, type) {
 // This will listen to votes from VoidBots, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const VoidBots = voteManager.VoidBotsVoteHook(url, auth, true);
+const VoidBots = client.voteManager.VoidBotsVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from VoidBots
 BLWEvent.on('VB-voted', async function (userID, botID) {
@@ -130,7 +125,7 @@ BLWEvent.on('VB-voted', async function (userID, botID) {
 // This will listen to votes from DiscordLabs, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const DiscordLabs = voteManager.DiscordLabsVoteHook(url, auth, true);
+const DiscordLabs = client.voteManager.DiscordLabsVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from DiscordLabs
 BLWEvent.on('DL-voted', async function (userID, botID, wasTest) {
@@ -143,7 +138,7 @@ BLWEvent.on('DL-voted', async function (userID, botID, wasTest) {
 // This will listen to votes from Botrix, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const Botrix = voteManager.BotrixVoteHook(url, auth, true);
+const Botrix = client.voteManager.BotrixVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from Botrix
 BLWEvent.on('BTR-voted', async function (userID, botID) {
