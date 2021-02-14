@@ -16,9 +16,9 @@ It's intended to be used with discord.js v12.
 
 BLWebhooks fully supports external and discord.js internal sharding, make sure to enable the Upcoming Sharded Client Module.
 
-**NPM (Recommended)**
+**NPM (recommended)**
 ```
-npm i blwebhooks
+npm i blwebhooks --save
 ```
 
 **Yarn**
