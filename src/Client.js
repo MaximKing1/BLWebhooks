@@ -4,19 +4,19 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const discord = require('discord.js');
 const slowDown = require('express-slow-down');
+const rateLimit = require('express-rate-limit');
+const chalk = require('chalk');
+const { EventEmitter } = require('events');
+
 const speedLimiter = slowDown({
   windowMs: 15 * 60 * 1000,
   delayAfter: 250,
   delayMs: 400
 });
-const rateLimit = require('express-rate-limit');
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 250
 });
-const chalk = require('chalk');
-const { EventEmitter } = require('events');
-const Webhooks = require('./Webhooks.js');
 
 /**
  * Webhook Manager
@@ -24,36 +24,40 @@ const Webhooks = require('./Webhooks.js');
 class WebhooksManager extends EventEmitter {
     /**
      * @param {Discord.Client} client The Discord Client
+     * @param {Express.Port} Webserver port
      */
     constructor(client, port) {
     super();
+
     console.log(chalk.red("---------------------"))
     console.log("The Client Varible Has Been Changed To WebhooksManager, Check Our Docs If Your Code Is Not Working + BLWEvent.on Changed To client.on")
     console.log(chalk.red("---------------------"))
-        if (!client) {
-            return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
-        } else if (typeof port != "number") {
-            return console.log(chalk.red('[BLWEBHOOKS] The Port Number is not defined'));
-        }
-         /**
-         * The Discord Client
-         * @type {Discord.Client}
-         */
-        this.client = client;
-        if(client) {
-         console.log(chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks"))
+
+    /**
+     * The Discord Client
+     * @type {Discord.Client}
+    */
+    this.client = client;
+
+    if (!client) {
+        return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
+    } else if (typeof port != "number") {
+        return console.log(chalk.red('[BLWEBHOOKS] The Port Number is not defined'));
+    }
+    if(client) {
+        console.log(chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks"))
         client.on('error', async (error) => {
         this.client.emit('webhookError', error)
-         })
-        }
-        if(port) {
-            app.listen(port)
-            app.use(bodyParser.json())
-            app.use(limiter)
-            app.use(speedLimiter)
-            console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`))
-        }
+    })
+}
+    if(port) {
+        app.listen(port)
+        app.use(bodyParser.json())
+        app.use(limiter)
+        app.use(speedLimiter)
+        console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`))
     }
+}
 
     async shardedClient(toggle) {
         if (toggle == true) {
@@ -96,7 +100,7 @@ class WebhooksManager extends EventEmitter {
    async testVote(userID, botID) {
      console.log(userID + " Voted For " + botID)
      this.client.emit('vote', userID, botID)
-  }
+   }
 
     async topggVoteHook(url, auth, toggle) {
         if (toggle == false) {
@@ -249,7 +253,6 @@ async BListVoteHook(url, auth, toggle) {
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
       })      
 }
-
 }
 
 module.exports.WebhooksManager = WebhooksManager;
