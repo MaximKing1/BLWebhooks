@@ -49,11 +49,11 @@ const blwebhooks = require("blwebhooks");
 const discord = require("discord.js");
 const client = discord.Client();
 
-const { Client } = require("blwebhooks");
+const { WebhooksManager } = require("blwebhooks");
 
 // Attatch The Client and Port to the module.
 // The client is it attaching to the client, 80 is the port it will run on
-const voteClient = new Client(client, 80);
+const voteClient = new WebhooksManager(client, 80);
 
 client.voteManager = voteClient;
 ```
