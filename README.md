@@ -1,3 +1,4 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/Strider-Bot/BLWebhooks/badge.svg)](https://snyk.io/test/github/Strider-Bot/BLWebhooks)
 [![npm version](https://badge.fury.io/js/blwebhooks.svg)](https://badge.fury.io/js/blwebhooks)
 [![dependencies Status](https://status.david-dm.org/gh/Strider-Bot/BLWebhooks.svg)](https://david-dm.org/Strider-Bot/BLWebhooks)
 [![install size](https://packagephobia.com/badge?p=blwebhooks)](https://packagephobia.com/result?p=blwebhooks)
