@@ -19,8 +19,6 @@ const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 250
 });
-const csrfProtection = csrf({ cookie: true });
-const parseForm = bodyParser.urlencoded({ extended: false });
 
 /**
  * Webhook Manager
