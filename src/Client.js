@@ -25,19 +25,21 @@ const { EventEmitter } = require('events');
 global.BLWEvent = new EventEmitter();
 
 class Client extends EventEmitter {
+    /**
+     * @param {Discord.Client} client The Discord Client
+     */
     constructor(client, port) {
+    super();
         if (!client) {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
         } else if (typeof port != "number") {
             return console.log(chalk.red('[BLWEBHOOKS] The Port Number is not defined'));
         }
-
          /**
          * The Discord Client
          * @type {Discord.Client}
          */
         this.client = client;
-
         if(client) {
          console.log(chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks"))
         client.on('error', async (error) => {
