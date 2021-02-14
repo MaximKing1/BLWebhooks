@@ -7,6 +7,7 @@ const blwebhooks = require("blwebhooks");
 // The client is it attaching to the client, 80 is the port it will run on
 const bl = new blwebhooks.Client(client, 80);
 
+const protection = bl.extraProtection(true);
 
 const Botrix = bl.BotrixVoteHook("Botrix", "LOADS_OF_RANDOMNESS", true);
 
