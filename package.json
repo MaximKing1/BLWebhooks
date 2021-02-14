@@ -12,7 +12,8 @@
     "express",
     "server",
     "webhook",
-    "blwebhooks"
+    "blwebhooks",
+    ""
   ],
   "dependencies": {
     "@top-gg/sdk": "^3.0.7",
