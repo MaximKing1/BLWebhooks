@@ -1,8 +1,10 @@
 const discord = require('discord.js');
 const { EventEmitter } = require('events');
+const WebhookManager = require('./Client.js');
+
 
 /**
- * Represents a Giveaway
+ * Represents a Vote or Webhook
  */
 class Webhooks extends EventEmitter {
     constructor(manager, options) {
