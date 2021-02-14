@@ -146,6 +146,14 @@ BLWEvent.on('BTR-voted', function async (userID, botID) {
 
 # Events
 
+**Vote Expired Event**
+```js
+// This will run after the vote expires, this will be different for each list
+BLWEvent.on('vote-expired', function async (userID, botID) {
+  console.log(userID)
+})
+```
+
 **Error Event**
 ```js
 // This code will run in the event of a error, normally it will just console.log the error but you can add custom error events here
