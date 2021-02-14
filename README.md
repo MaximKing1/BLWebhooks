@@ -87,7 +87,7 @@ const proxy = bl.proxyTrust(true);
 const topgg = bl.topggVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from top.gg
-BLWEvent.on('topgg-voted', function async (UserID, botID, type) {
+BLWEvent.on('topgg-voted', async function (UserID, botID, type) {
   console.log(userID)
 })
 ```
@@ -100,7 +100,7 @@ BLWEvent.on('topgg-voted', function async (UserID, botID, type) {
 const InfinityBotList = bl.IBLVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from InfinityBotList
-BLWEvent.on('IBL-voted', function async (userID, botID, type, timeStamp) {
+BLWEvent.on('IBL-voted', async function (userID, botID, type, timeStamp) {
   console.log(userID)
 })
 ```
@@ -113,7 +113,7 @@ BLWEvent.on('IBL-voted', function async (userID, botID, type, timeStamp) {
 const VoidBots = bl.VoidBotsVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from VoidBots
-BLWEvent.on('VB-voted', function async (userID, botID) {
+BLWEvent.on('VB-voted', async function (userID, botID) {
   console.log(userID + " Voted For " + botID)
 })
 ```
@@ -126,7 +126,7 @@ BLWEvent.on('VB-voted', function async (userID, botID) {
 const DiscordLabs = bl.DiscordLabsVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from DiscordLabs
-BLWEvent.on('DL-voted', function async (userID, botID, wasTest) {
+BLWEvent.on('DL-voted', async function (userID, botID, wasTest) {
   console.log(`${userID} Voted For ${botID}. Was Test: ${wasTest}`)
 })
 ```
@@ -139,7 +139,7 @@ BLWEvent.on('DL-voted', function async (userID, botID, wasTest) {
 const Botrix = bl.BotrixVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from Botrix
-BLWEvent.on('BTR-voted', function async (userID, botID) {
+BLWEvent.on('BTR-voted', async function (userID, botID) {
   console.log(`${userID} Voted For ${botID}.`)
 })
 ```
@@ -149,7 +149,7 @@ BLWEvent.on('BTR-voted', function async (userID, botID) {
 **Vote Expired Event**
 ```js
 // This will run after the vote expires, this will be different for each list
-BLWEvent.on('vote-expired', function async (userID, botID) {
+BLWEvent.on('vote-expired', async function (userID, botID) {
   console.log(userID)
 })
 ```
@@ -157,7 +157,7 @@ BLWEvent.on('vote-expired', function async (userID, botID) {
 **Error Event**
 ```js
 // This code will run in the event of a error, normally it will just console.log the error but you can add custom error events here
-BLWEvent.on('error', function async (error) {
+BLWEvent.on('error', async function (error) {
   console.log(userID)
 })
 ```
