@@ -28,7 +28,9 @@ class WebhooksManager extends EventEmitter {
      */
     constructor(client, port) {
     super();
+    console.log(chalk.red("---------------------"))
     console.log("The Client Varible Has Been Changed To WebhooksManager, Check Our Docs If Your Code Is Not Working.")
+    console.log(chalk.red("---------------------"))
         if (!client) {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
         } else if (typeof port != "number") {
