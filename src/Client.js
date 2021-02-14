@@ -94,7 +94,7 @@ class WebhooksManager extends EventEmitter {
 
    async testVote(userID, botID) {
      console.log(userID + " Voted For " + botID)
-     BLWEvent.emit('vote', UserID, botID)
+     BLWEvent.emit('vote', userID, botID)
   }
 
     async topggVoteHook(url, auth, toggle) {
@@ -111,7 +111,7 @@ class WebhooksManager extends EventEmitter {
     const botID = req.vote.bot;
     const type = req.vote.type;
     const List = "top.gg";
-    BLWEvent.emit('topgg-voted', UserID, botID, type)
+    BLWEvent.emit('topgg-voted', userID, botID, type)
     BLWEvent.emit('vote', UserID, botID, List)
     setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
     })
@@ -136,7 +136,7 @@ async IBLVoteHook(url, auth, toggle) {
         const timeStamp = req.body.timeStamp;
         const List = "InfinityBotList";
         BLWEvent.emit('IBL-voted', userID, botID, type)
-        BLWEvent.emit('vote', UserID, botID, List)
+        BLWEvent.emit('vote', userID, botID, List)
         setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to IBL API
@@ -161,7 +161,7 @@ async VoidBotsVoteHook(url, auth, toggle) {
         const botID = req.body.bot;
         const List = "VoidBots";
         BLWEvent.emit('VB-voted', userID, botID)
-        BLWEvent.emit('vote', UserID, botID, List)
+        BLWEvent.emit('vote', userID, botID, List)
         setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to VoidBots API
@@ -187,7 +187,7 @@ async DiscordLabsVoteHook(url, auth, toggle) {
         const wasTest = req.body.test;
         const List = "DiscordLabs";
         BLWEvent.emit('DL-voted', userID, botID, wasTest)
-        BLWEvent.emit('vote', UserID, botID, List)
+        BLWEvent.emit('vote', userID, botID, List)
         setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to DiscordLabs API
@@ -211,7 +211,7 @@ async BotrixVoteHook(url, auth, toggle) {
         const userID = req.body.user;
         const List = "Botrix";
         BLWEvent.emit('BTR-voted', userID)
-        BLWEvent.emit('vote', UserID, List)
+        BLWEvent.emit('vote', userID, List)
         setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to Botrix API
@@ -235,7 +235,7 @@ async BListVoteHook(url, auth, toggle) {
         const userID = req.body.user;
         const List = "BList";
         BLWEvent.emit('BTR-voted', userID)
-        BLWEvent.emit('vote', UserID, List)
+        BLWEvent.emit('vote', userID, List)
         setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to BList API
