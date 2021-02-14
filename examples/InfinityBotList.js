@@ -1,13 +1,13 @@
 const discord = require("discord.js");
 const client = discord.Client();
 
-const blwebhooks = require("blwebhooks");
+const { WebhooksManager } = require("blwebhooks");
 
 // Attatch The Client and Port to the module.
 // The client is it attaching to the client, 80 is the port it will run on
 const bl = new blwebhooks.Client(client, 80);
 
-const protection = bl.extraProtection(true);
+bl.extraProtection(true);
 
 const InfinityBotList = bl.IBLVoteHook("IBLHook", "LOADS_OF_RANDOMNESS", true);
 
