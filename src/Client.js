@@ -89,6 +89,11 @@ class Client extends EventEmitter {
         }
     } // Enable this if your behind a proxy, Heroku etc
 
+    async testVote(userID, botID) {
+    console.log(userID + " Voted For " + botID)
+    BLWEvent.emit('vote', UserID, botID)
+    }
+
     async topggVoteHook(url, auth, toggle) {
         if (toggle == false) {
             return console.log(chalk.red('[BLWEBHOOKS] top.gg Vote Hooks Disabled'));
