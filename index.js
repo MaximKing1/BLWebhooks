@@ -1,1 +1,1 @@
-module.exports = require("./src/Client.d.ts");
+module.exports = require("./src/Client");
