@@ -163,9 +163,8 @@ async BotrixVoteHook(url, auth, toggle) {
       
         // Use the data on whatever you want
         console.log(req.body)
-        const userID = req.body.uid;
-        const botID = req.body.bid;
-        BLWEvent.emit('BTR-voted', userID, botID)
+        const userID = req.body.user;
+        BLWEvent.emit('BTR-voted', userID)
       
        // Respond to DiscordLabs API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
