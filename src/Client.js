@@ -39,14 +39,14 @@ class WebhooksManager extends EventEmitter {
         if (!client) {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'));
         }
+        else if (!port) {
+            return console.log(chalk.red('[BLWEBHOOKS] The Port is required!'));
+        }
         else if (typeof port != "number") {
-            return console.log(chalk.red('[BLWEBHOOKS] The Port Number is not defined'));
+            return console.log(chalk.red('[BLWEBHOOKS] The Port is a number.'));
         }
         else if (client) {
             console.log(chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks"));
-            this.client.on('error', async (error) => {
-                this.client.emit('webhookError', error);
-            });
         }
         if (port) {
             app.listen(port);
@@ -69,6 +69,9 @@ class WebhooksManager extends EventEmitter {
     async setLogging(toggle) {
         if (toggle == true) {
             await console.log(chalk.green('[BLWEBHOOKS] Advance Logging Enabled'));
+            await this.client.on('error', async (error) => {
+                this.client.emit('webhookError', error);
+            });
         }
         else if (toggle == false) {
             await console.log(chalk.red('[BLWEBHOOKS] Advance Logging Disabled'));
