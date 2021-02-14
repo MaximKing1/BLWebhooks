@@ -55,6 +55,14 @@ class Client extends EventEmitter {
         }
     }
 
+    async shardedClient(toggle) {
+        if (toggle == true) {
+            await console.log(chalk.green('[BLWEBHOOKS] Sharding Client Has Been Enabled.'));
+        } else if (toggle == false) {
+            await console.log(chalk.red('[BLWEBHOOKS] Sharding Client Has Been Disabled.'));
+        }
+    }
+
     async setLogging(toggle) {
         if (toggle == true) {
             await console.log(chalk.green('[BLWEBHOOKS] Advance Logging Enabled'));
