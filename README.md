@@ -65,6 +65,13 @@ const logging = bl.setLogging(true);
 const protection = bl.extraProtection(true);
 ```
 
+**Turn On Proxy Trust**
+```js
+// Enable this option is you use this behind a proxy like
+// Heroku services etc
+const proxy = bl.proxyTrust(true);
+```
+
 # Vote Hooks
 
 **TopGG Vote Hooks:**
