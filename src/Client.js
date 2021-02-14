@@ -43,10 +43,9 @@ class WebhooksManager extends EventEmitter {
         return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
     } else if (typeof port != "number") {
         return console.log(chalk.red('[BLWEBHOOKS] The Port Number is not defined'));
-    }
-    if(client) {
+    } else if(client) {
         console.log(chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks"))
-        client.on('error', async (error) => {
+        this.client.on('error', async (error) => {
         this.client.emit('webhookError', error)
     })
 }
@@ -78,7 +77,7 @@ class WebhooksManager extends EventEmitter {
     async extraProtection(toggle) {
         if (toggle == true) {
             await console.log(chalk.green('[BLWEBHOOKS] Extra Protection enabled.'));
-            return app.use(helmet({ contentSecurityPolicy: false, permittedCrossDomainPolicies: false, }));
+            return app.use(helmet({ contentSecurityPolicy: false, permittedCrossDomainPolicies: false }));
         } else if (toggle == false) {
             await console.log(chalk.red('[BLWEBHOOKS] Extra Protection disabled.'));
         }
@@ -109,16 +108,22 @@ class WebhooksManager extends EventEmitter {
             await console.log(chalk.green('[BLWEBHOOKS] top.gg Vote Hooks Enabled'))
         }
       
-    const Topgg = require('@top-gg/sdk')
-    const webhook = new Topgg.Webhook(auth)
-    app.post(`/${url}`, webhook.middleware(), async (req, res) => {
-    const UserID = req.vote.user;
+    const TopGG = require('@top-gg/sdk')
+    const WH = new TopGG.Webhook(auth)
+    app.post(`/${url}`, WH.middleware(), async (req, res, next) => {
+    // Respond to invalid requests
+    if (req.header('authorization') != auth) await console.log("Failed Access - top.gg Endpoint");
+
+    console.log(req.vote)
+    const userID = req.vote.user;
     const botID = req.vote.bot;
     const type = req.vote.type;
     const List = "top.gg";
     this.client.emit('topgg-voted', userID, botID, type)
-    this.client.emit('vote', UserID, botID, List)
-    setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+    this.client.emit('vote', userID, botID, List)
+    setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24)
+
+    res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
     })
 }
 

@@ -89,7 +89,7 @@ voteManager.testVote(userID, botID);
 client.voteManager.topggVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from top.gg
-client.on('topgg-voted', async function (UserID, botID, type) {
+client.on('topgg-voted', async function (userID, botID, type) {
   console.log(userID)
 })
 ```
