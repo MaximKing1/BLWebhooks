@@ -7,6 +7,7 @@ const slowDown = require('express-slow-down');
 const rateLimit = require('express-rate-limit');
 const chalk = require('chalk');
 const { EventEmitter } = require('events');
+const errorhandler = require('errorhandler');
 const speedLimiter = slowDown({
     windowMs: 15 * 60 * 1000,
     delayAfter: 250,
@@ -69,9 +70,7 @@ class WebhooksManager extends EventEmitter {
     async setLogging(toggle) {
         if (toggle == true) {
             await console.log(chalk.green('[BLWEBHOOKS] Advance Logging Enabled'));
-            await this.client.on('error', async (error) => {
-                this.client.emit('webhookError', error);
-            });
+            return app.use(errorhandler());
         }
         else if (toggle == false) {
             await console.log(chalk.red('[BLWEBHOOKS] Advance Logging Disabled'));
