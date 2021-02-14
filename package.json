@@ -26,8 +26,8 @@
     "express-rate-limit": "^5.2.5",
     "express-slow-down": "^1.4.0",
     "helmet": "^4.4.1",
-    "typescript": "^4.1.5",
-    "yarn": "^1.22.10"
+    "csurf": "^1.11.0",
+    "errorhandler": "^1.5.1"
   },
   "devDependencies": {},
   "scripts": {
