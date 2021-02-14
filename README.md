@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/blwebhooks.svg)](https://badge.fury.io/js/blwebhooks)
 [![dependencies Status](https://status.david-dm.org/gh/Strider-Bot/BLWebhooks.svg)](https://david-dm.org/Strider-Bot/BLWebhooks)
 [![install size](https://packagephobia.com/badge?p=blwebhooks)](https://packagephobia.com/result?p=blwebhooks)
 [![](https://data.jsdelivr.com/v1/package/npm/blwebhooks/badge?style=rounded)](https://www.jsdelivr.com/package/npm/blwebhooks)
