@@ -149,7 +149,7 @@ BLWEvent.on('BTR-voted', async function (userID, botID) {
 **Vote Expired Event**
 ```js
 // This will run after the vote expires, this will be different for each list
-BLWEvent.on('vote-expired', async function (userID, botID) {
+BLWEvent.on('vote-expired', async function (userID, botID, List) {
   console.log(userID)
 })
 ```
