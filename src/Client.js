@@ -87,7 +87,11 @@ class Client extends EventEmitter {
         }
     } // Enable this if your behind a proxy, Heroku etc
 
-    async testVote(userID, botID) {
+    async refreshStorage() {
+        return true;
+    }
+
+   async testVote(userID, botID) {
      console.log(userID + " Voted For " + botID)
      BLWEvent.emit('vote', UserID, botID)
   }
