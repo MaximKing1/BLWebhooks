@@ -17,7 +17,6 @@ const limiter = rateLimit({
 const chalk = require('chalk');
 const { EventEmitter } = require('events');
 const Webhooks = require('./Webhooks.js');
-const { contentSecurityPolicy } = require('helmet');
 
 /**
  * Webhook Manager
@@ -29,7 +28,7 @@ class WebhooksManager extends EventEmitter {
     constructor(client, port) {
     super();
     console.log(chalk.red("---------------------"))
-    console.log("The Client Varible Has Been Changed To WebhooksManager, Check Our Docs If Your Code Is Not Working + BLWEvent.on Changed To client.pn")
+    console.log("The Client Varible Has Been Changed To WebhooksManager, Check Our Docs If Your Code Is Not Working + BLWEvent.on Changed To client.on")
     console.log(chalk.red("---------------------"))
         if (!client) {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
