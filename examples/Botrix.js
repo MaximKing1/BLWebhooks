@@ -5,11 +5,12 @@ const { WebhooksManager } = require("blwebhooks");
 
 // Attatch The Client and Port to the module.
 // The client is it attaching to the client, 80 is the port it will run on
-const bl = new WebhooksManager(client, 80);
+const voteClient = new WebhooksManager(client, 80);
+client.voteManager = voteClient;
 
-bl.extraProtection(true);
+voteManager.extraProtection(true);
 
-const Botrix = bl.BotrixVoteHook("Botrix", "LOADS_OF_RANDOMNESS", true);
+const Botrix = voteManager.BotrixVoteHook("Botrix", "LOADS_OF_RANDOMNESS", true);
 
 // This code will run after a new vote was received from Botrix
 BLWEvent.on('BTR-voted', async function (userID) {
