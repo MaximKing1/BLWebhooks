@@ -4,6 +4,8 @@
 
 # Installation
 
+Need Any Help Setting It Up? Join Our [Support Server](https://discord.gg/8j4ZkpPvzP).
+
 **NPM (Recommended)**
 ```
 npm i blwebhooks
@@ -33,7 +35,7 @@ const blwebhooks = require("blwebhooks");
 
 **With discord.js**
 ```js
-const discord = require('discord.js');
+const discord = require("discord.js");
 const client = discord.Client();
 
 const blwebhooks = require("blwebhooks");
@@ -48,6 +50,13 @@ const bl = new blwebhooks.Client(client, 80);
 // This will enable the extended logging, this is mainly for debugging purposes
 // All errors will be logged without using this setting
 const logging = bl.setLogging(true);
+```
+
+**Turn On Extended Securitu**
+```js
+// This will enable bruteforce protection for module, once enabled
+// it will start the protection also using more CPU.
+const protection = bl.extraProtection(true);
 ```
 
 # Vote Hooks

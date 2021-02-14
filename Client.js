@@ -36,14 +36,13 @@ class Client {
          console.log(chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks"))
         client.on('error', async (error) => {
          BLWEvent.emit('error', error)
-          }
+          })
         }
         if(port) {
             app.listen(port)
             app.use(bodyParser.json())
             app.use(limiter)
             app.use(speedLimiter)
-            app.use(helmet({ contentSecurityPolicy: false, permittedCrossDomainPolicies: false, }));
             console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`))
         }
     }
@@ -56,11 +55,12 @@ class Client {
         }
     }
 
-    async onlineStatus(toggle) {
+    async extraProtection(toggle) {
         if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] Online Node Status Dashboard Enabled.'));
+            await console.log(chalk.green('[BLWEBHOOKS] Extra Protection enabled.'));
+            return app.use(helmet({ contentSecurityPolicy: false, permittedCrossDomainPolicies: false, }));
         } else if (toggle == false) {
-            await console.log(chalk.red('[BLWEBHOOKS] Online Node Status Dashboard Disabled.'));
+            await console.log(chalk.red('[BLWEBHOOKS] Extra Protection disabled.'));
         }
     }
 
