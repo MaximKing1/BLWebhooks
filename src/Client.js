@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const discord = require('discord.js');
 
 // Brute Force Protection
 const slowDown = require("express-slow-down");
@@ -12,8 +13,7 @@ const speedLimiter = slowDown({
   delayMs: 400 // begin adding 400ms of delay per request above 100:
 });
 
-const rateLimit = require("express-rate-limit");
-// app.set('trust proxy', 1);
+const rateLimit = require('express-rate-limit');
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 250 // limit each IP to 100 requests per windowMs
