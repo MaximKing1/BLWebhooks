@@ -148,7 +148,7 @@ async IBLVoteHook(url, auth, toggle) {
         const List = "InfinityBotList";
         this.client.emit('IBL-voted', userID, botID, type)
         this.client.emit('vote', userID, botID, List)
-        setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to IBL API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -175,7 +175,7 @@ async VoidBotsVoteHook(url, auth, toggle) {
         const List = "VoidBots";
         this.client.emit('VB-voted', userID, botID)
         this.client.emit('vote', userID, botID, List)
-        setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to VoidBots API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -202,7 +202,7 @@ async DiscordLabsVoteHook(url, auth, toggle) {
         const List = "DiscordLabs";
         this.client.emit('DL-voted', userID, botID, wasTest)
         this.client.emit('vote', userID, botID, List)
-        setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to DiscordLabs API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -227,7 +227,7 @@ async BotrixVoteHook(url, auth, toggle) {
         const List = "Botrix";
         this.client.emit('BTR-voted', userID)
         this.client.emit('vote', userID, List)
-        setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to Botrix API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
@@ -252,7 +252,7 @@ async BListVoteHook(url, auth, toggle) {
         const List = "BList";
         this.client.emit('BTR-voted', userID)
         this.client.emit('vote', userID, List)
-        setTimeout(() => this.client.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to BList API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
