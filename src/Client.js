@@ -22,11 +22,12 @@ const Webhooks = require('./Webhooks.js');
 /**
  * Webhook Manager
  */
-class WebhooksManager {
+class WebhooksManager extends EventEmitter {
     /**
      * @param {Discord.Client} client The Discord Client
      */
     constructor(client, port) {
+    super();
     console.log("The Client Varible Has Been Changed To WebhooksManager, Check Our Docs If Your Code Is Not Working.")
         if (!client) {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
