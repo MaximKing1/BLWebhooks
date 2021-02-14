@@ -107,7 +107,7 @@ BLWEvent.on('topgg-voted', async function (UserID, botID, type) {
 const InfinityBotList = voteManager.IBLVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from InfinityBotList
-BLWEvent.on('IBL-voted', async function (userID, botID, type, timeStamp) {
+BLWEvent.on('IBL-voted', async function (userID, botID, type) {
   console.log(userID)
 })
 ```
