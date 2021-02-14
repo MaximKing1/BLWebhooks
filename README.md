@@ -12,6 +12,10 @@
 
 Need Any Help Setting It Up? Join Our [Support Server](https://discord.gg/8j4ZkpPvzP).
 
+It's intended to be used with discord.js v12.
+
+BLWebhooks fully supports external and discord.js internal sharding, make sure to enable the Upcoming Sharded Client Module.
+
 **NPM (Recommended)**
 ```
 npm i blwebhooks
@@ -27,7 +31,8 @@ yarn add blwebhooks
 > InfinityBotList<br>
 > VoidBots<br>
 > DiscordLabs<br>
-> Botrix - Coming Soon!<br>
+> Botrix<br>
+> Blist - Support Next Update<br>
 
 # Usage
 
