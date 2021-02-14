@@ -21,21 +21,28 @@ const limiter = rateLimit({
 
 // Imports
 const chalk = require('chalk');
-const EventEmitter = require('events');
+const { EventEmitter } = require('events');
 global.BLWEvent = new EventEmitter();
 
-class Client {
+class Client extends EventEmitter {
     constructor(client, port) {
         if (!client) {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'))
         } else if (typeof port != "number") {
             return console.log(chalk.red('[BLWEBHOOKS] The Port Number is not defined'));
         }
+
+         /**
+         * The Discord Client
+         * @type {Discord.Client}
+         */
+        this.client = client;
+
         if(client) {
          console.log(chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks"))
         client.on('error', async (error) => {
          BLWEvent.emit('error', error)
-          })
+         })
         }
         if(port) {
             app.listen(port)
@@ -217,6 +224,7 @@ async BListVoteHook(url, auth, toggle) {
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
       })      
 }
+
 }
 
 module.exports.Client = Client;
