@@ -6,7 +6,6 @@ const helmet = require('helmet');
 
 // Brute Force Protection
 const slowDown = require("express-slow-down");
-//app.enable("trust proxy");
 const speedLimiter = slowDown({
   windowMs: 15 * 60 * 1000, // 15 minutes
   delayAfter: 300, // allow 300 requests per 15 minutes, then...
@@ -63,6 +62,15 @@ class Client {
             await console.log(chalk.red('[BLWEBHOOKS] Extra Protection disabled.'));
         }
     }
+
+    async proxyTrust(toggle) {
+        if (toggle == true) {
+            await console.log(chalk.green('[BLWEBHOOKS] Proxy Trust enabled.'));
+            return app.enable("trust proxy");
+        } else if (toggle == false) {
+            await console.log(chalk.red('[BLWEBHOOKS] Proxy Trust disabled.'));
+        }
+    } // Enable this if your behind a proxy, Heroku etc
 
     async topggVoteHook(url, auth, toggle) {
         if (toggle == false) {
