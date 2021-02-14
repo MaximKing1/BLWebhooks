@@ -76,6 +76,12 @@ bl.extraProtection(true);
 bl.proxyTrust(true);
 ```
 
+**Emit Test Vote Events**
+```js
+// Emit a test event to test your Voted Event
+bl.testVote(userID, botID);
+```
+
 # Vote Hooks
 
 **TopGG Vote Hooks:**
