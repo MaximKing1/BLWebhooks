@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const slowDown = require("express-slow-down");
 const speedLimiter = slowDown({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  delayAfter: 300, // allow 300 requests per 15 minutes, then...
+  delayAfter: 250, // allow 300 requests per 15 minutes, then...
   delayMs: 400 // begin adding 400ms of delay per request above 100:
 });
 
@@ -16,7 +16,7 @@ const rateLimit = require("express-rate-limit");
 // app.set('trust proxy', 1);
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 300 // limit each IP to 100 requests per windowMs
+  max: 250 // limit each IP to 100 requests per windowMs
 });
 
 // Imports
