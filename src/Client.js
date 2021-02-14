@@ -188,6 +188,29 @@ async BotrixVoteHook(url, auth, toggle) {
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
       })      
 }
+
+async BListVoteHook(url, auth, toggle) {
+    if (toggle == false) {
+        return console.log(chalk.red('[BLWEBHOOKS] BList Vote Hooks Disabled'));
+    } else if (toggle == true) {
+        await console.log(chalk.green('[BLWEBHOOKS] BList Vote Hooks Enabled'))
+    }
+      
+    app.post(`/${url}`, (req, res) => {
+        // Respond to invalid requests
+        if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - Botrix"}));
+      
+        // Use the data on whatever you want
+        console.log(req.body)
+        const userID = req.body.user;
+        const List = "BList";
+        BLWEvent.emit('BTR-voted', userID)
+        setTimeout(() => BLWEvent.emit('vote-expired', UserID, botID, List), 1000 * 60 * 60 * 24)
+      
+       // Respond to BList API
+        res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
+      })      
+}
 }
 
 module.exports.Client = Client;
