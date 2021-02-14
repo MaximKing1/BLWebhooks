@@ -17,7 +17,7 @@ BLWEvent.on('BTR-voted', function async (userID) {
   
   // Add role for 24 hours
   const guildD = client.guilds.cache.get("721282458708082713")
-   guildD.members.fetch(req.vote.user).catch(() => null).then(member => {
+   guildD.members.fetch(userID).catch(() => null).then(member => {
      
        if (!member) return;
      
