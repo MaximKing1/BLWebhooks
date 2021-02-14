@@ -85,8 +85,9 @@ class Client {
     const UserID = req.vote.user;
     const botID = req.vote.bot;
     const type = req.vote.type;
+    const List = "top.gg";
     BLWEvent.emit('topgg-voted', UserID, botID, type)
-    setTimeout(() => BLWEvent.emit('vote-expired', UserID, botID), 1000 * 60 * 60 * 24);
+    setTimeout(() => BLWEvent.emit('vote-expired', UserID, botID, List), 1000 * 60 * 60 * 24);
     })
 }
 
