@@ -12,7 +12,7 @@ const protection = bl.extraProtection(true);
 const InfinityBotList = bl.IBLVoteHook("IBLHook", "LOADS_OF_RANDOMNESS", true);
 
 // This code will run after a new vote was received from InfinityBotList
-BLWEvent.on('IBL-voted', function async (userID, botID, type, timeStamp) {
+BLWEvent.on('IBL-voted', async function (userID, botID, type, timeStamp) {
   console.log(userID)
   
   // Add role for 24 hours
