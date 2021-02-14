@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "src/index.js",
-  "publishConfig": {
-  "registry":"https://npm.pkg.github.com/teamstrider/blwebhooks"
-  },
   "keywords": [
     "discord.js",
     "webhooks",
