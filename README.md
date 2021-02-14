@@ -52,7 +52,7 @@ const bl = new blwebhooks.Client(client, 80);
 const logging = bl.setLogging(true);
 ```
 
-**Turn On Extended Securitu**
+**Turn On Extended Security**
 ```js
 // This will enable bruteforce protection for module, once enabled
 // it will start the protection also using more CPU.
