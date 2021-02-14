@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 const helmet = require('helmet');
 const discord = require('discord.js');
 const slowDown = require('express-slow-down');
@@ -17,6 +19,8 @@ const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 250
 });
+const csrfProtection = csrf({ cookie: true });
+const parseForm = bodyParser.urlencoded({ extended: false });
 
 /**
  * Webhook Manager
@@ -54,6 +58,7 @@ class WebhooksManager extends EventEmitter {
             app.use(bodyParser.json());
             app.use(limiter);
             app.use(speedLimiter);
+            app.use(cookieParser());
             console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`));
         }
     }
