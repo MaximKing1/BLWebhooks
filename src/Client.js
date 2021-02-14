@@ -3,21 +3,22 @@ const app = express();
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const discord = require('discord.js');
-const slowDown = require("express-slow-down");
+const slowDown = require('express-slow-down');
 const speedLimiter = slowDown({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  delayAfter: 250, // allow 300 requests per 15 minutes, then...
-  delayMs: 400 // begin adding 400ms of delay per request above 100:
+  windowMs: 15 * 60 * 1000,
+  delayAfter: 250,
+  delayMs: 400
 });
 const rateLimit = require('express-rate-limit');
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 250 // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000,
+  max: 250
 });
 const chalk = require('chalk');
 const { EventEmitter } = require('events');
 global.BLWEvent = new EventEmitter();
 const Webhooks = require('./Webhooks.js');
+const { contentSecurityPolicy } = require('helmet');
 
 /**
  * Webhook Manager
@@ -108,7 +109,7 @@ class WebhooksManager extends EventEmitter {
       
     const Topgg = require('@top-gg/sdk')
     const webhook = new Topgg.Webhook(auth)
-    app.post(`/${url}`, webhook.middleware(), (req, res) => {
+    app.post(`/${url}`, webhook.middleware(), async (req, res) => {
     const UserID = req.vote.user;
     const botID = req.vote.bot;
     const type = req.vote.type;
@@ -126,8 +127,9 @@ async IBLVoteHook(url, auth, toggle) {
         await console.log(chalk.green('[BLWEBHOOKS] InfinityBotList Vote Hooks Enabled'))
     }
       
-    app.post(`/${url}`, (req, res) => {
+    app.post(`/${url}`, async (req, res) => {
         // Respond to invalid requests
+        if (req.header('Authorization') != auth) await console.log("Failed Access - InfinityBotList Endpoint");
         if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - InfinityBotList"}));
       
         // Use the data on whatever you want
@@ -137,12 +139,13 @@ async IBLVoteHook(url, auth, toggle) {
         const type = req.body.type;
         const timeStamp = req.body.timeStamp;
         const List = "InfinityBotList";
-        BLWEvent.emit('IBL-voted', userID, botID, type)
-        BLWEvent.emit('vote', userID, botID, List)
-        setTimeout(() => BLWEvent.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
+        this.emit('IBL-voted', userID, botID, type)
+        this.emit('vote', userID, botID, List)
+        setTimeout(() => this.emit('voteExpired', UserID, botID, List), 1000 * 60 * 60 * 24)
       
        // Respond to IBL API
         res.status(200).send(JSON.stringify({error: false, message: "[BLWEBHOOKS] Received The Request!"}));
+        
       })      
 }
 
@@ -153,8 +156,9 @@ async VoidBotsVoteHook(url, auth, toggle) {
         await console.log(chalk.green('[BLWEBHOOKS] Void Bots Vote Hooks Enabled'))
     }
       
-    app.post(`/${url}`, (req, res) => {
+    app.post(`/${url}`, async (req, res) => {
         // Respond to invalid requests
+        if (req.header('Authorization') != auth) await console.log("Failed Access - VoidBots Endpoint");
         if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - VoidBots"}));
       
         // Use the data on whatever you want
@@ -178,8 +182,9 @@ async DiscordLabsVoteHook(url, auth, toggle) {
         await console.log(chalk.green('[BLWEBHOOKS] DiscordLabs Vote Hooks Enabled'))
     }
       
-    app.post(`/${url}`, (req, res) => {
+    app.post(`/${url}`, async (req, res) => {
         // Respond to invalid requests
+        if (req.header('Authorization') != auth) await console.log("Failed Access - DiscordLabs Endpoint");
         if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - DiscordLabs"}));
       
         // Use the data on whatever you want
@@ -204,8 +209,9 @@ async BotrixVoteHook(url, auth, toggle) {
         await console.log(chalk.green('[BLWEBHOOKS] Botrix Vote Hooks Enabled'))
     }
       
-    app.post(`/${url}`, (req, res) => {
+    app.post(`/${url}`, async (req, res) => {
         // Respond to invalid requests
+        if (req.header('Authorization') != auth) await console.log("Failed Access - Botrix Endpoint");
         if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - Botrix"}));
       
         // Use the data on whatever you want
@@ -228,8 +234,9 @@ async BListVoteHook(url, auth, toggle) {
         await console.log(chalk.green('[BLWEBHOOKS] BList Vote Hooks Enabled'))
     }
       
-    app.post(`/${url}`, (req, res) => {
+    app.post(`/${url}`, async (req, res) => {
         // Respond to invalid requests
+        if (req.header('Authorization') != auth) await console.log("Failed Access - BList Endpoint");
         if (req.header('Authorization') != auth) return res.status(403).send(JSON.stringify({error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - BList"}));
       
         // Use the data on whatever you want
