@@ -56,11 +56,10 @@ const blwebhooks = require("blwebhooks");
 const bl = new blwebhooks.Client(client, 80);
 ```
 
-**Turn On Extended Logging**
+**Turn On Sharding Support**
 ```js
 // This will enable the extended logging, this is mainly for debugging purposes
-// All errors will be logged without using this setting
-bl.setLogging(true);
+bl.shardClient(true);
 ```
 
 **Turn On Extended Security**
