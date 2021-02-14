@@ -1,8 +1,8 @@
 {
   "name": "blwebhooks",
-  "version": "1.4.3",
+  "version": "1.4.6",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
-  "main": "src/index.js",
+  "main": "index.js",
   "keywords": [
     "discord.js",
     "webhooks",

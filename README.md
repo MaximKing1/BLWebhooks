@@ -86,7 +86,7 @@ voteManager.testVote(userID, botID);
 // This will listen to votes from top.gg, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const topgg = client.voteManager.topggVoteHook(url, auth, true);
+client.voteManager.topggVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from top.gg
 client.on('topgg-voted', async function (UserID, botID, type) {
@@ -99,7 +99,7 @@ client.on('topgg-voted', async function (UserID, botID, type) {
 // This will listen to votes from InfinityBotList, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const InfinityBotList = client.voteManager.IBLVoteHook(url, auth, true);
+client.voteManager.IBLVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from InfinityBotList
 client.on('IBL-voted', async function (userID, botID, type) {
@@ -112,7 +112,7 @@ client.on('IBL-voted', async function (userID, botID, type) {
 // This will listen to votes from VoidBots, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const VoidBots = client.voteManager.VoidBotsVoteHook(url, auth, true);
+client.voteManager.VoidBotsVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from VoidBots
 client.on('VB-voted', async function (userID, botID) {
@@ -125,7 +125,7 @@ client.on('VB-voted', async function (userID, botID) {
 // This will listen to votes from DiscordLabs, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const DiscordLabs = client.voteManager.DiscordLabsVoteHook(url, auth, true);
+client.voteManager.DiscordLabsVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from DiscordLabs
 client.on('DL-voted', async function (userID, botID, wasTest) {
@@ -138,7 +138,7 @@ client.on('DL-voted', async function (userID, botID, wasTest) {
 // This will listen to votes from Botrix, the url is the end not
 // including the / and auth is the webhook auth. You can enable and
 // disable using true or false at the end
-const Botrix = client.voteManager.BotrixVoteHook(url, auth, true);
+client.voteManager.BotrixVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from Botrix
 client.on('BTR-voted', async function (userID, botID) {
