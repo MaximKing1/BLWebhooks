@@ -1,28 +1,23 @@
-// Express Server Requirements
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const discord = require('discord.js');
-
-// Brute Force Protection
 const slowDown = require("express-slow-down");
 const speedLimiter = slowDown({
   windowMs: 15 * 60 * 1000, // 15 minutes
   delayAfter: 250, // allow 300 requests per 15 minutes, then...
   delayMs: 400 // begin adding 400ms of delay per request above 100:
 });
-
 const rateLimit = require('express-rate-limit');
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 250 // limit each IP to 100 requests per windowMs
 });
-
-// Imports
 const chalk = require('chalk');
 const { EventEmitter } = require('events');
 global.BLWEvent = new EventEmitter();
+const Webhooks = require('./Webhooks.js');
 
 /**
  * Webhook Manager
