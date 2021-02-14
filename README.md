@@ -89,7 +89,7 @@ voteManager.testVote(userID, botID);
 const topgg = client.voteManager.topggVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from top.gg
-BLWEvent.on('topgg-voted', async function (UserID, botID, type) {
+client.on('topgg-voted', async function (UserID, botID, type) {
   console.log(userID)
 })
 ```
@@ -102,7 +102,7 @@ BLWEvent.on('topgg-voted', async function (UserID, botID, type) {
 const InfinityBotList = client.voteManager.IBLVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from InfinityBotList
-BLWEvent.on('IBL-voted', async function (userID, botID, type) {
+client.on('IBL-voted', async function (userID, botID, type) {
   console.log(userID)
 })
 ```
@@ -115,7 +115,7 @@ BLWEvent.on('IBL-voted', async function (userID, botID, type) {
 const VoidBots = client.voteManager.VoidBotsVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from VoidBots
-BLWEvent.on('VB-voted', async function (userID, botID) {
+client.on('VB-voted', async function (userID, botID) {
   console.log(userID + " Voted For " + botID)
 })
 ```
@@ -128,7 +128,7 @@ BLWEvent.on('VB-voted', async function (userID, botID) {
 const DiscordLabs = client.voteManager.DiscordLabsVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from DiscordLabs
-BLWEvent.on('DL-voted', async function (userID, botID, wasTest) {
+client.on('DL-voted', async function (userID, botID, wasTest) {
   console.log(`${userID} Voted For ${botID}. Was Test: ${wasTest}`)
 })
 ```
@@ -141,7 +141,7 @@ BLWEvent.on('DL-voted', async function (userID, botID, wasTest) {
 const Botrix = client.voteManager.BotrixVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from Botrix
-BLWEvent.on('BTR-voted', async function (userID, botID) {
+client.on('BTR-voted', async function (userID, botID) {
   console.log(`${userID} Voted For ${botID}.`)
 })
 ```
@@ -151,7 +151,7 @@ BLWEvent.on('BTR-voted', async function (userID, botID) {
 **Global Voted Event**
 ```js
 // This will run after any vote has been received, use this if you don't want seprate events for each list
-BLWEvent.on('vote', async function (userID, botID, List) {
+client.on('vote', async function (userID, botID, List) {
   console.log(`${userID} Voted For ${botID} on ${List}`)
 })
 ```
@@ -159,7 +159,7 @@ BLWEvent.on('vote', async function (userID, botID, List) {
 **Vote Expired Event**
 ```js
 // This will run after the vote expires, this will be different for each list
-BLWEvent.on('vote-expired', async function (userID, botID, List) {
+client.on('vote-expired', async function (userID, botID, List) {
   console.log(userID)
 })
 ```
@@ -167,7 +167,7 @@ BLWEvent.on('vote-expired', async function (userID, botID, List) {
 **Error Event**
 ```js
 // This code will run in the event of a error, normally it will just console.log the error but you can add custom error events here
-BLWEvent.on('error', async function (error) {
+client.on('webhookError', async function (error) {
   console.log(userID)
 })
 ```
