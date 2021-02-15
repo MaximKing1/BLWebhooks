@@ -100,8 +100,11 @@ class WebhooksManager extends EventEmitter {
     } // Enable this if your behind a proxy, Heroku etc
 
     async testVote(userID, botID) {
+        const type = "test";
         console.log(userID + " Voted For " + botID);
         this.client.emit('vote', userID, botID);
+        this.client.emit('topgg-voted', userID, botID, type);
+        this.client.emit('IBL-voted', userID, botID, type);
     }
     
     async topggVoteHook(url, auth, toggle) {
