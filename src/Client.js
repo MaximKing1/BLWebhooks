@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const csrf = require('csurf');
 const helmet = require('helmet');
 const discord = require('discord.js');
 const slowDown = require('express-slow-down');
