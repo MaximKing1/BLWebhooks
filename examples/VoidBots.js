@@ -10,7 +10,7 @@ client.voteManager = voteClient;
 
 voteManager.extraProtection(true);
 
-const VoidBots = voteManager.VoidBotsVoteHook("IBLHook", "LOADS_OF_RANDOMNESS", true);
+const VoidBots = voteManager.VoidBotsVoteHook("VBHOOK", "LOADS_OF_RANDOMNESS", true);
 
 // This code will run after a new vote was received from InfinityBotList
 BLWEvent.on('VB-voted', async function (userID, botID, type, timeStamp) {
