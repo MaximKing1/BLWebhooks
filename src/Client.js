@@ -257,8 +257,9 @@ class WebhooksManager extends EventEmitter {
             // Use the data on whatever you want
             console.log(req.body);
             const userID = req.body.user;
+            const time = req.body.time;
             const List = "BList";
-            this.client.emit('BTR-voted', userID);
+            this.client.emit('BLT-voted', userID);
             this.client.emit('vote', userID, List);
             setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
 

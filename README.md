@@ -146,6 +146,19 @@ client.on('BTR-voted', async function (userID, botID) {
 })
 ```
 
+**BList Vote Hooks:**
+```js
+// This will listen to votes from BList, the url is the end not
+// including the / and auth is the webhook auth. You can enable and
+// disable using true or false at the end
+client.voteManager.BListVoteHook(url, auth, true);
+
+// This code will run after a new vote was received from BList
+client.on('BLT-voted', async function (userID, botID) {
+  console.log(`${userID} Voted.`)
+})
+```
+
 # Events
 
 **Global Voted Event**
