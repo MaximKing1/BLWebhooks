@@ -32,7 +32,8 @@ yarn add blwebhooks
 > VoidBots<br>
 > DiscordLabs<br>
 > Botrix<br>
-> Blist - Support Next Update<br>
+> Blist<br>
+> DiscordBots.co<br>
 
 # Usage
 
@@ -155,6 +156,19 @@ client.voteManager.BListVoteHook(url, auth, true);
 
 // This code will run after a new vote was received from BList
 client.on('BLT-voted', async function (userID, botID) {
+  console.log(`${userID} Voted.`)
+})
+```
+
+**DiscordBots.co Vote Hooks:**
+```js
+// This will listen to votes from BList, the url is the end not
+// including the / and auth is the webhook auth. You can enable and
+// disable using true or false at the end
+client.voteManager.DBCVoteHook(url, auth, true);
+
+// This code will run after a new vote was received from BList
+client.on('DBC-voted', async function (userID, botID) {
   console.log(`${userID} Voted.`)
 })
 ```

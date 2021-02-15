@@ -1,6 +1,6 @@
 {
   "name": "blwebhooks",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
   "keywords": [
@@ -38,7 +38,7 @@
     "url": "git+https://github.com/Strider-Bot/BLWebhooks.git"
   },
   "author": "maximking1",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Strider-Bot/BLWebhooks/issues"
   },

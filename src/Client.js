@@ -267,5 +267,32 @@ class WebhooksManager extends EventEmitter {
             res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received The Request!" }));
         });
     }
+    async DBCVoteHook(url, auth, toggle) {
+        if (toggle == false) {
+            return console.log(chalk.red('[BLWEBHOOKS] DiscordBots.co Vote Hooks Disabled'));
+        }
+        else if (toggle == true) {
+            await console.log(chalk.green('[BLWEBHOOKS] DiscordBots.co Vote Hooks Enabled'));
+        }
+        app.post(`/${url}`, async (req, res) => {
+            // Respond to invalid requests
+            if (req.header('Authorization') != auth)
+                await console.log("Failed Access - DiscordBots.co Endpoint");
+            if (req.header('Authorization') != auth)
+                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - DiscordBots.co" }));
+
+            // Use the data on whatever you want
+            console.log(req.body);
+            const userID = req.body.userId;
+            const time = req.body.time;
+            const List = "DiscordBots.co";
+            this.client.emit('DBC-voted', userID);
+            this.client.emit('vote', userID, List);
+            setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
+
+            // Respond to BList API
+            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received The Request!" }));
+        });
+    }
 }
 module.exports.WebhooksManager = WebhooksManager;
