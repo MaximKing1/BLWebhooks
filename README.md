@@ -14,7 +14,9 @@ Need Any Help Setting It Up? Join Our [Support Server](https://discord.gg/8j4Zkp
 
 It's intended to be used with discord.js v12.
 
-BLWebhooks fully supports external and discord.js internal sharding, make sure to enable the Upcoming Sharded Client Module.
+BLWebhooks fully supports external and discord.js internal sharding, make sure to enable the Sharded Client Option.
+
+Please do remember this is in beta, before writing a negative review please open a issue first so we can have a chance to resolve the issue.
 
 **NPM (recommended)**
 ```
