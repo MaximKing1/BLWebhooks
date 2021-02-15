@@ -76,7 +76,7 @@ voteClient.proxyTrust(true);
 **Emit Test Vote Events**
 ```js
 // Emit a test event to test your Voted Event
-voteManager.testVote(userID, botID);
+voteClient.testVote(userID, botID);
 ```
 
 # Vote Hooks
