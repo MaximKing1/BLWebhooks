@@ -57,6 +57,16 @@ const voteClient = new WebhooksManager(client, 80);
 client.voteManager = voteClient;
 ```
 
+**Vote's Storage**
+```js
+// The DB can be set to either mongo or sqlite
+// Only set the string if using the mongoose db
+voteClient.setStroage(DB, String);
+
+// MongooseDB Example
+voteClient.setStroage("mongo", "mongodb://localhost/my_database");
+```
+
 **Turn On Sharding Support**
 ```js
 voteClient.shardedClient(true);

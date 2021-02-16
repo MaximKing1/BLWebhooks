@@ -9,6 +9,7 @@ const rateLimit = require('express-rate-limit');
 const chalk = require('chalk');
 const { EventEmitter } = require('events');
 const errorhandler = require('errorhandler');
+const mongoose = require('mongoose');
 const speedLimiter = slowDown({
     windowMs: 15 * 60 * 1000,
     delayAfter: 250,
@@ -66,6 +67,21 @@ class WebhooksManager extends EventEmitter {
         }
         else if (toggle == false) {
             await console.log(chalk.red('[BLWEBHOOKS] Sharding Client Has Been Disabled.'));
+        }
+    }
+
+    async setStroage(DB, string) {
+        if (DB == "mongo") {
+            await console.log(chalk.green('[BLWEBHOOKS] Enabled Mongoose Database'));
+            await mongoose.connect(string, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useFindAndModify: false, 
+                useCreateIndex: true 
+            });
+        }
+        else if (DB == "sqlite") {
+            await console.log(chalk.red('[BLWEBHOOKS] Enabled SQLITE Database, We Re'));
         }
     }
 
