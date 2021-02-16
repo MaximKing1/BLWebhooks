@@ -71,8 +71,8 @@ class WebhooksManager extends EventEmitter {
     }
 
     async setStroage(DB, string) {
-        if (DB == "mongo") {
-            await console.log(chalk.green('[BLWEBHOOKS] Enabled Mongoose Database'));
+        if (DB === "mongo") {
+            await console.log(chalk.yellow('[BLWEBHOOKS] Enabled Mongoose Database'));
             await mongoose.connect(string, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
@@ -80,8 +80,8 @@ class WebhooksManager extends EventEmitter {
                 useCreateIndex: true 
             });
         }
-        else if (DB == "sqlite") {
-            await console.log(chalk.red('[BLWEBHOOKS] Enabled SQLITE Database, We Re'));
+        else if (DB === "sqlite") {
+            await console.log(chalk.yellow('[BLWEBHOOKS] Enabled SQLITE Database, We Re'));
         }
     }
 
