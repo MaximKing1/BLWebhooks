@@ -10,6 +10,7 @@ const chalk = require('chalk');
 const { EventEmitter } = require('events');
 const errorhandler = require('errorhandler');
 const mongoose = require('mongoose');
+var VotingModel = require('./Models/vote.js');
 const speedLimiter = slowDown({
     windowMs: 15 * 60 * 1000,
     delayAfter: 250,
@@ -148,6 +149,7 @@ class WebhooksManager extends EventEmitter {
                 await console.log("Failed Access - top.gg Endpoint");
 
             console.log(req.vote);
+            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.vote.user;
             const botID = req.vote.bot;
             const type = req.vote.type;
