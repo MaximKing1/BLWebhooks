@@ -32,7 +32,7 @@ class WebhooksManager extends EventEmitter {
     constructor(client, port) {
         super();
         console.log(chalk.red("---------------------"));
-        console.log("The Client Has Been Changed To WebhooksManager, Check Our Docs If Your Code Is Not Working + BLWEvent.on Changed To client.on");
+        console.log("The client has been changed to WebhooksManager, check our docs if your code is not working + BLWEvent.on Changed To client.on");
         console.log(chalk.red("---------------------"));
 
         /**
@@ -44,10 +44,10 @@ class WebhooksManager extends EventEmitter {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'));
         }
         else if (!port) {
-            return console.log(chalk.red('[BLWEBHOOKS] The Port is required!'));
+            return console.log(chalk.red('[BLWEBHOOKS] The port is required!'));
         }
         else if (typeof port != "number") {
-            return console.log(chalk.red('[BLWEBHOOKS] The Port is a number.'));
+            return console.log(chalk.red('[BLWEBHOOKS] The port is a number.'));
         }
         else if (client) {
             console.log(chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks"));
@@ -64,16 +64,16 @@ class WebhooksManager extends EventEmitter {
 
     async shardedClient(toggle) {
         if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] Sharding Client Has Been Enabled.'));
+            await console.log(chalk.green('[BLWEBHOOKS] Sharding client has been enabled.'));
         }
         else if (toggle == false) {
-            await console.log(chalk.red('[BLWEBHOOKS] Sharding Client Has Been Disabled.'));
+            await console.log(chalk.red('[BLWEBHOOKS] Sharding client has been disabled.'));
         }
     }
 
     async setStroage(DB, string) {
         if (DB == "mongo") {
-            await console.log(chalk.yellow('[BLWEBHOOKS] Enabled Mongoose Database'));
+            await console.log(chalk.yellow('[BLWEBHOOKS] Enabled mongoose database.'));
             await mongoose.connect(string, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
@@ -87,43 +87,43 @@ class WebhooksManager extends EventEmitter {
                 if (err) {
                   console.error(chalk.red(err.message));
                 }
-                await console.log(chalk.yellow('[BLWEBHOOKS] Enabled SQLITE Database'));
-                await console.log(chalk.yellow('[BLWEBHOOKS] Connected To The voteHooks.db Database'));
+                await console.log(chalk.yellow('[BLWEBHOOKS] Enabled SQLITE database.'));
+                await console.log(chalk.yellow('[BLWEBHOOKS] Connected to the voteHooks.db database.'));
               });
         } else if (DB == "mysql") {
-            await console.log(chalk.yellow('[BLWEBHOOKS] Enabled MYSQL Database'));
+            await console.log(chalk.yellow('[BLWEBHOOKS] Enabled MYSQL database.'));
         }
     }
 
     async setLogging(toggle) {
         if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] Advance Logging Enabled'));
+            await console.log(chalk.green('[BLWEBHOOKS] Advanced logging enabled.'));
             return app.use(errorhandler());
         }
         else if (toggle == false) {
-            await console.log(chalk.red('[BLWEBHOOKS] Advance Logging Disabled'));
+            await console.log(chalk.red('[BLWEBHOOKS] Advance logging disabled'));
         }
     }
 
     async extraProtection(toggle) {
         if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] Extra Protection enabled.'));
+            await console.log(chalk.green('[BLWEBHOOKS] Extra protection enabled.'));
             return app.use(helmet({ contentSecurityPolicy: false, permittedCrossDomainPolicies: false }));
         }
         else if (toggle == false) {
-            await console.log(chalk.red('[BLWEBHOOKS] Extra Protection disabled.'));
+            await console.log(chalk.red('[BLWEBHOOKS] Extra protection disabled.'));
         }
     }
 
     async proxyTrust(toggle) {
         if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] Proxy Trust enabled.'));
+            await console.log(chalk.green('[BLWEBHOOKS] Proxy trust enabled.'));
             return app.enable("trust proxy");
         }
         else if (toggle == false) {
-            await console.log(chalk.red('[BLWEBHOOKS] Proxy Trust disabled.'));
+            await console.log(chalk.red('[BLWEBHOOKS] Proxy trust disabled.'));
         }
-    } // Enable this if your behind a proxy, Heroku etc
+    } // Enable this if your behind a proxy, Heroku, Docker, Replit, etc
 
     async testVote(userID, botID) {
         const type = "test";
@@ -136,17 +136,17 @@ class WebhooksManager extends EventEmitter {
     
     async topggVoteHook(url, auth, toggle) {
         if (toggle == false) {
-            return console.log(chalk.red('[BLWEBHOOKS] top.gg Vote Hooks Disabled'));
+            return console.log(chalk.red('[BLWEBHOOKS] Top.gg vote hooks have been disabled.'));
         }
         else if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] top.gg Vote Hooks Enabled'));
+            await console.log(chalk.green('[BLWEBHOOKS] Top.gg vote hooks have been enabled.'));
         }
         const TopGG = require('@top-gg/sdk');
         const WH = new TopGG.Webhook(auth);
         app.post(`/${url}`, WH.middleware(), async (req, res, next) => {
             // Respond to invalid requests
             if (req.header('authorization') != auth)
-                await console.log("Failed Access - top.gg Endpoint");
+                await console.log("Failed Access - Top.gg Endpoint");
 
             console.log(req.vote);
             VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
@@ -163,17 +163,17 @@ class WebhooksManager extends EventEmitter {
     }
     async IBLVoteHook(url, auth, toggle) {
         if (toggle == false) {
-            return console.log(chalk.red('[BLWEBHOOKS] InfinityBotList Vote Hooks Disabled'));
+            return console.log(chalk.red('[BLWEBHOOKS] InfinityBotList vote hooks have been disabled.'));
         }
         else if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] InfinityBotList Vote Hooks Enabled'));
+            await console.log(chalk.green('[BLWEBHOOKS] InfinityBotList vote hooks have been enabled.'));
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - InfinityBotList Endpoint");
             if (req.header('Authorization') != auth)
-                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - InfinityBotList" }));
+                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You don't have access to use this endpoint. - InfinityBotList" }));
                 
             // Use the data on whatever you want
             console.log(req.body);
@@ -186,22 +186,22 @@ class WebhooksManager extends EventEmitter {
             setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
 
             // Respond to IBL API
-            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received The Request!" }));
+            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received the request!" }));
         });
     }
     async VoidBotsVoteHook(url, auth, toggle) {
         if (toggle == false) {
-            return console.log(chalk.red('[BLWEBHOOKS] Void Bots Vote Hooks Disabled'));
+            return console.log(chalk.red('[BLWEBHOOKS] Void Bots vote hooks have been disabled.'));
         }
         else if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] Void Bots Vote Hooks Enabled'));
+            await console.log(chalk.green('[BLWEBHOOKS] Void Bots vote hooks have been enabled.'));
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - VoidBots Endpoint");
             if (req.header('Authorization') != auth)
-                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - VoidBots" }));
+                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You don't have access to this endpoint - VoidBots" }));
 
             // Use the data on whatever you want
             console.log(req.body);
@@ -213,12 +213,12 @@ class WebhooksManager extends EventEmitter {
             setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
 
             // Respond to VoidBots API
-            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received The Request!" }));
+            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received the request!" }));
         });
     }
     async DiscordLabsVoteHook(url, auth, toggle) {
         if (toggle == false) {
-            return console.log(chalk.red('[BLWEBHOOKS] DiscordLabs Vote Hooks Disabled'));
+            return console.log(chalk.red('[BLWEBHOOKS] DiscordLabs vote hooks have been disabled.'));
         }
         else if (toggle == true) {
             await console.log(chalk.green('[BLWEBHOOKS] DiscordLabs Vote Hooks Enabled'));
@@ -228,7 +228,7 @@ class WebhooksManager extends EventEmitter {
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - DiscordLabs Endpoint");
             if (req.header('Authorization') != auth)
-                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - DiscordLabs" }));
+                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You don't have access to use this endpoint - DiscordLabs" }));
 
             // Use the data on whatever you want
             console.log(req.body);
@@ -241,22 +241,22 @@ class WebhooksManager extends EventEmitter {
             setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
 
             // Respond to DiscordLabs API
-            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received The Request!" }));
+            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received the request!" }));
         });
     }
     async BotrixVoteHook(url, auth, toggle) {
         if (toggle == false) {
-            return console.log(chalk.red('[BLWEBHOOKS] Botrix Vote Hooks Disabled'));
+            return console.log(chalk.red('[BLWEBHOOKS] Botrix vote hooks have been disabled.'));
         }
         else if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] Botrix Vote Hooks Enabled'));
+            await console.log(chalk.green('[BLWEBHOOKS] Botrix vote hooks have been enabled.'));
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - Botrix Endpoint");
             if (req.header('Authorization') != auth)
-                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - Botrix" }));
+                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You don't have access to use this endpoint. - Botrix" }));
 
             // Use the data on whatever you want
             console.log(req.body);
@@ -267,22 +267,22 @@ class WebhooksManager extends EventEmitter {
             setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
 
             // Respond to Botrix API
-            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received The Request!" }));
+            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received the request!" }));
         });
     }
     async BListVoteHook(url, auth, toggle) {
         if (toggle == false) {
-            return console.log(chalk.red('[BLWEBHOOKS] BList Vote Hooks Disabled'));
+            return console.log(chalk.red('[BLWEBHOOKS] BList vote hooks have been disabled.'));
         }
         else if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] BList Vote Hooks Enabled'));
+            await console.log(chalk.green('[BLWEBHOOKS] BList hote hooks have been enabled.'));
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - BList Endpoint");
             if (req.header('Authorization') != auth)
-                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - BList" }));
+                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You don't have access to use this endpoint - BList" }));
 
             // Use the data on whatever you want
             console.log(req.body);
@@ -294,22 +294,22 @@ class WebhooksManager extends EventEmitter {
             setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
 
             // Respond to BList API
-            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received The Request!" }));
+            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received the request!" }));
         });
     }
     async DBCVoteHook(url, auth, toggle) {
         if (toggle == false) {
-            return console.log(chalk.red('[BLWEBHOOKS] DiscordBots.co Vote Hooks Disabled'));
+            return console.log(chalk.red('[BLWEBHOOKS] DiscordBots.co vote hooks have been disabled.'));
         }
         else if (toggle == true) {
-            await console.log(chalk.green('[BLWEBHOOKS] DiscordBots.co Vote Hooks Enabled'));
+            await console.log(chalk.green('[BLWEBHOOKS] DiscordBots.co vote hooks have been enabled.'));
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - DiscordBots.co Endpoint");
             if (req.header('Authorization') != auth)
-                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You Don't Have Access To Use This Endpoint - DiscordBots.co" }));
+                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You don't have access to use this endpoint - DiscordBots.co" }));
 
             // Use the data on whatever you want
             console.log(req.body);
@@ -321,7 +321,7 @@ class WebhooksManager extends EventEmitter {
             setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
 
             // Respond to BList API
-            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received The Request!" }));
+            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received the request!" }));
         });
     }
 }
