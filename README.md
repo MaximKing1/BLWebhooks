@@ -59,12 +59,15 @@ client.voteManager = voteClient;
 
 **Vote's Storage**
 ```js
-// The DB can be set to either mongo or sqlite
+// The DB can be set to either mongo, sqlite
 // Only set the string if using the mongoose db
 voteClient.setStroage(DB, String);
 
-// MongooseDB Example
+// MongooseDB Example (recommended)
 voteClient.setStroage("mongo", "mongodb://localhost/my_database");
+
+// SQLITE Example
+voteClient.setStroage("sqlite");
 ```
 
 **Turn On Sharding Support**

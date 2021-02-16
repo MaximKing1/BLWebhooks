@@ -1,6 +1,6 @@
 {
   "name": "blwebhooks",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
   "keywords": [
@@ -28,7 +28,8 @@
     "express-rate-limit": "^5.2.5",
     "express-slow-down": "^1.4.0",
     "helmet": "^4.4.1",
-    "mongoose": "^5.11.16"
+    "mongoose": "^5.11.16",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {},
   "scripts": {

@@ -71,7 +71,7 @@ class WebhooksManager extends EventEmitter {
     }
 
     async setStroage(DB, string) {
-        if (DB === "mongo") {
+        if (DB == "mongo") {
             await console.log(chalk.yellow('[BLWEBHOOKS] Enabled Mongoose Database'));
             await mongoose.connect(string, {
                 useNewUrlParser: true,
@@ -80,8 +80,12 @@ class WebhooksManager extends EventEmitter {
                 useCreateIndex: true 
             });
         }
-        else if (DB === "sqlite") {
-            await console.log(chalk.yellow('[BLWEBHOOKS] Enabled SQLITE Database, We Re'));
+        else if (DB == "sqlite") {
+            var sqlite3 = require('sqlite3').verbose();
+            var db = new sqlite3.Database(':memory:');
+            await console.log(chalk.yellow('[BLWEBHOOKS] Enabled SQLITE Database, We Suggest Using MongooseDB.'));
+        } else if (DB == "mysql") {
+            await console.log(chalk.yellow('[BLWEBHOOKS] Enabled MYSQL Database'));
         }
     }
 
