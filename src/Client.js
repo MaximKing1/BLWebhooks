@@ -80,10 +80,15 @@ class WebhooksManager extends EventEmitter {
                 useCreateIndex: true 
             });
         }
-        else if (DB == "sqlite") {
+        else if(DB == "sqlite") {
             var sqlite3 = require('sqlite3').verbose();
-            var db = new sqlite3.Database(':memory:');
-            await console.log(chalk.yellow('[BLWEBHOOKS] Enabled SQLITE Database, We Suggest Using MongooseDB.'));
+            let db = new sqlite3.Database('voteHooks.db', async (err) => {
+                if (err) {
+                  console.error(chalk.red(err.message));
+                }
+                await console.log(chalk.yellow('[BLWEBHOOKS] Enabled SQLITE Database'));
+                await console.log(chalk.yellow('[BLWEBHOOKS] Connected To The voteHooks.db Database'));
+              });
         } else if (DB == "mysql") {
             await console.log(chalk.yellow('[BLWEBHOOKS] Enabled MYSQL Database'));
         }
@@ -121,8 +126,9 @@ class WebhooksManager extends EventEmitter {
 
     async testVote(userID, botID) {
         const type = "test";
+        const List = "Test";
         console.log(userID + " Voted For " + botID);
-        this.client.emit('vote', userID, botID);
+        this.client.emit('vote', userID, botID, List);
         this.client.emit('topgg-voted', userID, botID, type);
         this.client.emit('IBL-voted', userID, botID, type);
     }
@@ -255,7 +261,7 @@ class WebhooksManager extends EventEmitter {
             const userID = req.body.user;
             const List = "Botrix";
             this.client.emit('BTR-voted', userID);
-            this.client.emit('vote', userID, List);
+            this.client.emit('vote', userID, botID, List);
             setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
 
             // Respond to Botrix API
@@ -282,7 +288,7 @@ class WebhooksManager extends EventEmitter {
             const time = req.body.time;
             const List = "BList";
             this.client.emit('BLT-voted', userID);
-            this.client.emit('vote', userID, List);
+            this.client.emit('vote', userID, botID, List);
             setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
 
             // Respond to BList API
@@ -309,7 +315,7 @@ class WebhooksManager extends EventEmitter {
             const time = req.body.time;
             const List = "DiscordBots.co";
             this.client.emit('DBC-voted', userID);
-            this.client.emit('vote', userID, List);
+            this.client.emit('vote', userID, botID, List);
             setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
 
             // Respond to BList API
