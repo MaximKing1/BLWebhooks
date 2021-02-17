@@ -1,6 +1,6 @@
 {
   "name": "blwebhooks",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
   "keywords": [
@@ -33,7 +33,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Test Running!\" && node ."
   },
   "repository": {
     "type": "git",
