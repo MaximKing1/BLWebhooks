@@ -35,11 +35,19 @@ class WebhooksManager extends EventEmitter {
         console.log("The client has been changed to WebhooksManager, check our docs if your code is not working + BLWEvent.on Changed To client.on");
         console.log(chalk.red("---------------------"));
 
+        let monoogseSet;
+
         /**
          * The Discord Client
          * @type {Discord.Client}
         */
         this.client = client;
+        /**
+         * The Port
+         * @type {Express.Port}
+        */
+       this.port = port;
+
         if (!client) {
             return console.log(chalk.red('[BLWEBHOOKS] The client is not defined'));
         }
@@ -73,6 +81,7 @@ class WebhooksManager extends EventEmitter {
 
     async setStroage(DB, string) {
         if (DB == "mongo") {
+            let monoogseSet = true;
             await console.log(chalk.yellow('[BLWEBHOOKS] Enabled mongoose database.'));
             await mongoose.connect(string, {
                 useNewUrlParser: true,
@@ -177,6 +186,7 @@ class WebhooksManager extends EventEmitter {
                 
             // Use the data on whatever you want
             console.log(req.body);
+            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.userID;
             const botID = req.body.botID;
             const type = req.body.type;
@@ -205,6 +215,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
+            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
             const botID = req.body.bot;
             const List = "VoidBots";
@@ -232,6 +243,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
+            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.uid;
             const botID = req.body.bid;
             const wasTest = req.body.test;
@@ -260,6 +272,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
+            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
             const List = "Botrix";
             this.client.emit('BTR-voted', userID);
@@ -286,6 +299,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
+            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
             const time = req.body.time;
             const List = "BList";
@@ -313,6 +327,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
+            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.userId;
             const time = req.body.time;
             const List = "DiscordBots.co";
@@ -325,4 +340,5 @@ class WebhooksManager extends EventEmitter {
         });
     }
 }
+
 module.exports.WebhooksManager = WebhooksManager;

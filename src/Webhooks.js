@@ -1,30 +1,35 @@
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 const discord = require('discord.js');
+const chalk = require('chalk');
 const { EventEmitter } = require('events');
-const WebhooksManager = require('./Client.js');
+const mongoose = require('mongoose');
 
 /**
- * Represents a Vote or Webhook
+ * Guild SettingsManager
  */
-class Webhooks extends EventEmitter {
-    constructor(manager, options) {
+class SettingsManager extends EventEmitter {
+    /**
+     * @param {Discord.Client} client The Discord Client
+     * @param {Express.Port} Webserver port
+     */
+    constructor(client, port) {
         super();
-        /**
-         * The Webhook Manager
-         * @type {WebhookManager}
-         */
-        this.manager = manager;
-        /**
-         * The Discord Client
-         * @type {Discord.Client}
-         */
-        this.client = manager.client;
+
     }
 
-    get messageURL () {
-        return `https://discord.com/channels/${this.guildID}/${this.channelID}/${this.messageID}`;
+    async shardedClient(toggle) {
+        if (toggle == true) {
+            await console.log(chalk.green('[BLWEBHOOKS] Sharding client has been enabled.'));
+        }
+        else if (toggle == false) {
+            await console.log(chalk.red('[BLWEBHOOKS] Sharding client has been disabled.'));
+        }
     }
 
- 
 }
 
-module.exports = Webhooks;
+module.exports.SettingsManager = SettingsManager;
