@@ -12,6 +12,7 @@
 # Table of Contents
 
 - [Installation](#installation)
+- [Supported Libraries](#supported-libraries)
 - [Support Lists](#supported-lists)
 - [Usage](#usage)
 - [Vote Hooks](#vote-hooks)
@@ -37,6 +38,12 @@ npm i blwebhooks --save
 ```
 yarn add blwebhooks
 ```
+
+# Supported Libraries
+
+| Creator                           | Name                                                                                                                                   |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Amish Shah (originally hydrabolt) | [![npm](static/npm.png)](https://npm.im/discord.js) [![GitHub](static/github.png)](https://github.com/discordjs/discord.js) discord.js |
 
 # Supported Lists
 
