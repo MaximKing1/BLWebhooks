@@ -1,9 +1,8 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
-const discord = require('discord.js');
+// const discord = require('discord.js');
 const slowDown = require('express-slow-down');
 const rateLimit = require('express-rate-limit');
 const chalk = require('chalk');
