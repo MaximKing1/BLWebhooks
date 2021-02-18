@@ -154,9 +154,9 @@ class WebhooksManager extends EventEmitter {
         const WH = new TopGG.Webhook(auth);
         app.post(`/${url}`, WH.middleware(), async (req, res, next) => {
             // Respond to invalid requests
+            res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
             if (req.header('authorization') != auth)
                 await console.log("Failed Access - Top.gg Endpoint");
-
             console.log(req.vote);
             VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.vote.user;
@@ -179,6 +179,7 @@ class WebhooksManager extends EventEmitter {
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
+            res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - InfinityBotList Endpoint");
             if (req.header('Authorization') != auth)
@@ -208,6 +209,7 @@ class WebhooksManager extends EventEmitter {
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
+            res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - VoidBots Endpoint");
             if (req.header('Authorization') != auth)
@@ -236,6 +238,7 @@ class WebhooksManager extends EventEmitter {
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
+            res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - DiscordLabs Endpoint");
             if (req.header('Authorization') != auth)
@@ -265,6 +268,7 @@ class WebhooksManager extends EventEmitter {
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
+            res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - Botrix Endpoint");
             if (req.header('Authorization') != auth)
@@ -292,6 +296,7 @@ class WebhooksManager extends EventEmitter {
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
+            res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - BList Endpoint");
             if (req.header('Authorization') != auth)
@@ -320,6 +325,7 @@ class WebhooksManager extends EventEmitter {
         }
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
+            res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - DiscordBots.co Endpoint");
             if (req.header('Authorization') != auth)
