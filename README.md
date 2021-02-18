@@ -75,6 +75,25 @@ const voteClient = new WebhooksManager(client, 80);
 client.voteManager = voteClient;
 ```
 
+**With Eris**
+```js
+const Eris = require("eris");
+ 
+var bot = new Eris("BOT_TOKEN");
+// Replace BOT_TOKEN with your bot account's token
+ 
+bot.on("ready", () => { // When the bot is ready
+    console.log("Ready!"); // Log "Ready!"
+});
+ 
+const { WebhooksManager } = require("blwebhooks");
+
+const voteClient = new WebhooksManager(bot, 80);
+bot.voteManager = voteClient;
+
+bot.connect(); // Get the bot to connect to Discord
+```
+
 **Vote's Storage**
 ```js
 // The DB can be set to either mongo, sqlite
