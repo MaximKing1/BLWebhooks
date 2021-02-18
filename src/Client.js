@@ -316,6 +316,34 @@ class WebhooksManager extends EventEmitter {
             res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received the request!" }));
         });
     }
+    async MYBVoteHook(url, auth, toggle) {
+        if (toggle == false) {
+            return console.log(chalk.red('[BLWEBHOOKS] BList vote hooks have been disabled.'));
+        }
+        else if (toggle == true) {
+            await console.log(chalk.green('[BLWEBHOOKS] BList hote hooks have been enabled.'));
+        }
+        app.post(`/${url}`, async (req, res) => {
+            // Respond to invalid requests
+            res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
+            if (req.header('Authorization') != auth)
+                await console.log("Failed Access - Mythicalbots Endpoint");
+            if (req.header('Authorization') != auth)
+                return res.status(403).send(JSON.stringify({ error: true, message: "[BLWEBHOOKS] You don't have access to use this endpoint - Mythicalbots" }));
+
+            // Use the data on whatever you want
+            console.log(req.body);
+            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
+            const userID = req.body.user;
+            const List = "MythicalBots";
+            this.client.emit('MYB-voted', userID);
+            this.client.emit('vote', userID, botID, List);
+            setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
+
+            // Respond to Mythicalbots API
+            res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received the request!" }));
+        });
+    }
     async DBCVoteHook(url, auth, toggle) {
         if (toggle == false) {
             return console.log(chalk.red('[BLWEBHOOKS] DiscordBots.co vote hooks have been disabled.'));
