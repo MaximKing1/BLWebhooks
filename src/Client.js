@@ -3,7 +3,7 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
-// const discord = require('discord.js');
+const discord = require('discord.js');
 const slowDown = require('express-slow-down');
 const rateLimit = require('express-rate-limit');
 const chalk = require('chalk');
@@ -368,6 +368,17 @@ class WebhooksManager extends EventEmitter {
             res.status(200).send(JSON.stringify({ error: false, message: "[BLWEBHOOKS] Received the request!" }));
         });
     }
+
+    async getVotes(userID, option) {
+       if(option == "total") {
+
+       } else if(option == "daily") {
+
+       } else if(option == "weekly") {
+
+       }
+    }
+
 }
 
 module.exports.WebhooksManager = WebhooksManager;
