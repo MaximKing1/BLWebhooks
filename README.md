@@ -8,6 +8,15 @@
 
 # BLWebhooks, The Next Gen Vote Hooks!
 
+# Table of Contents
+
+- [Installation](#installation)
+- [Support Lists](#supported-lists)
+- [Usage](#usage)
+- [Vote Hooks](#vote-hooks)
+- [Events](#events)
+- [Vote Database](#vote-database)
+
 # Installation
 
 Need Any Help Setting It Up? Join Our [Support Server](https://discord.gg/8j4ZkpPvzP).
@@ -29,6 +38,7 @@ yarn add blwebhooks
 ```
 
 # Supported Lists
+
 > top.gg<br>
 > InfinityBotList<br>
 > VoidBots<br>
