@@ -34,8 +34,6 @@ class WebhooksManager extends EventEmitter {
         console.log("The client has been changed to WebhooksManager, check our docs if your code is not working + BLWEvent.on Changed To client.on");
         console.log(chalk.red("---------------------"));
 
-        let monoogseSet;
-
         /**
          * The Discord Client
          * @type {Discord.Client}
@@ -80,7 +78,6 @@ class WebhooksManager extends EventEmitter {
 
     async setStroage(DB, string) {
         if (DB == "mongo") {
-            let monoogseSet = true;
             await console.log(chalk.yellow('[BLWEBHOOKS] Enabled mongoose database.'));
             await mongoose.connect(string, {
                 useNewUrlParser: true,
