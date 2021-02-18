@@ -13,14 +13,14 @@ voteManager.extraProtection(true);
 const Botrix = voteManager.BotrixVoteHook("Botrix", "LOADS_OF_RANDOMNESS", true);
 
 // This code will run after a new vote was received from Botrix
-BLWEvent.on('BTR-voted', async function (userID) {
+client.on('BTR-voted', async function (userID) {
   console.log(`${userID} Voted!`)
   
   // Add role for 24 hours
   const guildD = client.guilds.cache.get("721282458708082713")
    guildD.members.fetch(userID).catch(() => null).then(member => {
      
-       if (!member) return;
+      if (!member) return;
      
       member.roles.add("748340144897261660");
      
@@ -29,4 +29,3 @@ BLWEvent.on('BTR-voted', async function (userID) {
 }).catch(() => {});
   
 });
-})
