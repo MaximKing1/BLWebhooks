@@ -41,9 +41,9 @@ yarn add blwebhooks
 
 # Supported Libraries
 
-| Creator                           | Name                                                                                                                                   |
+| Name                           | Features                                                                                                                                   |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Amish Shah (originally hydrabolt) | [![npm](static/npm.png)](https://npm.im/discord.js) [![GitHub](static/github.png)](https://github.com/discordjs/discord.js) discord.js |
+| discord.js | `DATABASE`, `EXPRESS`, `HOOKS` |
 
 # Supported Lists
 
