@@ -79,6 +79,7 @@ voteClient.setStroage("mongo", "mongodb://localhost/my_database");
 // SQLITE Example
 voteClient.setStroage("sqlite");
 ```
+For usage on pulling data see the [Database Vote](#database-vote) Section.
 
 **Turn On Sharding Support**
 ```js
@@ -222,4 +223,20 @@ client.on('vote-expired', async function (userID, botID, List) {
 client.on('webhookError', async function (error) {
   console.log(userID)
 })
+```
+
+# Vote Database
+The vote Database feature will save the total votes a User had made for your bot / server, it will add all the vote in a database and the methods below show you how to set it up and pull data.
+
+**discord.js example**
+```js
+// The DB can be set to either mongo, sqlite
+// Only set the string if using the mongoose db
+voteClient.setStroage(DB, String);
+
+// MongooseDB Example (recommended)
+voteClient.setStroage("mongo", "mongodb://localhost/my_database");
+
+// SQLITE Example
+voteClient.setStroage("sqlite");
 ```
