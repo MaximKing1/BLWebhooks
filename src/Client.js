@@ -155,7 +155,7 @@ class WebhooksManager extends EventEmitter {
         app.post(`/${url}`, WH.middleware(), async (req, res, next) => {
             // Respond to invalid requests
             res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
-            if (req.header('authorization') != auth)
+            if (req.header('Authorization') != auth)
                 await console.log("Failed Access - Top.gg Endpoint");
             console.log(req.vote);
             VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
