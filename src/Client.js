@@ -303,7 +303,6 @@ class WebhooksManager extends EventEmitter {
             console.log(req.body);
             VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
-            const time = req.body.time;
             const List = "BList";
             this.client.emit('BLT-voted', userID);
             this.client.emit('vote', userID, botID, List);
@@ -360,7 +359,6 @@ class WebhooksManager extends EventEmitter {
             console.log(req.body);
             VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.userId;
-            const time = req.body.time;
             const List = "DiscordBots.co";
             this.client.emit('DBC-voted', userID);
             this.client.emit('vote', userID, botID, List);
