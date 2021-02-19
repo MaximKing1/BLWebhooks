@@ -40,12 +40,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Strider-Bot/BLWebhooks.git"
+    "url": "git+https://github.com/MaximKing1/BLWebhooks.git"
   },
   "author": "maximking1",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Strider-Bot/BLWebhooks/issues"
+    "url": "https://github.com/MaximKing1/BLWebhooks/issues"
   },
-  "homepage": "https://github.com/Strider-Bot/BLWebhooks#readme"
+  "homepage": "https://github.com/MaximKing1/BLWebhooks#readme"
 }
