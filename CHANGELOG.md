@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.6.15](https://github.com/Strider-Bot/BLWebhooks/compare/v1.6.14...v1.6.15) (2021-02-19)
 
+* **Added:** Added funding page
 ### [1.6.14](https://github.com/Strider-Bot/BLWebhooks/compare/v1.6.13...v1.6.14) (2021-02-19)
 
 ### [1.6.13](https://github.com/Strider-Bot/BLWebhooks/compare/v1.6.12...v1.6.13) (2021-02-19)
