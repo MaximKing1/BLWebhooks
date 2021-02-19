@@ -1,6 +1,6 @@
 {
   "name": "blwebhooks",
-  "version": "1.6.16",
+  "version": "1.6.17",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
   "keywords": [
