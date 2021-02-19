@@ -282,7 +282,7 @@ voteClient.setStroage("sqlite");
 
 **Pulling User Votes**
 ```js
-// Coming Soon!
+voteClient.getVotes(userID);
 ```
 
 # Our Projects
