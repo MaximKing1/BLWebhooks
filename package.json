@@ -1,6 +1,6 @@
 {
   "name": "blwebhooks",
-  "version": "1.6.8",
+  "version": "1.6.10",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
   "keywords": [
@@ -31,9 +31,12 @@
     "mongoose": "^5.11.16",
     "sqlite3": "^5.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "standard-version": "^9.1.1"
+  },
   "scripts": {
-    "test": "echo \"Test Running!\" && node ."
+    "test": "echo \"Test Running!\" && node .",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
