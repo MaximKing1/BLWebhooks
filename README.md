@@ -282,8 +282,12 @@ voteClient.setStroage("sqlite");
 
 **Pulling User Votes**
 ```js
-voteClient.getVotes(userID);
+voteClient.getVotes(userID, option);
 ```
+*Options*
+`daily` - Get Daily Votes
+`weekly` - Get Weekly Votes
+`monthly` - Get Monthly Votes
 
 # Our Projects
 
