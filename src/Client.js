@@ -155,7 +155,7 @@ class WebhooksManager extends EventEmitter {
             if (req.header('Authorization') != auth)
                 await console.log("Failed Access - Top.gg Endpoint");
             console.log(req.vote);
-            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
+    //        VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.vote.user;
             const botID = req.vote.bot;
             const type = req.vote.type;
@@ -184,7 +184,7 @@ class WebhooksManager extends EventEmitter {
                 
             // Use the data on whatever you want
             console.log(req.body);
-            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
+            // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.userID;
             const botID = req.body.botID;
             const type = req.body.type;
@@ -214,7 +214,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
-            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
+           // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
             const botID = req.body.bot;
             const List = "VoidBots";
@@ -243,7 +243,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
-            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
+           // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.uid;
             const botID = req.body.bid;
             const wasTest = req.body.test;
@@ -273,7 +273,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
-            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
+            // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
             const List = "Botrix";
             this.client.emit('BTR-voted', userID);
@@ -301,7 +301,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
-            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
+           // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
             const List = "BList";
             this.client.emit('BLT-voted', userID);
@@ -329,7 +329,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
-            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
+           // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
             const List = "MythicalBots";
             this.client.emit('MYB-voted', userID);
@@ -357,7 +357,7 @@ class WebhooksManager extends EventEmitter {
 
             // Use the data on whatever you want
             console.log(req.body);
-            VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
+           // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.userId;
             const List = "DiscordBots.co";
             this.client.emit('DBC-voted', userID);
@@ -382,3 +382,4 @@ class WebhooksManager extends EventEmitter {
 }
 
 module.exports.WebhooksManager = WebhooksManager;
+
