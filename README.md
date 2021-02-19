@@ -284,7 +284,7 @@ voteClient.setStroage("sqlite");
 ```js
 voteClient.getVotes(userID, option);
 ```
-*Options*<br>
+*Options:*<br>
 
 - `daily` - Get Daily Votes<br>
 - `weekly` - Get Weekly Votes<br>
