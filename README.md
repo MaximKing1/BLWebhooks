@@ -34,7 +34,7 @@ BLWebhooks fully supports external and discord.js internal sharding, make sure t
 Please do remember this is in beta, before writing a negative review please open a issue first so we can have a chance to resolve the issue.
 
 **NPM (recommended)**
-```
+```js
 # Stable
 npm i --save blwebhooks
 
@@ -43,7 +43,7 @@ npm i --save blwebhooks@nightly
 ```
 
 **Yarn**
-```
+```js
 # Stable
 yarn add blwebhooks
 
@@ -55,7 +55,7 @@ yarn add blwebhooks@nightly
 
 | Name                           | Features                                                                                                                                   |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| discord.js | `DATABASE`, `EXPRESS`, `HOOKS` |
+| discord.js | `DATABASE`, `EXPRESS`, `HOOKS`, `SECURITY` |
 
 # Supported Lists
 
@@ -278,6 +278,11 @@ voteClient.setStroage("mongo", "mongodb://localhost/my_database");
 
 // SQLITE Example
 voteClient.setStroage("sqlite");
+```
+
+**Pulling User Votes**
+```js
+// Coming Soon!
 ```
 
 # Our Projects
