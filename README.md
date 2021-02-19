@@ -21,6 +21,7 @@
 - [Vote Hooks](#vote-hooks)
 - [Events](#events)
 - [Vote Database](#vote-database)
+- [Other Projects](#our-projects)
 
 # Installation
 
@@ -278,3 +279,7 @@ voteClient.setStroage("mongo", "mongodb://localhost/my_database");
 // SQLITE Example
 voteClient.setStroage("sqlite");
 ```
+
+# Our Projects
+
+- [DPost](h) (This Is A Work In Progress, Beta Out Now!)
