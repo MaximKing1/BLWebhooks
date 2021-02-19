@@ -34,12 +34,20 @@ Please do remember this is in beta, before writing a negative review please open
 
 **NPM (recommended)**
 ```
-npm i blwebhooks --save
+# Stable
+npm i --save blwebhooks
+
+# Nughtly Builds
+npm i --save blwebhooks@nightly
 ```
 
 **Yarn**
 ```
+# Stable
 yarn add blwebhooks
+
+# Nightly Builds
+yarn add blwebhooks@nightly
 ```
 
 # Supported Libraries
