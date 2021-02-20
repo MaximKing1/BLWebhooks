@@ -23,11 +23,6 @@
 - [Vote Database](#vote-database)
 - [Other Projects](#our-projects)
 
-<<<<<<< HEAD
-# Major Update! Read Changes [Here!](#WebhooksManager-Options-Updated)
-
-=======
->>>>>>> parent of 0384dac (MASSIVE UPDATE)
 # Installation
 
 Need Any Help Setting It Up? Join Our [Support Server](https://discord.gg/8j4ZkpPvzP).
@@ -111,11 +106,7 @@ bot.voteManager = voteClient;
 bot.connect(); // Get the bot to connect to Discord
 ```
 
-<<<<<<< HEAD
-# WebhooksManager Options Updated
-=======
 **Vote's Storage**
->>>>>>> parent of 0384dac (MASSIVE UPDATE)
 ```js
 // The DB can be set to either mongo, sqlite
 // Only set the string if using the mongoose db
