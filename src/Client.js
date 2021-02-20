@@ -28,11 +28,11 @@ class WebhooksManager extends EventEmitter {
      * @param {Discord.Client} client The Discord Client
      * @param {Express.Port} Webserver port
      */
-    constructor(client, port) {
+    constructor(client, port, options) {
         super();
-        console.log(chalk.red("---------------------"));
+        console.log(chalk.red("-----------------------"));
         console.log("The client has been changed to WebhooksManager, check our docs if your code is not working + BLWEvent.on Changed To client.on");
-        console.log(chalk.red("---------------------"));
+        console.log(chalk.red("----------------------"));
 
         /**
          * The Discord Client
@@ -44,6 +44,11 @@ class WebhooksManager extends EventEmitter {
          * @type {Express.Port}
         */
        this.port = port;
+        /**
+         * The WebhooksManager Database
+         * @param {client.ready}
+        */
+       this.database = options.database;
 
         if (!client) {
             return console.log(chalk.red("[BLWEBHOOKS] The client is not defined"));
