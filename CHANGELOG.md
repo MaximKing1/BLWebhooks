@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.7.9](https://github.com/MaximKing1/BLWebhooks/compare/v1.7.5...v1.7.9) (2021-02-20)
 
+* **Major Update:** The new manager options will now replace this,
+```js
+voteClient.extraLogging(true);
+```
+with this:
+```js
+const voteClient = WebhooksManager(client, 80, {
+    database: "mongoose", // mongoose or sqlite for vote logging
+    extraLogging: true, // This will enable extraLogging {Debugging}
+    extra: {
+        extraProtection: true, // Leave Enabled Unless Using Small Amount Of RAM
+        proxyTrust: false, // Enable this if your behind a proxy, Heroku, Docker, Replit, etc
+        shardedClient: false // Use this if your using a sharded client {ShardingManager}
+    }
+});
+```
+
 ### [1.7.3](https://github.com/MaximKing1/BLWebhooks/compare/v1.7.2...v1.7.3) (2021-02-20)
 
 * **Added:** Added typing for typescript

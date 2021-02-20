@@ -3,8 +3,13 @@ const client = discord.Client();
 
 const { WebhooksManager } = require("blwebhooks");
 
-const manager = WebhooksManager(client, {
+const voteClient = WebhooksManager(client, 80, {
     database: "mongoose", // mongoose or sqlite
-    port: "80"
+    extraLogging: true,
+    extra: {
+        extraProtection: true,
+        proxyTrust: true,
+        shardedClient: true
+    }
 });
-client.voteManager = manager;
+client.voteManager = voteClient;

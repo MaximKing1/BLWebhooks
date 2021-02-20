@@ -5,10 +5,16 @@ const { WebhooksManager } = require("blwebhooks");
 
 // Attatch The Client and Port to the module.
 // The client is it attaching to the client, 80 is the port it will run on
-const voteClient = new WebhooksManager(client, 80);
+const voteClient = WebhooksManager(client, 80, {
+  database: "mongoose", // mongoose or sqlite
+  extraLogging: true,
+  extra: {
+      extraProtection: true,
+      proxyTrust: true,
+      shardedClient: true
+  }
+});
 client.voteManager = voteClient;
-
-voteClient.extraProtection(true);
 
 voteClient.BotrixVoteHook("Botrix", "LOADS_OF_RANDOMNESS", true);
 
