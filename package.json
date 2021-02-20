@@ -1,10 +1,10 @@
 {
   "name": "blwebhooks",
-  "version": "1.7.8",
+  "version": "1.7.9",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
   "types": "./typings/index.d.ts",
-    "engines": {
+  "engines": {
     "node": "^12.19.0"
   },
   "keywords": [
@@ -50,7 +50,7 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/MaximKing1/BLWebhooks/issues",
-    "email" : "blwebhooks@maximking.co.uk"
+    "email": "blwebhooks@maximking.co.uk"
   },
   "funding": "http://example.com/donate",
   "homepage": "https://github.com/MaximKing1/BLWebhooks#readme"
