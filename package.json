@@ -3,7 +3,6 @@
   "version": "2.0.0",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
-  "types": "./typings/index.d.ts",
   "engines": {
     "node": "^12.19.0"
   },

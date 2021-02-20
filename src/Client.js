@@ -123,8 +123,6 @@ class WebhooksManager extends EventEmitter {
         console.log(chalk.red("[BLWEBHOOKS] Extra protection disabled."));
     }
 
-       console.log(options.extra.shardedClient)
-
         if (!client) {
             return console.log(chalk.red("[BLWEBHOOKS] The client is not defined"));
         }
