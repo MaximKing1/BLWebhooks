@@ -1,0 +1,6 @@
+node_modules
+.vscode
+.github
+examples
+package-lock.json
+SECURITY.md
