@@ -38,7 +38,7 @@ Please do remember this is in beta, before writing a negative review please open
 # Stable
 npm i --save blwebhooks
 
-# Nughtly Builds
+# Nightly Builds
 npm i --save blwebhooks@nightly
 ```
 
