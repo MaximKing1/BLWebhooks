@@ -27,11 +27,13 @@
     "express-slow-down": "^1.4.0",
     "helmet": "^4.4.1",
     "mongoose": "^5.11.16",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "typescript": "^4.1.5"
   },
   "devDependencies": {
     "eslint": "^7.20.0",
-    "standard-version": "^9.1.1"
+    "standard-version": "^9.1.1",
+    "typedoc": "^0.20.26"
   },
   "scripts": {
     "test": "echo \"Test Running!\" && node .",
