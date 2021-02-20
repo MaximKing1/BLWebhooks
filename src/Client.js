@@ -33,6 +33,9 @@ class WebhooksManager extends EventEmitter {
         console.log(chalk.red("-----------------------"));
         console.log("The client has been changed to WebhooksManager, check our docs if your code is not working + BLWEvent.on Changed To client.on");
         console.log(chalk.red("----------------------"));
+        console.log(chalk.red("-----------------------"));
+        console.log("All Manager Options Updated Check Our Docs Now! https://github.com/MaximKing1/BLWebhooks#readme");
+        console.log(chalk.red("----------------------"));
 
         /**
          * The Discord Client
