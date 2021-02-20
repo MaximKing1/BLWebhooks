@@ -23,8 +23,11 @@
 - [Vote Database](#vote-database)
 - [Other Projects](#our-projects)
 
+<<<<<<< HEAD
 # Major Update! Read Changes [Here!](#WebhooksManager-Options-Updated)
 
+=======
+>>>>>>> parent of 0384dac (MASSIVE UPDATE)
 # Installation
 
 Need Any Help Setting It Up? Join Our [Support Server](https://discord.gg/8j4ZkpPvzP).
@@ -85,15 +88,7 @@ const discord = require("discord.js");
 const client = discord.Client();
 const { WebhooksManager } = require("blwebhooks");
 
-const voteClient = WebhooksManager(client, 80, {
-    database: "mongoose", // mongoose or sqlite
-    extraLogging: true, // This will enable extraLogging {Debugging}
-    extra: {
-        extraProtection: true, // Leave Enabled Unless Using Small Amount Of RAM
-        proxyTrust: false, // Enable this if your behind a proxy, Heroku, Docker, Replit, etc
-        shardedClient: false // Use this if your using a sharded client
-    }
-});
+const voteClient = new WebhooksManager(client, 80);
 client.voteManager = voteClient;
 ```
 
@@ -110,34 +105,50 @@ bot.on("ready", () => { // When the bot is ready
  
 const { WebhooksManager } = require("blwebhooks");
 
-const voteClient = WebhooksManager(bot, 80, {
-    database: "mongoose", // mongoose or sqlite
-    extraLogging: true, // This will enable extraLogging {Debugging}
-    extra: {
-        extraProtection: true, // Leave Enabled Unless Using Small Amount Of RAM
-        proxyTrust: false, // Enable this if your behind a proxy, Heroku, Docker, Replit, etc
-        shardedClient: false // Use this if your using a sharded client
-    }
-});
+const voteClient = new WebhooksManager(bot, 80);
 bot.voteManager = voteClient;
 
 bot.connect(); // Get the bot to connect to Discord
 ```
 
+<<<<<<< HEAD
 # WebhooksManager Options Updated
+=======
+**Vote's Storage**
+>>>>>>> parent of 0384dac (MASSIVE UPDATE)
 ```js
-const voteClient = WebhooksManager(client, 80, {
-    database: "mongoose", // mongoose or sqlite for vote logging
-    extraLogging: true, // This will enable extraLogging {Debugging}
-    extra: {
-        extraProtection: true, // Leave Enabled Unless Using Small Amount Of RAM
-        proxyTrust: false, // Enable this if your behind a proxy, Heroku, Docker, Replit, etc
-        shardedClient: false // Use this if your using a sharded client {ShardingManager}
-    }
-});
+// The DB can be set to either mongo, sqlite
+// Only set the string if using the mongoose db
+voteClient.setStroage(DB, String);
+
+// MongooseDB Example (recommended)
+voteClient.setStroage("mongo", "mongodb://localhost/my_database");
+
+// SQLITE Example
+voteClient.setStroage("sqlite");
+```
+For usage on pulling data see the [Database Vote](#database-vote) Section.
+
+**Turn On Sharding Support**
+```js
+voteClient.shardedClient(true);
 ```
 
-**Emit Test Vote Event**
+**Turn On Extended Security**
+```js
+// This will enable bruteforce protection for module, once enabled
+// it will start the protection also using more CPU.
+voteClient.extraProtection(true);
+```
+
+**Turn On Proxy Trust**
+```js
+// Enable this option is you use this behind a proxy like
+// Heroku services etc
+voteClient.proxyTrust(true);
+```
+
+**Emit Test Vote Events**
 ```js
 // Emit a test event to test your Voted Event
 voteClient.testVote(userID, botID);

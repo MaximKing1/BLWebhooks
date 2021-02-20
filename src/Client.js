@@ -46,9 +46,10 @@ class WebhooksManager extends EventEmitter {
        this.port = port;
         /**
          * The WebhooksManager Database
-         * @param {Manager.database}
+         * @param {client.ready}
         */
        this.database = options.database;
+<<<<<<< HEAD
         /**
          * Extra Logging
          * @param {Manager.extraLogging}
@@ -119,6 +120,8 @@ class WebhooksManager extends EventEmitter {
     else if (this.extraProtection == false) {
         console.log(chalk.red("[BLWEBHOOKS] Extra protection disabled."));
     }
+=======
+>>>>>>> parent of 0384dac (MASSIVE UPDATE)
 
         if (!client) {
             return console.log(chalk.red("[BLWEBHOOKS] The client is not defined"));
@@ -141,6 +144,69 @@ class WebhooksManager extends EventEmitter {
             console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`));
         }
     }
+
+    async shardedClient(toggle) {
+        if (toggle == true) {
+            console.log(chalk.green("[BLWEBHOOKS] Sharding client has been enabled."));
+        }
+        else if (toggle == false) {
+            console.log(chalk.red("[BLWEBHOOKS] Sharding client has been disabled."));
+        }
+    }
+
+    async setStroage(DB, string) {
+        if (DB == "mongo") {
+            console.log(chalk.yellow("[BLWEBHOOKS] Enabled mongoose database."));
+            await mongoose.connect(string, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useFindAndModify: false, 
+                useCreateIndex: true 
+            });
+        }
+        else if(DB == "sqlite") {
+            var sqlite3 = require("sqlite3").verbose();
+            this.db = new sqlite3.Database("voteHooks.db", async (err) => {
+                if (err) {
+                  console.error(chalk.red(err.message));
+                }
+                console.log(chalk.yellow("[BLWEBHOOKS] Enabled SQLITE database."));
+                console.log(chalk.yellow("[BLWEBHOOKS] Connected to the voteHooks.db database."));
+              });
+        } else if (DB == "mysql") {
+            console.log(chalk.yellow("[BLWEBHOOKS] Enabled MYSQL database."));
+        }
+    }
+
+    async setLogging(toggle) {
+        if (toggle == true) {
+            console.log(chalk.green("[BLWEBHOOKS] Advanced logging enabled."));
+            return app.use(errorhandler());
+        }
+        else if (toggle == false) {
+            console.log(chalk.red("[BLWEBHOOKS] Advance logging disabled"));
+        }
+    }
+
+    async extraProtection(toggle) {
+        if (toggle == true) {
+            console.log(chalk.green("[BLWEBHOOKS] Extra protection enabled."));
+            return app.use(helmet({ contentSecurityPolicy: false, permittedCrossDomainPolicies: false }));
+        }
+        else if (toggle == false) {
+            console.log(chalk.red("[BLWEBHOOKS] Extra protection disabled."));
+        }
+    }
+
+    async proxyTrust(toggle) {
+        if (toggle == true) {
+            console.log(chalk.green("[BLWEBHOOKS] Proxy trust enabled."));
+            return app.enable("trust proxy");
+        }
+        else if (toggle == false) {
+            console.log(chalk.red("[BLWEBHOOKS] Proxy trust disabled."));
+        }
+    } // Enable this if your behind a proxy, Heroku, Docker, Replit, etc
 
     async testVote(userID, botID) {
         const type = "test";
