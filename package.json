@@ -4,6 +4,9 @@
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
   "types": "./typings/index.d.ts",
+    "engines": {
+    "node": "^12.19.0"
+  },
   "keywords": [
     "discord.js",
     "webhooks",
@@ -43,10 +46,12 @@
     "type": "git",
     "url": "git+https://github.com/MaximKing1/BLWebhooks.git"
   },
-  "author": "maximking1",
+  "author": "MaximKing1 <business@maximking.co.uk> (https://github.com/MaximKing1)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MaximKing1/BLWebhooks/issues"
+    "url": "https://github.com/MaximKing1/BLWebhooks/issues",
+    "email" : "blwebhooks@maximking.co.uk"
   },
+  "funding": "http://example.com/donate",
   "homepage": "https://github.com/MaximKing1/BLWebhooks#readme"
 }
