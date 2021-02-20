@@ -3,7 +3,6 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const bodyParser = require("body-parser");
-const discord = require("discord.js");
 const slowDown = require("express-slow-down");
 const rateLimit = require("express-rate-limit");
 const chalk = require("chalk");
@@ -89,7 +88,7 @@ class WebhooksManager extends EventEmitter {
         }
         else if(DB == "sqlite") {
             var sqlite3 = require("sqlite3").verbose();
-            let db = new sqlite3.Database("voteHooks.db", async (err) => {
+            this.db = new sqlite3.Database("voteHooks.db", async (err) => {
                 if (err) {
                   console.error(chalk.red(err.message));
                 }
@@ -140,6 +139,11 @@ class WebhooksManager extends EventEmitter {
         this.client.emit("IBL-voted", userID, botID, type);
     }
     
+    async getServer(serverID) {
+        let server = this.client.guilds.cache.get(serverID);
+        return server;
+    }
+
     async topggVoteHook(url, auth, toggle) {
         if (toggle == false) {
             return console.log(chalk.red("[BLWEBHOOKS] Top.gg vote hooks have been disabled."));
