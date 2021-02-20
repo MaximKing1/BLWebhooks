@@ -1,11 +1,8 @@
 {
   "name": "blwebhooks",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
-  "engines": {
-    "node": "^12.19.0"
-  },
   "keywords": [
     "discord.js",
     "webhooks",
@@ -30,8 +27,7 @@
     "express-slow-down": "^1.4.0",
     "helmet": "^4.4.1",
     "mongoose": "^5.11.16",
-    "sqlite3": "^5.0.2",
-    "typescript": "^4.1.5"
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "eslint": "^7.20.0",
@@ -45,7 +41,7 @@
     "type": "git",
     "url": "git+https://github.com/MaximKing1/BLWebhooks.git"
   },
-  "author": "MaximKing1 <business@maximking.co.uk> (https://github.com/MaximKing1)",
+  "author": "MaximKing1",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/MaximKing1/BLWebhooks/issues",
