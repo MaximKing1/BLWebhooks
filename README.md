@@ -23,7 +23,7 @@
 - [Vote Database](#vote-database)
 - [Other Projects](#our-projects)
 
-# Major Update! Read Changes [Here!](#WebhooksManager-Options-{Updated})
+# Major Update! Read Changes [Here!](#WebhooksManager-Options-Updated)
 
 # Installation
 
@@ -124,7 +124,7 @@ bot.voteManager = voteClient;
 bot.connect(); // Get the bot to connect to Discord
 ```
 
-# WebhooksManager Options {Updated}
+# WebhooksManager Options Updated
 ```js
 const voteClient = WebhooksManager(client, 80, {
     database: "mongoose", // mongoose or sqlite for vote logging
