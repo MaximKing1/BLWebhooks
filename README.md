@@ -4,8 +4,8 @@
 [![install size](https://packagephobia.com/badge?p=blwebhooks)](https://packagephobia.com/result?p=blwebhooks)
 [![](https://data.jsdelivr.com/v1/package/npm/blwebhooks/badge?style=rounded)](https://www.jsdelivr.com/package/npm/blwebhooks)
 [![DeepScan grade](https://deepscan.io/api/teams/12955/projects/15994/branches/330623/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=12955&pid=15994&bid=330623)
-
 [![blwebhooks](https://snyk.io/advisor/npm-package/blwebhooks/badge.svg)](https://snyk.io/advisor/npm-package/blwebhooks)
+![ts](https://flat.badgen.net/badge/-/TypeScript?icon=typescript&label&labelColor=blue&color=555555)
 
 [![NPM](https://nodei.co/npm/blwebhooks.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/blwebhooks/)
 
