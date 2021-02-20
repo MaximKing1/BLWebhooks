@@ -8,12 +8,12 @@ const { WebhooksManager } = require("blwebhooks");
 const voteClient = new WebhooksManager(client, 80);
 client.voteManager = voteClient;
 
-voteManager.extraProtection(true);
+voteClient.extraProtection(true);
 
-const InfinityBotList = voteManager.IBLVoteHook("IBLHook", "LOADS_OF_RANDOMNESS", true);
+voteClient.IBLVoteHook("IBLHook", "LOADS_OF_RANDOMNESS", true);
 
 // This code will run after a new vote was received from InfinityBotList
-client.on('IBL-voted', async function (userID, botID, type, timeStamp) {
+client.on("IBL-voted", async function (userID, botID, type, timeStamp) {
   console.log(userID)
   
   // Add role for 24 hours

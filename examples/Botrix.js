@@ -8,12 +8,12 @@ const { WebhooksManager } = require("blwebhooks");
 const voteClient = new WebhooksManager(client, 80);
 client.voteManager = voteClient;
 
-voteManager.extraProtection(true);
+voteClient.extraProtection(true);
 
-const Botrix = voteManager.BotrixVoteHook("Botrix", "LOADS_OF_RANDOMNESS", true);
+voteClient.BotrixVoteHook("Botrix", "LOADS_OF_RANDOMNESS", true);
 
 // This code will run after a new vote was received from Botrix
-client.on('BTR-voted', async function (userID) {
+client.on("BTR-voted", async function (userID) {
   console.log(`${userID} Voted!`)
   
   // Add role for 24 hours
