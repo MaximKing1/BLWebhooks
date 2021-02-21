@@ -1,11 +1,11 @@
 const discord = require("discord.js");
 const client = discord.Client();
 
+// Requires Manager from blwebhooks
 const { WebhooksManager } = require("blwebhooks");
-
-// Attatch The Client and Port to the module.
-// The client is it attaching to the client, 80 is the port it will run on
+// Creates the voteClient manager
 const voteClient = new WebhooksManager(client, 80);
+// Now we have attached the manager to the client so we can use it everywhere!
 client.voteManager = voteClient;
 
 voteClient.extraProtection(true);
@@ -27,5 +27,10 @@ client.on("BTR-voted", async function (userID) {
       setTimeout(() => member.roles.remove("748340144897261660").catch(console.error), 1000 * 60 * 60 * 24);
      
 }).catch(() => {});
-  
 });
+
+client.on('ready', () => {
+    console.log('I\'m ready !');
+});
+
+client.login(settings.token);
