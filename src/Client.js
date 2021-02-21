@@ -566,6 +566,16 @@ class WebhooksManager extends EventEmitter {
       if (!userID) return console.log("Please provide userID");
     }
   }
+
+    /**
+     * Inits the manager
+     * @ignore
+     * @private
+     */
+    async _init() {
+        this.ready = true;
+    }
+
 }
 
 module.exports.WebhooksManager = WebhooksManager;
