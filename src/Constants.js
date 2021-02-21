@@ -1,9 +1,9 @@
 exports.defaultManager = {
-  database: null, // mongoose or sqlite
+  storage: null,
   extraLogging: false,
   extra: {
     extraProtection: true,
     proxyTrust: false,
-    shardedClient: false,
-  },
+    shardedClient: false
+  }
 };
