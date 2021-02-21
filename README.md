@@ -56,6 +56,7 @@ yarn add blwebhooks@nightly
 | Name                           | Features                                                                                                                                   |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | discord.js | `DATABASE`, `EXPRESS`, `HOOKS`, `SECURITY` |
+| Eris | `EXPRESS`, `HOOKS`, `SECURITY` |
 
 # Supported Lists
 
