@@ -31,12 +31,10 @@ class WebhooksManager extends EventEmitter {
    * @param {Discord.Client} client The Discord Client
    * @param {Express.Port} Webserver port
    */
-  constructor(client, port, options) {
+  constructor(client, port, options, init = true) {
     super();
     console.log(chalk.red("-----------------------"));
-    console.log(
-      "All Manager Options Updated Check Our Docs Now! https://github.com/MaximKing1/BLWebhooks#readme"
-    );
+    console.log("All Manager Options Updated Check Our Docs Now! https://github.com/MaximKing1/BLWebhooks#readme");
     console.log(chalk.red("----------------------"));
 
     /**
@@ -72,12 +70,9 @@ class WebhooksManager extends EventEmitter {
       app.use(limiter);
       app.use(speedLimiter);
       app.use(cookieParser());
-      console.log(
-        chalk.green(
-          `[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`
-        )
-      );
+      console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`));
     }
+    if (init) this._init();
   }
 
   async shardedClient(toggle) {
