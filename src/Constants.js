@@ -1,6 +1,6 @@
 exports.defaultManager = {
-  database: "mongoose", // mongoose or sqlite
-  extraLogging: true,
+  database: null, // mongoose or sqlite
+  extraLogging: false,
   extra: {
     extraProtection: true,
     proxyTrust: false,
