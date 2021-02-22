@@ -34,7 +34,9 @@ class WebhooksManager extends EventEmitter {
   constructor(client, port, options, init = true) {
     super();
     console.log(chalk.red("-----------------------"));
-    console.log("All Manager Options Updated Check Our Docs Now! https://github.com/MaximKing1/BLWebhooks#readme");
+    console.log(
+      "All Manager Options Updated Check Our Docs Now! https://github.com/MaximKing1/BLWebhooks#readme"
+    );
     console.log(chalk.red("----------------------"));
 
     /**
@@ -70,7 +72,11 @@ class WebhooksManager extends EventEmitter {
       app.use(limiter);
       app.use(speedLimiter);
       app.use(cookieParser());
-      console.log(chalk.green(`[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`));
+      console.log(
+        chalk.green(
+          `[BLWEBHOOKS] The Vote Webserver Has Started On Port ${port}.`
+        )
+      );
     }
     if (init) this._init();
   }
@@ -185,14 +191,12 @@ class WebhooksManager extends EventEmitter {
         1000 * 60 * 60 * 24
       );
 
-      res
-        .status(200)
-        .send(
-          JSON.stringify({
-            error: false,
-            message: "[BLWEBHOOKS] Received The Request!",
-          })
-        );
+      res.status(200).send(
+        JSON.stringify({
+          error: false,
+          message: "[BLWEBHOOKS] Received The Request!",
+        })
+      );
     });
   }
 
@@ -214,15 +218,13 @@ class WebhooksManager extends EventEmitter {
       if (req.header("Authorization") != auth)
         console.log("Failed Access - InfinityBotList Endpoint");
       if (req.header("Authorization") != auth)
-        return res
-          .status(403)
-          .send(
-            JSON.stringify({
-              error: true,
-              message:
-                "[BLWEBHOOKS] You don't have access to use this endpoint. - InfinityBotList",
-            })
-          );
+        return res.status(403).send(
+          JSON.stringify({
+            error: true,
+            message:
+              "[BLWEBHOOKS] You don't have access to use this endpoint. - InfinityBotList",
+          })
+        );
 
       // Use the data on whatever you want
       console.log(req.body);
@@ -239,14 +241,12 @@ class WebhooksManager extends EventEmitter {
       );
 
       // Respond to IBL API
-      res
-        .status(200)
-        .send(
-          JSON.stringify({
-            error: false,
-            message: "[BLWEBHOOKS] Received the request!",
-          })
-        );
+      res.status(200).send(
+        JSON.stringify({
+          error: false,
+          message: "[BLWEBHOOKS] Received the request!",
+        })
+      );
     });
   }
 
@@ -266,15 +266,13 @@ class WebhooksManager extends EventEmitter {
       if (req.header("Authorization") != auth)
         console.log("Failed Access - VoidBots Endpoint");
       if (req.header("Authorization") != auth)
-        return res
-          .status(403)
-          .send(
-            JSON.stringify({
-              error: true,
-              message:
-                "[BLWEBHOOKS] You don't have access to this endpoint - VoidBots",
-            })
-          );
+        return res.status(403).send(
+          JSON.stringify({
+            error: true,
+            message:
+              "[BLWEBHOOKS] You don't have access to this endpoint - VoidBots",
+          })
+        );
 
       // Use the data on whatever you want
       console.log(req.body);
@@ -290,14 +288,12 @@ class WebhooksManager extends EventEmitter {
       );
 
       // Respond to VoidBots API
-      res
-        .status(200)
-        .send(
-          JSON.stringify({
-            error: false,
-            message: "[BLWEBHOOKS] Received the request!",
-          })
-        );
+      res.status(200).send(
+        JSON.stringify({
+          error: false,
+          message: "[BLWEBHOOKS] Received the request!",
+        })
+      );
     });
   }
 
@@ -315,15 +311,13 @@ class WebhooksManager extends EventEmitter {
       if (req.header("Authorization") != auth)
         console.log("Failed Access - DiscordLabs Endpoint");
       if (req.header("Authorization") != auth)
-        return res
-          .status(403)
-          .send(
-            JSON.stringify({
-              error: true,
-              message:
-                "[BLWEBHOOKS] You don't have access to use this endpoint - DiscordLabs",
-            })
-          );
+        return res.status(403).send(
+          JSON.stringify({
+            error: true,
+            message:
+              "[BLWEBHOOKS] You don't have access to use this endpoint - DiscordLabs",
+          })
+        );
 
       // Use the data on whatever you want
       console.log(req.body);
@@ -340,14 +334,12 @@ class WebhooksManager extends EventEmitter {
       );
 
       // Respond to DiscordLabs API
-      res
-        .status(200)
-        .send(
-          JSON.stringify({
-            error: false,
-            message: "[BLWEBHOOKS] Received the request!",
-          })
-        );
+      res.status(200).send(
+        JSON.stringify({
+          error: false,
+          message: "[BLWEBHOOKS] Received the request!",
+        })
+      );
     });
   }
 
@@ -367,15 +359,13 @@ class WebhooksManager extends EventEmitter {
       if (req.header("Authorization") != auth)
         console.log("Failed Access - Botrix Endpoint");
       if (req.header("Authorization") != auth)
-        return res
-          .status(403)
-          .send(
-            JSON.stringify({
-              error: true,
-              message:
-                "[BLWEBHOOKS] You don't have access to use this endpoint. - Botrix",
-            })
-          );
+        return res.status(403).send(
+          JSON.stringify({
+            error: true,
+            message:
+              "[BLWEBHOOKS] You don't have access to use this endpoint. - Botrix",
+          })
+        );
 
       // Use the data on whatever you want
       console.log(req.body);
@@ -391,14 +381,12 @@ class WebhooksManager extends EventEmitter {
       );
 
       // Respond to Botrix API
-      res
-        .status(200)
-        .send(
-          JSON.stringify({
-            error: false,
-            message: "[BLWEBHOOKS] Received the request!",
-          })
-        );
+      res.status(200).send(
+        JSON.stringify({
+          error: false,
+          message: "[BLWEBHOOKS] Received the request!",
+        })
+      );
     });
   }
 
@@ -418,15 +406,13 @@ class WebhooksManager extends EventEmitter {
       if (req.header("Authorization") != auth)
         console.log("Failed Access - BList Endpoint");
       if (req.header("Authorization") != auth)
-        return res
-          .status(403)
-          .send(
-            JSON.stringify({
-              error: true,
-              message:
-                "[BLWEBHOOKS] You don't have access to use this endpoint - BList",
-            })
-          );
+        return res.status(403).send(
+          JSON.stringify({
+            error: true,
+            message:
+              "[BLWEBHOOKS] You don't have access to use this endpoint - BList",
+          })
+        );
 
       // Use the data on whatever you want
       console.log(req.body);
@@ -442,14 +428,12 @@ class WebhooksManager extends EventEmitter {
       );
 
       // Respond to BList API
-      res
-        .status(200)
-        .send(
-          JSON.stringify({
-            error: false,
-            message: "[BLWEBHOOKS] Received the request!",
-          })
-        );
+      res.status(200).send(
+        JSON.stringify({
+          error: false,
+          message: "[BLWEBHOOKS] Received the request!",
+        })
+      );
     });
   }
 
@@ -469,15 +453,13 @@ class WebhooksManager extends EventEmitter {
       if (req.header("Authorization") != auth)
         console.log("Failed Access - Mythicalbots Endpoint");
       if (req.header("Authorization") != auth)
-        return res
-          .status(403)
-          .send(
-            JSON.stringify({
-              error: true,
-              message:
-                "[BLWEBHOOKS] You don't have access to use this endpoint - Mythicalbots",
-            })
-          );
+        return res.status(403).send(
+          JSON.stringify({
+            error: true,
+            message:
+              "[BLWEBHOOKS] You don't have access to use this endpoint - Mythicalbots",
+          })
+        );
 
       // Use the data on whatever you want
       console.log(req.body);
@@ -493,14 +475,12 @@ class WebhooksManager extends EventEmitter {
       );
 
       // Respond to Mythicalbots API
-      res
-        .status(200)
-        .send(
-          JSON.stringify({
-            error: false,
-            message: "[BLWEBHOOKS] Received the request!",
-          })
-        );
+      res.status(200).send(
+        JSON.stringify({
+          error: false,
+          message: "[BLWEBHOOKS] Received the request!",
+        })
+      );
     });
   }
 
@@ -520,15 +500,13 @@ class WebhooksManager extends EventEmitter {
       if (req.header("Authorization") != auth)
         console.log("Failed Access - DiscordBots.co Endpoint");
       if (req.header("Authorization") != auth)
-        return res
-          .status(403)
-          .send(
-            JSON.stringify({
-              error: true,
-              message:
-                "[BLWEBHOOKS] You don't have access to use this endpoint - DiscordBots.co",
-            })
-          );
+        return res.status(403).send(
+          JSON.stringify({
+            error: true,
+            message:
+              "[BLWEBHOOKS] You don't have access to use this endpoint - DiscordBots.co",
+          })
+        );
 
       // Use the data on whatever you want
       console.log(req.body);
@@ -544,14 +522,12 @@ class WebhooksManager extends EventEmitter {
       );
 
       // Respond to BList API
-      res
-        .status(200)
-        .send(
-          JSON.stringify({
-            error: false,
-            message: "[BLWEBHOOKS] Received the request!",
-          })
-        );
+      res.status(200).send(
+        JSON.stringify({
+          error: false,
+          message: "[BLWEBHOOKS] Received the request!",
+        })
+      );
     });
   }
 
@@ -567,15 +543,71 @@ class WebhooksManager extends EventEmitter {
     }
   }
 
-    /**
-     * Inits the manager
-     * @ignore
-     * @private
-     */
-    async _init() {
-        this.ready = true;
+  /**
+   * Inits the manager
+   * @ignore
+   * @private
+   */
+  async _init() {
+    if (this.options.extra.proxyTrust == true) {
+      console.log(chalk.green("[BLWEBHOOKS] Proxy trust enabled."));
+      return app.enable("trust proxy");
+    } else if (this.options.extra.proxyTrust == false) {
+      console.log(chalk.red("[BLWEBHOOKS] Proxy trust disabled."));
+    } // Enable this if your behind a proxy, Heroku, Docker, Replit, etc
+
+    if (this.options.extra.shardedClient == true) {
+      console.log(
+        chalk.green("[BLWEBHOOKS] Sharding client has been enabled.")
+      );
+    } else if (this.options.extra.shardedClient == false) {
+      console.log(chalk.red("[BLWEBHOOKS] Sharding client has been disabled."));
     }
 
+    if (this.options.extraLogging == true) {
+      console.log(chalk.green("[BLWEBHOOKS] Advanced logging enabled."));
+      return app.use(errorhandler());
+    } else if (this.options.extraLogging == false) {
+      console.log(chalk.red("[BLWEBHOOKS] Advance logging disabled"));
+    }
+
+    if (this.options.database == "mongo") {
+      console.log(chalk.yellow("[BLWEBHOOKS] Enabled mongoose database."));
+      mongoose.connect(this.options.string, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+      });
+    } else if (this.options.database == "sqlite") {
+      var sqlite3 = require("sqlite3").verbose();
+      let db = new sqlite3.Database("voteHooks.db", async (err) => {
+        if (err) {
+          console.error(chalk.red(err.message));
+        }
+        console.log(chalk.yellow("[BLWEBHOOKS] Enabled SQLITE database."));
+        console.log(
+          chalk.yellow("[BLWEBHOOKS] Connected to the voteHooks.db database.")
+        );
+      });
+    } else if (this.options.database == "none") {
+      console.log(chalk.red("Database Disabled"));
+    }
+
+    if (this.options.extra.extraProtection == true) {
+      console.log(chalk.green("[BLWEBHOOKS] Extra protection enabled."));
+      return app.use(
+        helmet({
+          contentSecurityPolicy: false,
+          permittedCrossDomainPolicies: false,
+        })
+      );
+    } else if (this.options.extra.extraProtection == false) {
+      console.log(chalk.red("[BLWEBHOOKS] Extra protection disabled."));
+    }
+
+    this.ready = true;
+  }
 }
 
 module.exports.WebhooksManager = WebhooksManager;
