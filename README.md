@@ -62,13 +62,20 @@ yarn add blwebhooks@nightly
 
 # Supported Lists
 
-> top.gg<br>
-> InfinityBotList<br>
-> VoidBots<br>
-> DiscordLabs<br>
-> Botrix - Coming Soon!<br>
-> Blist<br>
-> DiscordBots.co<br>
+| Name            | Features            | UserID | BotID | Event Name  |
+| --------------- | ------------------- | ------ | ----- | ----------- |
+| top.gg          | `DATABASE`, `HOOKS` | true   | true  | topgg-voted |
+| InfinityBotList | `DATABASE`, `HOOKS` | true   | true  | IBL-voted   |
+| VoidBots        | `DATABASE`, `HOOKS` | true   | true  | VB-voted    |
+| DiscordLabs     | `DATABASE`, `HOOKS` | true   | true  | DL-voted    |
+| Blist           | `DATABASE`, `HOOKS` | true   | true  | BLT-voted   |
+| DiscordBots.co  | `DATABASE`, `HOOKS` | true   | true  | DBC-voted   |
+
+# Future Lists
+
+| Name   | Features            | ETA |
+| ------ | ------------------- | --- |
+| Botrix | `DATABASE`, `HOOKS` | N/A |
 
 # Usage
 
