@@ -55,8 +55,8 @@ yarn add blwebhooks@nightly
 
 | Name                           | Features                                                                                                                                   |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| discord.js | `DATABASE`, `EXPRESS`, `HOOKS`, `SECURITY` |
-| Eris | `EXPRESS`, `HOOKS`, `SECURITY` |
+| [discord.js](https://www.npmjs.com/package/discord.js) | `DATABASE`, `EXPRESS`, `HOOKS`, `SECURITY` |
+| [Eris](https://www.npmjs.com/package/eris) | `EXPRESS`, `HOOKS`, `SECURITY` |
 
 # Supported Lists
 
@@ -78,7 +78,7 @@ import * as blwebhooks from "blwebhooks";
 const blwebhooks = require("blwebhooks");
 ```
 
-**With discord.js**
+### With discord.js
 ```js
 const discord = require("discord.js");
 const client = discord.Client();
@@ -88,7 +88,7 @@ const voteClient = new WebhooksManager(client, 80);
 client.voteManager = voteClient;
 ```
 
-**With Eris**
+### With Eris
 ```js
 const Eris = require("eris");
  
