@@ -62,14 +62,15 @@ yarn add blwebhooks@nightly
 
 # Supported Lists
 
-| Name            | Features            | UserID | BotID | Event Name  |
-| --------------- | ------------------- | ------ | ----- | ----------- |
-| top.gg          | `DATABASE`, `HOOKS` | true   | true  | topgg-voted |
-| InfinityBotList | `DATABASE`, `HOOKS` | true   | true  | IBL-voted   |
-| VoidBots        | `DATABASE`, `HOOKS` | true   | true  | VB-voted    |
-| DiscordLabs     | `DATABASE`, `HOOKS` | true   | true  | DL-voted    |
-| Blist           | `DATABASE`, `HOOKS` | true   | true  | BLT-voted   |
-| DiscordBots.co  | `DATABASE`, `HOOKS` | true   | true  | DBC-voted   |
+| Name            | Features            | UserID | BotID | userName | Event Name  |
+| --------------- | ------------------- | ------ | ----- | -------- | ----------- |
+| top.gg          | `DATABASE`, `HOOKS` | true   | true  | false    | topgg-voted |
+| InfinityBotList | `DATABASE`, `HOOKS` | true   | true  | false    | IBL-voted   |
+| VoidBots        | `DATABASE`, `HOOKS` | true   | true  | false    | VB-voted    |
+| DiscordLabs     | `DATABASE`, `HOOKS` | true   | true  | false    | DL-voted    |
+| Blist           | `DATABASE`, `HOOKS` | true   | true  | false    | BLT-voted   |
+| DiscordBots.co  | `DATABASE`, `HOOKS` | true   | true  | false    | DBC-voted   |
+| ParadiseBotList | `DATABASE`, `HOOKS` | true   | true  | true     | PBL-voted   |
 
 # Future Lists
 
@@ -287,6 +288,20 @@ client.voteManager.DBCVoteHook(url, auth, true);
 // This code will run after a new vote was received from BList
 client.on("DBC-voted", async function (userID, botID) {
   console.log(`${userID} Voted.`);
+});
+```
+
+**ParadiseBotList Vote Hooks:**
+
+```js
+// This will listen to votes from BList, the url is the end not
+// including the / and auth is the webhook auth. You can enable and
+// disable using true or false at the end
+client.voteManager.PBLVoteHook(url, auth, true);
+
+// This code will run after a new vote was received from BList
+client.on("PBL-voted", async function (userID, botID, userName) {
+  console.log(`${userName} (${userID}) Voted For <#${botID}>`);
 });
 ```
 

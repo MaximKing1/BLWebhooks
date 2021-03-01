@@ -280,7 +280,7 @@ class WebhooksManager extends EventEmitter {
       const userID = req.body.userID;
       const botID = req.body.bot;
       const userName = req.body.user;
-      const type = req.body.type;
+      const type = null;
       const List = "ParaiseBots";
       this.client.emit("PBL-voted", userID, botID, userName, type);
       this.client.emit("vote", userID, botID, List);
