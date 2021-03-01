@@ -250,6 +250,55 @@ class WebhooksManager extends EventEmitter {
     });
   }
 
+  async PBLVoteHook(url, auth, toggle) {
+    if (toggle == false) {
+      return console.log(
+        chalk.red("[BLWEBHOOKS] ParaiseBots vote hooks have been disabled.")
+      );
+    } else if (toggle == true) {
+      console.log(
+        chalk.green("[BLWEBHOOKS] ParaiseBots vote hooks have been enabled.")
+      );
+    }
+    app.post(`/${url}`, async (req, res) => {
+      // Respond to invalid requests
+      res.setHeader("X-Powered-By", "BLWebhooks.js/Express");
+      if (req.header("Authorization") != auth)
+        console.log("Failed Access - ParaiseBots Endpoint");
+      if (req.header("Authorization") != auth)
+        return res.status(403).send(
+          JSON.stringify({
+            error: true,
+            message:
+              "[BLWEBHOOKS] You don't have access to use this endpoint. - ParaiseBots",
+          })
+        );
+
+      // Use the data on whatever you want
+      console.log(req.body);
+      // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
+      const userID = req.body.userID;
+      const botID = req.body.bot;
+      const userName = req.body.user;
+      const type = req.body.type;
+      const List = "ParaiseBots";
+      this.client.emit("PBL-voted", userID, botID, userName, type);
+      this.client.emit("vote", userID, botID, List);
+      setTimeout(
+        () => this.client.emit("voteExpired", userID, botID, List),
+        1000 * 60 * 60 * 24
+      );
+
+      // Respond to IBL API
+      res.status(200).send(
+        JSON.stringify({
+          error: false,
+          message: "[BLWEBHOOKS] Received the request!",
+        })
+      );
+    });
+  }
+
   async VoidBotsVoteHook(url, auth, toggle) {
     if (toggle == false) {
       return console.log(
