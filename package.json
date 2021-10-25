@@ -27,7 +27,7 @@
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.5",
     "express-slow-down": "^1.4.0",
-    "helmet": "^4.4.1",
+    "helmet": "^4.6.0",
     "mongoose": "^5.13.9",
     "sqlite3": "^5.0.2"
   },
