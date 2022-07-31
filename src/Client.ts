@@ -158,7 +158,8 @@ class WebhooksManager extends EventEmitter {
   async proxyTrust(toggle: boolean) {
     if (toggle == true) {
       console.log(chalk.green("[BLWEBHOOKS] Proxy trust enabled."));
-      return app.enable("trust proxy");
+      app.enable("trust proxy");
+      return;
     } else if (toggle == false) {
       console.log(chalk.red("[BLWEBHOOKS] Proxy trust disabled."));
     }
