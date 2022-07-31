@@ -28,7 +28,7 @@
     "express-rate-limit": "^5.5.0",
     "express-slow-down": "^1.4.0",
     "helmet": "^4.6.0",
-    "mongoose": "^5.13.14",
+    "mongoose": "^6.4.6",
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
