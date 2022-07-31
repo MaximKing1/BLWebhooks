@@ -1,27 +1,29 @@
-const chalk = require("chalk");
-const { EventEmitter } = require("events");
+import chalk from "chalk";
+import { EventEmitter } from "events";
 
 /**
  * Guild SettingsManager
  */
 class SettingsManager extends EventEmitter {
+    client: any;
+    port: any;
     /**
      * @param {Discord.Client} client The Discord Client
      * @param {Express.Port} Webserver port
      */
-    constructor(client, port) {
+    constructor(client: any, port: any) {
         super();
         this.client = client;
         this.port = port;
 
     }
 
-    async shardedClient(toggle) {
+    async shardedClient(toggle: boolean) {
         if (toggle == true) {
-            await console.log(chalk.green("[BLWEBHOOKS] Sharding client has been enabled."));
+            console.log(chalk.green("[BLWEBHOOKS] Sharding client has been enabled."));
         }
         else if (toggle == false) {
-            await console.log(chalk.red("[BLWEBHOOKS] Sharding client has been disabled."));
+            console.log(chalk.red("[BLWEBHOOKS] Sharding client has been disabled."));
         }
     }
 
