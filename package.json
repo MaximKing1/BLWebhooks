@@ -1,6 +1,6 @@
 {
   "name": "blwebhooks",
-  "version": "2.3.1",
+  "version": "3.0.0",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
   "main": "index.js",
   "types": "./typings/index.d.ts",
@@ -24,12 +24,12 @@
     "deepmerge": "^4.2.2",
     "errorhandler": "^1.5.1",
     "events": "^3.3.0",
-    "express": "^4.17.1",
+    "express": "^4.18.1",
     "express-rate-limit": "^5.5.0",
     "express-slow-down": "^1.4.0",
-    "helmet": "^4.6.0",
+    "helmet": "^5.1.1",
     "mongoose": "^6.5.0",
-    "sqlite3": "^5.0.10",
+    "sqlite3": "^5.0.10"
   },
   "devDependencies": {
     "eslint": "^7.20.0",
