@@ -29,7 +29,7 @@
     "express-slow-down": "^1.4.0",
     "helmet": "^5.1.1",
     "mongoose": "^6.5.0",
-    "sqlite3": "^5.0.10"
+    "sqlite3": "^5.1.0"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",
