@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
-import bodyParser from "body-parser";
+import { json } from "body-parser";
 import slowDown from "express-slow-down";
 import rateLimit from "express-rate-limit";
 import chalk from "chalk";
@@ -9,7 +9,6 @@ import merge from "deepmerge";
 import { EventEmitter } from "events";
 import errorhandler from "errorhandler";
 import mongoose from "mongoose";
-import VotingModel from "./Models/vote";
 import { defaultManager } from "./Constants";
 
 const app = express();
@@ -24,14 +23,63 @@ const limiter = rateLimit({
   max: 250,
 });
 
+interface WebhooksManager extends EventEmitter {
+  client: any;
+  port: any;
+  options: {
+    /**
+     * @param protocol The client either 'discordjs' or 'eris'
+    */
+    protocol: string;
+    /**
+     * @param database Either 'mongoose' or 'sqlite3'
+    */
+    database: string;
+    /**
+     * @param string THe MongoDB connection string
+    */
+    string(string: any, arg1: { useNewUrlParser: boolean; useUnifiedTopology: boolean; useFindAndModify: boolean; useCreateIndex: boolean; }): unknown;
+    storage: null; extraLogging: boolean; extra: {
+      extraProtection: boolean; proxyTrust: boolean; shardedClient: boolean;
+    };
+  };
+  db: any;
+  ready: boolean;
+}
+
 /**
- * Webhook Manager
+ * The Webhook Manager Class for configuration
+ ```js
+import { WebhooksManager } from "blwebhooks";
+
+const manager = WebhooksManager(client, {
+    database: "mongoose", // mongoose or sqlite
+    port: "80"
+});
+client.voteManager = manager;
+```
+ * 
+ * @param client The client param is the discord.js v14 client instance.
+ * @param port The port param is used to define the express webserver port.
+ * @param options The options param is used to define the database options, and other settings. 
+ * 
+ * @since 1.0.3
  */
 class WebhooksManager extends EventEmitter {
   client: any;
   port: any;
   options: {
+    /**
+     * @param protocol The client either 'discordjs' or 'eris'
+    */
+    protocol: string;
+    /**
+     * @param database Either 'mongoose' or 'sqlite3'
+    */
     database: string;
+    /**
+     * @param string The MongoDB connection string
+    */
     string(string: any, arg1: { useNewUrlParser: boolean; useUnifiedTopology: boolean; useFindAndModify: boolean; useCreateIndex: boolean; }): unknown;
     storage: null; extraLogging: boolean; extra: {
       extraProtection: boolean; proxyTrust: boolean; shardedClient: boolean;
@@ -41,7 +89,7 @@ class WebhooksManager extends EventEmitter {
   ready: boolean;
   /**
    * @param {Discord.Client} client The Discord Client
-   * @param {Express.Port} Webserver port
+   * @param {Express.Port} port The port of the webserver
    */
   constructor(client: any, port: any, options: Partial<{ storage: null; extraLogging: boolean; extra: { extraProtection: boolean; proxyTrust: boolean; shardedClient: boolean; }; }>, init = true) {
     super();
@@ -82,9 +130,10 @@ class WebhooksManager extends EventEmitter {
         chalk.green("[BLWEBHOOKS] The Client has connected to BLWebhooks")
       );
     }
+
     if (port) {
       app.listen(port);
-      app.use(bodyParser.json());
+      app.use(json());
       app.use(limiter);
       app.use(speedLimiter);
       app.use(cookieParser());
@@ -113,22 +162,22 @@ class WebhooksManager extends EventEmitter {
       mongoose.connect(string, {
         // @ts-ignore
         useUnifiedTopology: true,
-        useFindAndModify: false,
+        useFindAndModify: true,
         useCreateIndex: true,
       });
     } else if (DB == "sqlite") {
-      var sqlite3 = require("sqlite3").verbose();
-      this.db = new sqlite3.Database("voteHooks.db", async (err: { message: unknown; }) => {
+      var sqlite3 = require("sqlite3");
+      this.db = new sqlite3.Database("blwebhooks.db", async (err: { message: unknown; }) => {
         if (err) {
           console.error(chalk.red(err.message));
         }
         console.log(chalk.yellow("[BLWEBHOOKS] Enabled SQLITE database."));
         console.log(
-          chalk.yellow("[BLWEBHOOKS] Connected to the voteHooks.db database.")
+          chalk.yellow("[BLWEBHOOKS] Connected to the blwebhooks.db database.")
         );
       });
     } else if (DB == "mysql") {
-      console.log(chalk.yellow("[BLWEBHOOKS] Enabled MYSQL database."));
+      console.log(chalk.yellow("[BLWEBHOOKS - Beta] Enabled MySQL database Connection."));
     }
   }
 
@@ -174,8 +223,8 @@ class WebhooksManager extends EventEmitter {
     this.client.emit("IBL-voted", userID, botID, type);
   }
 
-  async getServer(serverID: any) {
-    let server = this.client.guilds.cache.get(serverID);
+  async getServer(serverID: string) {
+    let server = await this.client.guilds.cache.get(serverID);
     return server;
   }
 
@@ -195,9 +244,7 @@ class WebhooksManager extends EventEmitter {
     app.post(`/${url}`, WH.middleware(), async (req: { header: (arg0: string) => any; vote: { user: any; bot: any; type: any; }; }, res: { setHeader: (arg0: string, arg1: string) => void; status: (arg0: number) => { (): any; new(): any; send: { (arg0: string): void; new(): any; }; }; }) => {
       // Respond to invalid requests
       res.setHeader("X-Powered-By", "BLWebhooks.js/Express");
-      if (req.header("Authorization") != auth)
-        console.log("Failed Access - Top.gg Endpoint");
-      console.log(req.vote);
+      if (req.header("Authorization") != auth) return console.log("Failed Access - Top.gg Endpoint");
       const userID = req.vote.user;
       const botID = req.vote.bot;
       const type = req.vote.type;
@@ -218,6 +265,16 @@ class WebhooksManager extends EventEmitter {
     });
   }
 
+    /**
+   * @example
+const client = discord.Client();
+const { WebhooksManager } = require("blwebhooks");
+
+const voteClient = new WebhooksManager(client, 80);
+client.voteManager = voteClient;
+
+voteClient.IBLVoteHook("IBLHook", "LOADS_OF_RANDOMNESS", true);
+   */
   async IBLVoteHook(url: any, auth: any, toggle: boolean) {
     if (toggle == false) {
       return console.log(
@@ -234,8 +291,7 @@ class WebhooksManager extends EventEmitter {
     app.post(`/${url}`, async (req: { header: (arg0: string) => any; body: { userID: any; botID: any; type: any; }; }, res: { setHeader: (arg0: string, arg1: string) => void; status: (arg0: number) => { (): any; new(): any; send: { (arg0: string): void; new(): any; }; }; }) => {
       // Respond to invalid requests
       res.setHeader("X-Powered-By", "BLWebhooks.js/Express");
-      if (req.header("Authorization") != auth)
-        console.log("Failed Access - InfinityBotList Endpoint");
+      if (req.header("Authorization") != auth) return console.log("Failed Access - InfinityBotList Endpoint");
       if (req.header("Authorization") != auth)
         return res.status(403).send(
           JSON.stringify({
@@ -269,6 +325,9 @@ class WebhooksManager extends EventEmitter {
     });
   }
 
+  /**
+   * @deprecated Legacy API
+   */
   async PBLVoteHook(url: any, auth: any, toggle: boolean) {
     if (toggle == false) {
       return console.log(
@@ -294,8 +353,6 @@ class WebhooksManager extends EventEmitter {
           })
         );
 
-      // Use the data on whatever you want
-      console.log(req.body);
       // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
       const userID = req.body.userID;
       const botID = req.body.bot;
@@ -572,7 +629,6 @@ class WebhooksManager extends EventEmitter {
 
   /**
    * Inits the manager
-   * @ignore
    * @private
    */
   async _init() {
@@ -604,8 +660,7 @@ class WebhooksManager extends EventEmitter {
       mongoose.connect(this.options.string, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true,
+        useFindAndModify: true,
       });
     } else if (this.options.database == "sqlite") {
       var sqlite3 = require("sqlite3").verbose();
@@ -636,6 +691,6 @@ class WebhooksManager extends EventEmitter {
 
     this.ready = true;
   }
-}
+};
 
 module.exports.WebhooksManager = WebhooksManager;

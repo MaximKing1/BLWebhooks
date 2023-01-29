@@ -1,1 +1,1 @@
-module.exports = require("./src/Client");
+export * from "./src/Client";

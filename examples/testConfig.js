@@ -1,10 +1,16 @@
-const discord = require("discord.js");
-const client = discord.Client();
-
-const { WebhooksManager } = require("blwebhooks");
-
-const manager = WebhooksManager(client, {
-    database: "mongoose", // mongoose or sqlite
-    port: "80"
+import { Client } from "discord.js";
+const client = new Client({
+    intents: []
 });
-client.voteManager = manager;
+import { WebhooksManager } from "blwebhooks";
+
+const voteClient = new WebhooksManager(client, 80, {
+  database: "none", // mongoose or sqlite
+  string: "MongooseURL", // Only Use This If The Database Is Set To Mongoose
+  extra: {
+    extraLogging: false, // This will enable extraLogging {Debugging}
+    extraProtection: true, // Leave Enabled Unless Using Small Amount Of RAM
+    proxyTrust: false, // Enable this if your behind a proxy, Heroku,
+  },
+});
+client.voteManager = voteClient;

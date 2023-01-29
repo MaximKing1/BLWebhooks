@@ -27,7 +27,7 @@
 
 Need Any Help Setting It Up? Join Our [Support Server](https://discord.gg/8j4ZkpPvzP).
 
-It's intended to be used with discord.js v12.
+It's intended to be used with discord.js v14.
 
 BLWebhooks fully supports external and discord.js internal sharding, make sure to enable the Sharded Client Option.
 
@@ -92,19 +92,30 @@ const blwebhooks = require("blwebhooks");
 ### With discord.js
 
 ```js
-const discord = require("discord.js");
-const client = discord.Client();
+const { Client } = require("discord.js");
+const client = new Client({
+  intents: []
+});
+
 const { WebhooksManager } = require("blwebhooks");
 
 const voteClient = new WebhooksManager(client, 80, {
   database: "none", // mongoose or sqlite
-  string: "MongooseURL", // Only Use This If The Database Is Set To Mongoose
+
+  protocol: "discordjs", // Define the discord client
+
+  string: "mongodb://", // Only Use This If The Database Is Set To Mongoose
+
   extra: {
     extraLogging: false, // This will enable extraLogging {Debugging}
+
     extraProtection: true, // Leave Enabled Unless Using Small Amount Of RAM
-    proxyTrust: false, // Enable this if your behind a proxy, Heroku,
+
+    proxyTrust: false, // Enable this if your behind a proxy, Heroku.
   },
 });
+
+// Attach to client
 client.voteManager = voteClient;
 ```
 
@@ -125,13 +136,21 @@ const { WebhooksManager } = require("blwebhooks");
 
 const voteClient = new WebhooksManager(bot, 80, {
   database: "none", // mongoose or sqlite
-  string: "MongooseURL", // Only Use This If The Database Is Set To Mongoose
+
+  protocol: "eris", // Define the discord client
+
+  string: "mongodb://", // Only Use This If The Database Is Set To Mongoose
+
   extra: {
     extraLogging: false, // This will enable extraLogging {Debugging}
+
     extraProtection: true, // Leave Enabled Unless Using Small Amount Of RAM
-    proxyTrust: false, // Enable this if your behind a proxy, Heroku,
+
+    proxyTrust: false, // Enable this if your behind a proxy, Heroku.
   },
 });
+
+// Attach to client
 bot.voteManager = voteClient;
 
 bot.connect(); // Get the bot to connect to Discord

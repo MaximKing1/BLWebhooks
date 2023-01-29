@@ -9,7 +9,7 @@ class SettingsManager extends EventEmitter {
     port: any;
     /**
      * @param {Discord.Client} client The Discord Client
-     * @param {Express.Port} Webserver port
+     * @param {Express.Port} port port
      */
     constructor(client: any, port: any) {
         super();
