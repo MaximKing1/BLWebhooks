@@ -2,7 +2,7 @@ import { Client } from "discord.js";
 const client = new Client({
     intents: []
 });
-import { WebhooksManager } from "blwebhooks";
+import { WebhooksManager } from "../index";
 
 const voteClient = new WebhooksManager(client, 80, {
   database: "none", // mongoose or sqlite

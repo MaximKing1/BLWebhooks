@@ -23,7 +23,7 @@ const limiter = rateLimit({
   max: 250,
 });
 
-interface WebhooksManager extends EventEmitter {
+export interface WebhooksManager extends EventEmitter {
   client: any;
   port: any;
   options: {
@@ -65,7 +65,7 @@ client.voteManager = manager;
  * 
  * @since 1.0.3
  */
-export default class WebhooksManager extends EventEmitter {
+export class WebhooksManager extends EventEmitter {
   client: any;
   port: any;
   options: {
