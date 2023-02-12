@@ -65,7 +65,7 @@ client.voteManager = manager;
  * 
  * @since 1.0.3
  */
-class WebhooksManager extends EventEmitter {
+export default class WebhooksManager extends EventEmitter {
   client: any;
   port: any;
   options: {
@@ -692,5 +692,3 @@ voteClient.IBLVoteHook("IBLHook", "LOADS_OF_RANDOMNESS", true);
     this.ready = true;
   }
 };
-
-module.exports.WebhooksManager = WebhooksManager;
