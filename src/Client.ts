@@ -49,15 +49,21 @@ export interface WebhooksManager extends EventEmitter {
 
 /**
  * The Webhook Manager Class for configuration
- ```js
-import { WebhooksManager } from "blwebhooks";
-
-const manager = WebhooksManager(client, {
-    database: "mongoose", // mongoose or sqlite
-    port: "80"
-});
-client.voteManager = manager;
-```
+ *  ```js
+ * import { WebhooksManager } from "blwebhooks";
+ * 
+ * const manager = WebhooksManager(client, {
+ *   database: "mongoose", // mongoose or sqlite
+ *   port: "80",
+ *   storage: {
+ *     proxyTrust: true, // Use if behind a proxy
+ *     shardedClient: true, // Use if behind a sharded client
+ *     extraProtection: true // Use for the enhanced security features (Will require more RAM)
+ *   }
+ * });
+ * 
+ * client.voteManager = manager;
+ * 
  * 
  * @param client The client param is the discord.js v14 client instance.
  * @param port The port param is used to define the express webserver port.
@@ -68,25 +74,55 @@ client.voteManager = manager;
 export class WebhooksManager extends EventEmitter {
   client: any;
   port: any;
+
   options: {
     /**
      * @param protocol The client either 'discordjs' or 'eris'
     */
     protocol: string;
+
     /**
      * @param database Either 'mongoose' or 'sqlite3'
     */
     database: string;
+
     /**
      * @param string The MongoDB connection string
     */
     string(string: any, arg1: { useNewUrlParser: boolean; useUnifiedTopology: boolean; useFindAndModify: boolean; useCreateIndex: boolean; }): unknown;
+
+    /**
+     * @param storage The storage options can be used to set extraProtection, proxyTrust and shardedClient options.
+     * 
+     * @example
+     *  ```js
+     * import { WebhooksManager } from "blwebhooks";
+
+     * const manager = WebhooksManager(client, {
+     *   database: "mongoose", // mongoose or sqlite
+     *   port: "80",
+     *   storage: {
+     *     proxyTrust: true, // Use if behind a proxy
+     *     shardedClient: true, // Use if behind a sharded client
+     *     extraProtection: true // Use for the enhanced security features (Will require more RAM)
+     *   }
+     * });
+     * 
+     * client.voteManager = manager;
+     *   ```
+     * 
+    */
     storage: null; extraLogging: boolean; extra: {
       extraProtection: boolean; proxyTrust: boolean; shardedClient: boolean;
     };
   };
   db: any;
-  ready: boolean;
+
+  /**
+   * @returns
+   */
+  ready: boolean = false;
+
   /**
    * @param {Discord.Client} client The Discord Client
    * @param {Express.Port} port The port of the webserver

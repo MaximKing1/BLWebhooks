@@ -1,9 +1,9 @@
 {
   "name": "blwebhooks",
-  "version": "3.5.4",
+  "version": "3.5.5",
   "description": "Webhook Vote Reciever For Lists Such As top.gg, InfinityBotList and Many More To Come!",
-  "main": "index.ts",
-  "types": "./typings/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "keywords": [
     "discord.js",
     "webhooks",
@@ -31,7 +31,8 @@
     "express-slow-down": "^1.5.0",
     "helmet": "^6.0.1",
     "mongoose": "^6.9.0",
-    "sqlite3": "^5.1.4"
+    "sqlite3": "^5.1.4",
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",
