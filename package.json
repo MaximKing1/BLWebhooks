@@ -31,7 +31,7 @@
     "express-slow-down": "^1.5.0",
     "helmet": "^6.0.1",
     "mongoose": "^6.9.0",
-    "sqlite3": "^5.1.4",
+    "sqlite3": "^5.1.7",
     "typescript": "^4.9.5"
   },
   "devDependencies": {
