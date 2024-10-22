@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.5.9](https://github.com/MaximKing1/BLWebhooks/compare/v3.5.8...v3.5.9) (2024-10-22)
+
 ### [3.5.8](https://github.com/MaximKing1/BLWebhooks/compare/v3.5.3...v3.5.8) (2024-10-22)
 
 ### [3.5.7](https://github.com/MaximKing1/BLWebhooks/compare/v3.5.3...v3.5.7) (2024-10-22)
