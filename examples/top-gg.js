@@ -1,9 +1,9 @@
-import { Client } from "discord.js";
+const { Client } = require("discord.js");
 const client = new Client({
   intents: []
 });
 
-import { WebhooksManager } from "blwebhooks";
+const { WebhooksManager } = require("../dist/index.js");
 
 // Attatch The Client and Port to the module.
 // The client is it attaching to the client, 80 is the port it will run on

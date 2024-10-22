@@ -1,16 +1,15 @@
 /**
- * @default defaultManager The default manager configuration for the client instance
- *
- * @template
+ * Default manager configuration for the client instance
  * @since 1.0.0
  */
-export declare const defaultManager: {
-    storage: null;
+export interface ManagerConfig {
+    storage: null | string;
     extraLogging: boolean;
-    protocol: string;
+    protocol: 'discordjs' | 'eris';
     extra: {
         extraProtection: boolean;
         proxyTrust: boolean;
         shardedClient: boolean;
     };
-};
+}
+export declare const defaultManager: ManagerConfig;

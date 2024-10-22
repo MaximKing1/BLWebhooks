@@ -99,7 +99,7 @@ const client = new Client({
 const { WebhooksManager } = require("blwebhooks");
 
 const voteClient = new WebhooksManager(client, 80, {
-  database: "none", // mongoose or sqlite
+  database: "none", // mongoose or sqlite3
 
   protocol: "discordjs", // Define the discord client
 
@@ -134,7 +134,7 @@ bot.on("ready", () => {
 const { WebhooksManager } = require("blwebhooks");
 
 const voteClient = new WebhooksManager(bot, 80, {
-  database: "none", // mongoose or sqlite
+  database: "none", // mongoose or sqlite3
 
   protocol: "eris", // Define the discord client
 
@@ -364,10 +364,10 @@ The vote Database feature will save the total votes a User had made for your bot
 voteClient.setStroage(DB, String);
 
 // MongooseDB Example (recommended)
-voteClient.setStroage("mongo", "mongodb://localhost/my_database");
+voteClient.setStroage("mongoose", "mongodb://localhost/my_database");
 
 // SQLITE Example
-voteClient.setStroage("sqlite");
+voteClient.setStroage("sqlite3");
 ```
 
 **Pulling User Votes**

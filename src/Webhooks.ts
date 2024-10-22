@@ -1,32 +1,29 @@
 import chalk from "chalk";
 import { EventEmitter } from "events";
+import { Client } from "discord.js";
 
 /**
- * Guild SettingsManager
+ * SettingsManager for handling webhook settings
  */
 class SettingsManager extends EventEmitter {
-    client: any;
-    port: any;
+    client: Client;
+    port: number;
+
     /**
-     * @param {Discord.Client} client The Discord Client
-     * @param {Express.Port} port port
+     * @param {Client} client The Discord Client
+     * @param {number} port The port number
      */
-    constructor(client: any, port: any) {
+    constructor(client: Client, port: number) {
         super();
         this.client = client;
         this.port = port;
-
     }
 
-    async shardedClient(toggle: boolean) {
-        if (toggle == true) {
-            console.log(chalk.green("[BLWEBHOOKS] Sharding client has been enabled."));
-        }
-        else if (toggle == false) {
-            console.log(chalk.red("[BLWEBHOOKS] Sharding client has been disabled."));
-        }
+    async setShardedClient(enabled: boolean): Promise<void> {
+        const status = enabled ? "enabled" : "disabled";
+        const logColor = enabled ? chalk.green : chalk.red;
+        console.log(logColor(`[BLWEBHOOKS] Sharding client has been ${status}.`));
     }
-
 }
 
-module.exports.SettingsManager = SettingsManager;
+export { SettingsManager };
