@@ -43,6 +43,7 @@ const limiter = (0, express_rate_limit_1.default)({
  * const manager = new WebhooksManager(client, PORT, {
  *   database: "mongoose", // mongoose or sqlite
  *   protocol: 'discordjs',
+ *   connectionString: 'MongooseURL', // Only Use This If The Database Is Set To Mongoose
  *   extra: {
  *     proxyTrust: true, // Use if behind a proxy
  *     shardedClient: true, // Use if behind a sharded client
@@ -56,6 +57,7 @@ const limiter = (0, express_rate_limit_1.default)({
  * @param client - The Discord.js v14 client instance.
  * @param options - Configuration options for the WebhooksManager.
  * @param options.database - The database type to use ("mongoose" or "sqlite").
+ * @param options.connectionString - The connection string for the database.
  * @param options.protocol - The protocol to use ("discordjs" or "eris").
  * @param options.port - The port for the Express webserver.
  * @param options.extra - Additional storage options.
@@ -138,15 +140,16 @@ class WebhooksManager extends events_1.EventEmitter {
      * await voteManager.setStroage('mongoose', 'MongooseURL');
      * ```
      */
-    async setStroage(DB, string) {
+    async setStroage(DB, connectionString) {
         if (DB === 'mongoose') {
             console.log(chalk_1.default.yellow('[BLWEBHOOKS] Enabled mongoose database.'));
-            mongoose_1.default.connect(string, {
-                // @ts-ignore
-                useUnifiedTopology: true,
-                useFindAndModify: true,
-                useCreateIndex: true,
-            });
+            try {
+                await mongoose_1.default.connect(connectionString);
+                console.log(chalk_1.default.green('[BLWEBHOOKS] Successfully connected to MongoDB.'));
+            }
+            catch (error) {
+                console.error(chalk_1.default.red('[BLWEBHOOKS] Failed to connect to MongoDB:'), error);
+            }
         }
         else if (DB == 'sqlite3') {
             var sqlite3 = require('sqlite3');
@@ -249,6 +252,22 @@ class WebhooksManager extends events_1.EventEmitter {
         }
         return server;
     }
+    async updateVoteCount(userID) {
+        if (this.options.database === 'mongoose') {
+            await vote_1.default.findOneAndUpdate({ userID: userID }, { $inc: { totalVotes: 1 } }, { upsert: true, new: true });
+        }
+        else if (this.options.database === 'sqlite3') {
+            return new Promise((resolve, reject) => {
+                this.db.run('INSERT OR REPLACE INTO user_votes (userID, totalVotes) VALUES (?, COALESCE((SELECT totalVotes FROM user_votes WHERE userID = ?) + 1, 1))', [userID, userID], (err) => {
+                    if (err)
+                        reject(err);
+                    else
+                        resolve();
+                });
+            });
+        }
+        // If no database is enabled, do nothing
+    }
     /**
      * @example
      * ```js
@@ -278,14 +297,10 @@ class WebhooksManager extends events_1.EventEmitter {
             const type = req.body.type;
             const List = 'top.gg';
             try {
-                // Update the user's vote count in the database
-                await vote_1.default.findOneAndUpdate({ userID: userID }, { $inc: { totalVotes: 1 } }, { upsert: true, new: true });
-                // Emit events
+                await this.updateVoteCount(userID);
                 this.client.emit('topgg-voted', userID, botID, type);
                 this.client.emit('vote', userID, botID, List);
-                // Set timeout for vote expiration
                 setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
-                // Respond to Top.gg API
                 res.status(200).send(JSON.stringify({
                     error: false,
                     message: '[BLWEBHOOKS] Received the request!',
@@ -329,31 +344,25 @@ class WebhooksManager extends events_1.EventEmitter {
                     message: "[BLWEBHOOKS] You don't have access to use this endpoint. - InfinityBotList",
                 }));
             }
-            // Use the data on whatever you want
-            console.log(req.body);
             const userID = req.body.userID;
             const botID = req.body.botID;
             const type = req.body.type;
             const List = 'InfinityBotList';
             try {
-                // Update the user's vote count in the database
-                await vote_1.default.findOneAndUpdate({ userID: userID }, { $inc: { totalVotes: 1 } }, { upsert: true, new: true });
-                // Emit events
+                await this.updateVoteCount(userID);
                 this.client.emit('IBL-voted', userID, botID, type);
                 this.client.emit('vote', userID, botID, List);
-                // Set timeout for vote expiration
                 setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
-                // Respond to IBL API
                 res.status(200).send(JSON.stringify({
                     error: false,
                     message: '[BLWEBHOOKS] Received the request!',
                 }));
             }
             catch (error) {
-                console.error('Error updating user vote count:', error);
+                console.error('Error updating vote count:', error);
                 res.status(500).send(JSON.stringify({
                     error: true,
-                    message: 'Error updating user vote count',
+                    message: '[BLWEBHOOKS] Internal server error',
                 }));
             }
         });
@@ -379,7 +388,6 @@ class WebhooksManager extends events_1.EventEmitter {
                     error: true,
                     message: "[BLWEBHOOKS] You don't have access to use this endpoint. - ParaiseBots",
                 }));
-            // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.userID;
             const botID = req.body.bot;
             const userName = req.body.user;
@@ -402,7 +410,6 @@ class WebhooksManager extends events_1.EventEmitter {
         else if (toggle == true) {
             console.log(chalk_1.default.green('[BLWEBHOOKS] Void Bots vote hooks have been enabled.'));
         }
-        // @ts-ignore
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
             res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
@@ -413,20 +420,26 @@ class WebhooksManager extends events_1.EventEmitter {
                     error: true,
                     message: "[BLWEBHOOKS] You don't have access to this endpoint - VoidBots",
                 }));
-            // Use the data on whatever you want
-            console.log(req.body);
-            // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
             const botID = req.body.bot;
             const List = 'VoidBots';
-            this.client.emit('VB-voted', userID, botID);
-            this.client.emit('vote', userID, botID, List);
-            setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
-            // Respond to VoidBots API
-            res.status(200).send(JSON.stringify({
-                error: false,
-                message: '[BLWEBHOOKS] Received the request!',
-            }));
+            try {
+                await this.updateVoteCount(userID);
+                this.client.emit('VB-voted', userID, botID);
+                this.client.emit('vote', userID, botID, List);
+                setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
+                res.status(200).send(JSON.stringify({
+                    error: false,
+                    message: '[BLWEBHOOKS] Received the request!',
+                }));
+            }
+            catch (error) {
+                console.error('Error updating vote count:', error);
+                res.status(500).send(JSON.stringify({
+                    error: true,
+                    message: '[BLWEBHOOKS] Internal server error',
+                }));
+            }
         });
     }
     async DiscordLabsVoteHook(url, auth, toggle) {
@@ -436,7 +449,6 @@ class WebhooksManager extends events_1.EventEmitter {
         else if (toggle == true) {
             console.log(chalk_1.default.green('[BLWEBHOOKS] DiscordLabs Vote Hooks Enabled'));
         }
-        // @ts-ignore
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
             res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
@@ -447,21 +459,27 @@ class WebhooksManager extends events_1.EventEmitter {
                     error: true,
                     message: "[BLWEBHOOKS] You don't have access to use this endpoint - DiscordLabs",
                 }));
-            // Use the data on whatever you want
-            console.log(req.body);
-            // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.uid;
             const botID = req.body.bid;
             const wasTest = req.body.test;
             const List = 'DiscordLabs';
-            this.client.emit('DL-voted', userID, botID, wasTest);
-            this.client.emit('vote', userID, botID, List);
-            setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
-            // Respond to DiscordLabs API
-            res.status(200).send(JSON.stringify({
-                error: false,
-                message: '[BLWEBHOOKS] Received the request!',
-            }));
+            try {
+                await this.updateVoteCount(userID);
+                this.client.emit('DL-voted', userID, botID, wasTest);
+                this.client.emit('vote', userID, botID, List);
+                setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
+                res.status(200).send(JSON.stringify({
+                    error: false,
+                    message: '[BLWEBHOOKS] Received the request!',
+                }));
+            }
+            catch (error) {
+                console.error('Error updating vote count:', error);
+                res.status(500).send(JSON.stringify({
+                    error: true,
+                    message: '[BLWEBHOOKS] Internal server error',
+                }));
+            }
         });
     }
     async BListVoteHook(url, auth, toggle) {
@@ -469,9 +487,8 @@ class WebhooksManager extends events_1.EventEmitter {
             return console.log(chalk_1.default.red('[BLWEBHOOKS] BList vote hooks have been disabled.'));
         }
         else if (toggle == true) {
-            console.log(chalk_1.default.green('[BLWEBHOOKS] BList hote hooks have been enabled.'));
+            console.log(chalk_1.default.green('[BLWEBHOOKS] BList vote hooks have been enabled.'));
         }
-        // @ts-ignore
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
             res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
@@ -482,30 +499,35 @@ class WebhooksManager extends events_1.EventEmitter {
                     error: true,
                     message: "[BLWEBHOOKS] You don't have access to use this endpoint - BList",
                 }));
-            // Use the data on whatever you want
-            console.log(req.body);
-            // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
             const botID = null;
             const List = 'BList';
-            this.client.emit('BLT-voted', userID);
-            this.client.emit('vote', userID, botID, List);
-            setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
-            // Respond to BList API
-            res.status(200).send(JSON.stringify({
-                error: false,
-                message: '[BLWEBHOOKS] Received the request!',
-            }));
+            try {
+                await this.updateVoteCount(userID);
+                this.client.emit('BLT-voted', userID);
+                this.client.emit('vote', userID, botID, List);
+                setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
+                res.status(200).send(JSON.stringify({
+                    error: false,
+                    message: '[BLWEBHOOKS] Received the request!',
+                }));
+            }
+            catch (error) {
+                console.error('Error updating vote count:', error);
+                res.status(500).send(JSON.stringify({
+                    error: true,
+                    message: '[BLWEBHOOKS] Internal server error',
+                }));
+            }
         });
     }
     async MYBVoteHook(url, auth, toggle) {
         if (toggle == false) {
-            return console.log(chalk_1.default.red('[BLWEBHOOKS] BList vote hooks have been disabled.'));
+            return console.log(chalk_1.default.red('[BLWEBHOOKS] MythicalBots vote hooks have been disabled.'));
         }
         else if (toggle == true) {
-            console.log(chalk_1.default.green('[BLWEBHOOKS] BList hote hooks have been enabled.'));
+            console.log(chalk_1.default.green('[BLWEBHOOKS] MythicalBots vote hooks have been enabled.'));
         }
-        // @ts-ignore
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
             res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
@@ -516,20 +538,26 @@ class WebhooksManager extends events_1.EventEmitter {
                     error: true,
                     message: "[BLWEBHOOKS] You don't have access to use this endpoint - Mythicalbots",
                 }));
-            // Use the data on whatever you want
-            console.log(req.body);
-            // VotingModel.findOneAndUpdate({ userID : req.vote.user }, {$inc : {'totalVotes' : 1}});
             const userID = req.body.user;
             const botID = null;
             const List = 'MythicalBots';
-            this.client.emit('MYB-voted', userID);
-            this.client.emit('vote', userID, botID, List);
-            setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
-            // Respond to Mythicalbots API
-            res.status(200).send(JSON.stringify({
-                error: false,
-                message: '[BLWEBHOOKS] Received the request!',
-            }));
+            try {
+                await this.updateVoteCount(userID);
+                this.client.emit('MYB-voted', userID);
+                this.client.emit('vote', userID, botID, List);
+                setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
+                res.status(200).send(JSON.stringify({
+                    error: false,
+                    message: '[BLWEBHOOKS] Received the request!',
+                }));
+            }
+            catch (error) {
+                console.error('Error updating vote count:', error);
+                res.status(500).send(JSON.stringify({
+                    error: true,
+                    message: '[BLWEBHOOKS] Internal server error',
+                }));
+            }
         });
     }
     async DBCVoteHook(url, auth, toggle) {
@@ -539,7 +567,6 @@ class WebhooksManager extends events_1.EventEmitter {
         else if (toggle == true) {
             console.log(chalk_1.default.green('[BLWEBHOOKS] DiscordBots.co vote hooks have been enabled.'));
         }
-        // @ts-ignore
         app.post(`/${url}`, async (req, res) => {
             // Respond to invalid requests
             res.setHeader('X-Powered-By', 'BLWebhooks.js/Express');
@@ -556,31 +583,67 @@ class WebhooksManager extends events_1.EventEmitter {
             const userID = req.body.userId;
             const botID = null;
             const List = 'DiscordBots.co';
-            this.client.emit('DBC-voted', userID);
-            this.client.emit('vote', userID, botID, List);
-            setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
-            // Respond to BList API
-            res.status(200).send(JSON.stringify({
-                error: false,
-                message: '[BLWEBHOOKS] Received the request!',
-            }));
+            try {
+                await this.updateVoteCount(userID);
+                this.client.emit('DBC-voted', userID);
+                this.client.emit('vote', userID, botID, List);
+                setTimeout(() => this.client.emit('voteExpired', userID, botID, List), 1000 * 60 * 60 * 24);
+                res.status(200).send(JSON.stringify({
+                    error: false,
+                    message: '[BLWEBHOOKS] Received the request!',
+                }));
+            }
+            catch (error) {
+                console.error('Error updating vote count:', error);
+                res.status(500).send(JSON.stringify({
+                    error: true,
+                    message: '[BLWEBHOOKS] Internal server error',
+                }));
+            }
         });
     }
+    /**
+     * Get the number of votes for a user
+     * @param {string} userID - The ID of the user
+     * @param {string} option - The time period for votes ('total', 'daily', 'weekly', 'monthly')
+     * @returns {Promise<number>} The number of votes for the specified period
+     * @throws {Error} If an invalid option is provided or if userID is missing
+     * @example
+     * ```js
+     * const totalVotes = await voteManager.getVotes('123456789', 'total');
+     * console.log(`Total votes: ${totalVotes}`);
+     * ```
+     */
     async getVotes(userID, option) {
-        if (!option)
-            return console.log('Please provide option - daily, weekly, monthly');
-        if (option == 'total') {
-            if (!userID)
-                return console.log('Please provide userID');
+        if (!userID) {
+            throw new Error('Please provide a userID');
         }
-        else if (option == 'daily') {
-            if (!userID)
-                return console.log('Please provide userID');
+        if (!option) {
+            throw new Error('Please provide an option - total, daily, weekly, monthly');
         }
-        else if (option == 'weekly') {
-            if (!userID)
-                return console.log('Please provide userID');
+        const now = new Date();
+        let startDate;
+        switch (option) {
+            case 'total':
+                const user = await vote_1.default.findOne({ userID });
+                return user ? user.totalVotes : 0;
+            case 'daily':
+                startDate = new Date(now.setHours(0, 0, 0, 0));
+                break;
+            case 'weekly':
+                startDate = new Date(now.setDate(now.getDate() - now.getDay()));
+                break;
+            case 'monthly':
+                startDate = new Date(now.setDate(1));
+                break;
+            default:
+                throw new Error('Invalid option. Please use total, daily, weekly, or monthly');
         }
+        const voteCount = await vote_1.default.countDocuments({
+            userID,
+            createdAt: { $gte: startDate },
+        });
+        return voteCount;
     }
     /**
      * Inits the manager
@@ -610,21 +673,26 @@ class WebhooksManager extends events_1.EventEmitter {
         }
         if (this.options.database == 'mongoose') {
             console.log(chalk_1.default.yellow('[BLWEBHOOKS] Enabled mongoose database.'));
-            // @ts-ignore
-            mongoose_1.default.connect(this.options.string);
+            try {
+                await mongoose_1.default.connect(this.options.connectionString);
+                console.log(chalk_1.default.green('[BLWEBHOOKS] Successfully connected to MongoDB.'));
+            }
+            catch (error) {
+                console.error(chalk_1.default.red('[BLWEBHOOKS] Failed to connect to MongoDB:'), error);
+            }
         }
         else if (this.options.database == 'sqlite3') {
             var sqlite3 = require('sqlite3').verbose();
-            let db = new sqlite3.Database('voteHooks.db', async (err) => {
-                if (err) {
-                    console.error(chalk_1.default.red(err.message));
-                }
-                console.log(chalk_1.default.yellow('[BLWEBHOOKS] Enabled SQLITE database.'));
-                console.log(chalk_1.default.yellow('[BLWEBHOOKS] Connected to the voteHooks.db database.'));
-            });
+            this.db = new sqlite3.Database('voteHooks.db');
+            this.db.run(`
+        CREATE TABLE IF NOT EXISTS user_votes (
+          userID TEXT PRIMARY KEY,
+          totalVotes INTEGER DEFAULT 0
+        )
+      `);
         }
         else if (this.options.database == 'none') {
-            console.log(chalk_1.default.red('Database Disabled'));
+            console.log(chalk_1.default.red('[BLWEBHOOKS] Database Disabled'));
         }
         if (((_e = this.options.extra) === null || _e === void 0 ? void 0 : _e.extraProtection) == true) {
             console.log(chalk_1.default.green('[BLWEBHOOKS] Extra protection enabled.'));

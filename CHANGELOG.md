@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [3.5.12](https://github.com/MaximKing1/BLWebhooks/compare/v3.5.11...v3.5.12) (2024-10-22)
+### [4.0.0](https://github.com/MaximKing1/BLWebhooks/compare/v3.5.11...v4.0.0) (2024-10-22)
+* **Documentation Updated** Updates to documentation
+* **Updated Exports:** Revised and improved export structure
+* **Database Functions:** Database functions for MongoDB have finally been completed
+* **Improved Type Safety:** The type definitions have been updated for improved type safety
+* **Package:** Updated package version to 4.0.0
+* **Dependencies:** Updated and audited package dependencies
 
 ### [3.5.11](https://github.com/MaximKing1/BLWebhooks/compare/v3.5.10...v3.5.11) (2024-10-22)
 

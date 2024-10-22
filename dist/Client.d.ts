@@ -35,6 +35,7 @@ export interface WebhooksManager extends EventEmitter {
  * const manager = new WebhooksManager(client, PORT, {
  *   database: "mongoose", // mongoose or sqlite
  *   protocol: 'discordjs',
+ *   connectionString: 'MongooseURL', // Only Use This If The Database Is Set To Mongoose
  *   extra: {
  *     proxyTrust: true, // Use if behind a proxy
  *     shardedClient: true, // Use if behind a sharded client
@@ -48,6 +49,7 @@ export interface WebhooksManager extends EventEmitter {
  * @param client - The Discord.js v14 client instance.
  * @param options - Configuration options for the WebhooksManager.
  * @param options.database - The database type to use ("mongoose" or "sqlite").
+ * @param options.connectionString - The connection string for the database.
  * @param options.protocol - The protocol to use ("discordjs" or "eris").
  * @param options.port - The port for the Express webserver.
  * @param options.extra - Additional storage options.
@@ -111,7 +113,7 @@ export declare class WebhooksManager extends EventEmitter {
      * await voteManager.setStroage('mongoose', 'MongooseURL');
      * ```
      */
-    setStroage(DB: string, string: string): Promise<void>;
+    setStroage(DB: string, connectionString: string): Promise<void>;
     /**
      * @example
      * ```js
@@ -147,6 +149,7 @@ export declare class WebhooksManager extends EventEmitter {
      * ```
      */
     getServer(serverID: string): Promise<any>;
+    private updateVoteCount;
     /**
      * @example
      * ```js
@@ -166,17 +169,29 @@ export declare class WebhooksManager extends EventEmitter {
      * voteClient.IBLVoteHook("IBLHook", "LOADS_OF_RANDOMNESS", true);
      * ```
      */
-    IBLVoteHook(url: any, auth: any, toggle: boolean): Promise<void>;
+    IBLVoteHook(url: string, auth: string, toggle: boolean): Promise<void>;
     /**
      * @deprecated Legacy API
      */
     PBLVoteHook(url: any, auth: any, toggle: boolean): Promise<void>;
-    VoidBotsVoteHook(url: any, auth: any, toggle: boolean): Promise<void>;
-    DiscordLabsVoteHook(url: any, auth: any, toggle: boolean): Promise<void>;
-    BListVoteHook(url: any, auth: any, toggle: boolean): Promise<void>;
-    MYBVoteHook(url: any, auth: any, toggle: boolean): Promise<void>;
-    DBCVoteHook(url: any, auth: any, toggle: boolean): Promise<void>;
-    getVotes(userID: any, option: string): Promise<void>;
+    VoidBotsVoteHook(url: string, auth: string, toggle: boolean): Promise<void>;
+    DiscordLabsVoteHook(url: string, auth: string, toggle: boolean): Promise<void>;
+    BListVoteHook(url: string, auth: string, toggle: boolean): Promise<void>;
+    MYBVoteHook(url: string, auth: string, toggle: boolean): Promise<void>;
+    DBCVoteHook(url: string, auth: string, toggle: boolean): Promise<void>;
+    /**
+     * Get the number of votes for a user
+     * @param {string} userID - The ID of the user
+     * @param {string} option - The time period for votes ('total', 'daily', 'weekly', 'monthly')
+     * @returns {Promise<number>} The number of votes for the specified period
+     * @throws {Error} If an invalid option is provided or if userID is missing
+     * @example
+     * ```js
+     * const totalVotes = await voteManager.getVotes('123456789', 'total');
+     * console.log(`Total votes: ${totalVotes}`);
+     * ```
+     */
+    getVotes(userID: string, option: string): Promise<number>;
     /**
      * Inits the manager
      * @private
