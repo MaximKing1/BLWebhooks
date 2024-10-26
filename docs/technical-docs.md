@@ -99,3 +99,4 @@ The `WebhooksManager` emits the following events:
 - `BLT-voted`: Emitted for BList votes
 - `MYB-voted`: Emitted for MythicalBots votes
 - `DBC-voted`: Emitted for DiscordBots.co votes
+- More coming soon.
