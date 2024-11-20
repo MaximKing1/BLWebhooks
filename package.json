@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "@top-gg/sdk": "^3.1.6",
-    "blwebhooks": "^3.5.6",
+    "blwebhooks": "^3.5.11",
     "body-parser": "^1.20.3",
     "chalk": "^4.1.2",
     "cookie-parser": "^1.4.7",
